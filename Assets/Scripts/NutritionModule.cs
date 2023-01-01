@@ -5,33 +5,14 @@ using UnityEngine;
 public class NutritionModule : MonoBehaviour
 {
     float maxNutrition = 100;
-    public float currentNutrition {get; private set;}
-    [SerializeField] float backgroundDecayRate = .01f;
-    float timer;
+    [ field : SerializeField] public float currentNutrition {get; private set;}
+    [field : SerializeField] public float backgroundDecayRate = .01f;
      
     public bool hasNutrition;
     
     void Start()
     {
         currentNutrition = maxNutrition;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        timer += Time.deltaTime;
-        ConsumeBackgroundEnergy();
-
-        hasNutrition = currentNutrition > 0;
-    }
-
-    private void ConsumeBackgroundEnergy()
-    {
-        if (timer > 1)
-        {
-            currentNutrition -= backgroundDecayRate;
-            timer = 0;
-        }
     }
 
     public void ConsumeEnergy(float value)
@@ -41,6 +22,7 @@ public class NutritionModule : MonoBehaviour
         {
             currentNutrition = 0;
         }
+        hasNutrition = currentNutrition > 0;
     }
 
     public void AddEnergy(float value)
@@ -50,5 +32,7 @@ public class NutritionModule : MonoBehaviour
         {
             currentNutrition = maxNutrition;
         }
+        hasNutrition = currentNutrition > 0;
+        Debug.Log("Hunger Satiated");
     }
 }

@@ -15,27 +15,18 @@ public class Thief : NPCController
         SubGoal s2 = new SubGoal("HasEaten", 0, false);
         goals.Add(s2,5);
 
-        beliefs.ChangeState("IsHungry", 0);
-        Invoke("GetHungry", Random.Range(5.0f, 7.0f));
-        Invoke("GetBored", Random.Range(10f, 20f));
+        //beliefs.ChangeState("IsHungry", 0);
+        //Invoke("GetHungry", Random.Range(5.0f, 7.0f));
+        //("GetBored", Random.Range(10f, 20f));
     }
 
-    void GetHungry()
+   public void GetHungry()
     {
-
         beliefs.ChangeState("IsHungry", 0);
-
-        Invoke("GetHungry", Random.Range(0.0f, 20.0f));
-        Debug.Log("Invoking Is Hungry");
     }
 
         void GetBored()
     {
-
         beliefs.ChangeState("IsBored", 0);
-        Invoke("GetBored", Random.Range(0.0f, 20.0f));
-        Debug.Log("Invoking Is Bored");
     }
-
-    
 }

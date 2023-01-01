@@ -20,6 +20,7 @@ public abstract class Actions : MonoBehaviour
     public WorldStates belief;
     public bool running = false;
     public bool activatingAction = false;
+    public NeedsManager needsManager;
 
     
 
@@ -29,6 +30,7 @@ public abstract class Actions : MonoBehaviour
     }
     private void Awake() {
         agent = this.gameObject.GetComponent<NavMeshAgent>();
+        needsManager = this.gameObject.GetComponent<NeedsManager>();
         if (preConditions != null){
             foreach (worldState state in preConditions)
             {

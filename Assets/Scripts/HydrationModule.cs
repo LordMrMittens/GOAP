@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class HydrationModule : MonoBehaviour
 {
-    float maxHydration = 100;
-    float minHydration = 30;
-    public float currentHydration { get; private set; }
-    [SerializeField] float backgroundDecayRate = .005f;
-    float timer;
-
+    public float maxHydration { get; private set; } = 100;
+    public float minHydration { get; private set; } = 30;
+    [field : SerializeField] public float currentHydration { get; private set; }
+    [field : SerializeField] public float backgroundDecayRate = .005f;
     public bool NeedsWater;
 
     void Start()
@@ -17,23 +15,6 @@ public class HydrationModule : MonoBehaviour
         currentHydration = maxHydration;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        timer += Time.deltaTime;
-        ConsumeBackgroundWater();
-
-        NeedsWater = currentHydration > minHydration;
-    }
-
-    private void ConsumeBackgroundWater()
-    {
-        if (timer > 1)
-        {
-            currentHydration -= backgroundDecayRate;
-            timer = 0;
-        }
-    }
 
     public void ConsumeWater(float value)
     {
@@ -42,6 +23,7 @@ public class HydrationModule : MonoBehaviour
         {
             currentHydration = 0;
         }
+        NeedsWater = currentHydration > minHydration;
     }
 
     public void AddWater(float value)
@@ -51,5 +33,6 @@ public class HydrationModule : MonoBehaviour
         {
             currentHydration = maxHydration;
         }
+        NeedsWater = currentHydration > minHydration;
     }
 }

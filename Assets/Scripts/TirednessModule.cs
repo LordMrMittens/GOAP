@@ -6,32 +6,13 @@ public class TirednessModule : MonoBehaviour
 {
     float maxEnergy = 100;
     public float currentEnergy {get; private set;}
-    [SerializeField] float backgroundDecayRate = .01f;
-    float timer;
+    [field:SerializeField] public float backgroundDecayRate = .01f;
      
-    public bool hasEnergy;
+    public bool isTired;
     
     void Start()
     {
         currentEnergy = maxEnergy;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        timer += Time.deltaTime;
-        ConsumeBackgroundEnergy();
-
-        hasEnergy = currentEnergy > 0;
-    }
-
-    private void ConsumeBackgroundEnergy()
-    {
-        if (timer > 1)
-        {
-            currentEnergy -= backgroundDecayRate;
-            timer = 0;
-        }
     }
 
     public void ConsumeEnergy(float value)
@@ -41,6 +22,7 @@ public class TirednessModule : MonoBehaviour
         {
             currentEnergy = 0;
         }
+        isTired = currentEnergy < 10;
     }
 
     public void AddEnergy(float value)
@@ -50,5 +32,6 @@ public class TirednessModule : MonoBehaviour
         {
             currentEnergy = maxEnergy;
         }
+        isTired = currentEnergy < 10;
     }
 }

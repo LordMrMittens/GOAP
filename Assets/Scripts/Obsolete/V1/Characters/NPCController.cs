@@ -31,6 +31,8 @@ public class NPCController : MonoBehaviour
 
     [SerializeField] float DistanceFromTarget;
 
+    public NeedsManager needsManager;
+
     protected virtual void Start()
     {
         Actions[] myActions = this.GetComponents<Actions>();
@@ -102,4 +104,5 @@ public class NPCController : MonoBehaviour
             }
         }
     }
+
 }

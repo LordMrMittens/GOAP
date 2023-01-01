@@ -5,11 +5,13 @@ using UnityEngine;
 public class TemperatureModule : MonoBehaviour
 {
 
-    [SerializeField] float targetTemperature = 36.5f;
+    [field : SerializeField] public float targetTemperature = 36.5f;
+    [field : SerializeField] public float toleranceOffset;
     float currentTemperature;
     [field : SerializeField] public float energyConsumptionRate {get; private set;} = .5f;
     [field : SerializeField] public float waterConsumptionRate {get; private set;} = .1f;
     public bool isWarming;
+    
 
 
     // Start is called before the first frame update

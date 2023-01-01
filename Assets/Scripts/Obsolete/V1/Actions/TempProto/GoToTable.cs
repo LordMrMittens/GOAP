@@ -14,7 +14,7 @@ public class GoToTable : Actions
     {
         belief.RemoveState("HasFood");
         belief.RemoveState("IsHungry");
-        Debug.Log("Table postState");
+        needsManager.Invoke("SatiateHunger",0);
         return true;
     }
 }
