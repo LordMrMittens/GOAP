@@ -28,18 +28,18 @@ public class NeedsManager : MonoBehaviour
             ManageTemperature();
 
             //TODO add some sort of priority system
-            if (nutritionModule.currentNutrition < 20)
+            if (nutritionModule.currentResource < 20)
             {
                 nPCController.Invoke("GetHungry",0);
                 //use  delegates instead??
             }
-            if (hydrationModule.currentHydration < hydrationModule.minHydration)
+            if (hydrationModule.currentResource < hydrationModule.minResource)
             {
-               // nPCController.Invoke("GetThirsty",0);
+                nPCController.Invoke("GetThirsty",0);
             }
-            if (tirednessModule.currentEnergy < 10)
+            if (tirednessModule.currentResource < 10)
             {
-               // nPCController.Invoke("GetTired",0);
+                nPCController.Invoke("GetTired",0);
             }
 
 
@@ -56,11 +56,11 @@ public class NeedsManager : MonoBehaviour
             {
                 if (temperatureModule.isWarming)
                 {
-                    nutritionModule.ConsumeEnergy(temperatureModule.energyConsumptionRate);
+                    nutritionModule.ConsumeResource(temperatureModule.energyConsumptionRate);
                 }
                 else
                 {
-                    hydrationModule.ConsumeWater(temperatureModule.waterConsumptionRate);
+                    hydrationModule.ConsumeResource(temperatureModule.waterConsumptionRate);
                 }
             } 
             // TODO calling functions may need to be moved to priority system
@@ -78,11 +78,11 @@ public class NeedsManager : MonoBehaviour
 
     private void ConsumeBackgroundResources()
     {
-        nutritionModule.ConsumeEnergy(nutritionModule.backgroundDecayRate);
-        hydrationModule.ConsumeWater(hydrationModule.backgroundDecayRate);
-        tirednessModule.ConsumeEnergy(tirednessModule.backgroundDecayRate);
+        nutritionModule.ConsumeResource(nutritionModule.backgroundDecayRate);
+        hydrationModule.ConsumeResource(hydrationModule.backgroundDecayRate);
+        tirednessModule.ConsumeResource(tirednessModule.backgroundDecayRate);
     }
     private void SatiateHunger(){
-        nutritionModule.AddEnergy(100);
+        nutritionModule.AddResource(100);
     }
 }
