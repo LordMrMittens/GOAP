@@ -11,6 +11,8 @@ TagManager:
   - TV
   - Table
   - Food
+  - Deer
+  - Wardrobe
   layers:
   - Default
   - TransparentFX
