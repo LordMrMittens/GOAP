@@ -8,6 +8,7 @@ public abstract class Actions : MonoBehaviour
     public string actionName = "Action";
     public float cost = 1f;
     public GameObject target;
+    public GameObject[] targets;
     public string targetTag;
     public float duration = 0f;
     public worldState[] preConditions;

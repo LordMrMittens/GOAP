@@ -415,10 +415,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sun: {fileID: 804113885}
   moon: {fileID: 1317687231}
+  timeOfDay: 0
   <currentTemperature>k__BackingField: 0
   maxTemperature: 40
   minTemperature: 0
   temperatureDeviation: 15
+  isDark: 0
 --- !u!4 &164423195
 Transform:
   m_ObjectHideFlags: 0
@@ -585,6 +587,7 @@ MonoBehaviour:
   actionName: TurnOnTV
   cost: 1
   target: {fileID: 1554978166}
+  targets: []
   targetTag: 
   duration: 1
   preConditions:
@@ -613,8 +616,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: GoToTabl;e
   cost: 1
-  target: {fileID: 481241570}
-  targetTag: 
+  target: {fileID: 0}
+  targets: []
+  targetTag: Table
   duration: 1
   preConditions:
   - key: HasFood
@@ -643,6 +647,7 @@ MonoBehaviour:
   actionName: GoToSofa
   cost: 1
   target: {fileID: 1698139265}
+  targets: []
   targetTag: 
   duration: 1
   preConditions:
@@ -671,8 +676,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: Go To Kitchen
   cost: 1
-  target: {fileID: 1643637167}
-  targetTag: 
+  target: {fileID: 0}
+  targets: []
+  targetTag: Food
   duration: 1
   preConditions:
   - key: IsHungry
@@ -700,7 +706,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: WearJacket
   cost: 1
-  target: {fileID: 1559875114}
+  target: {fileID: 0}
+  targets: []
   targetTag: Wardrobe
   duration: 0
   preConditions:
@@ -734,6 +741,7 @@ MonoBehaviour:
   actionName: GotoWardRobe
   cost: 1
   target: {fileID: 0}
+  targets: []
   targetTag: Wardrobe
   duration: 2
   preConditions: []
@@ -760,7 +768,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: LeaveJacket
   cost: 1
-  target: {fileID: 1559875114}
+  target: {fileID: 0}
+  targets: []
   targetTag: Wardrobe
   duration: 0
   preConditions:

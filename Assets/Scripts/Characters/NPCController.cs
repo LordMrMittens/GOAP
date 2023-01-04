@@ -30,7 +30,7 @@ public class NPCController : MonoBehaviour
     SubGoal currentGoal;
     public bool invoked = false;
 
-    [SerializeField] float DistanceFromTarget =1.3f;
+    [SerializeField] float DistanceFromTarget = 1.3f;
 
     public NeedsManager needsManager;
     public NPCInventory nPCInventory;
@@ -47,25 +47,26 @@ public class NPCController : MonoBehaviour
     {
         currentAction.running = false;
         currentAction.PostPerform();
+        currentAction.target = null; //so that it may choose a different target when several present
         invoked = false;
+        
     }
     void LateUpdate()
     {
         if (currentAction != null && currentAction.running)
         {
             float distanceToTarget = Vector3.Distance(currentAction.target.transform.position, transform.position);
-            if (currentAction.agent.hasPath && distanceToTarget < DistanceFromTarget || currentAction.activatingAction && distanceToTarget <DistanceFromTarget)
+            if (distanceToTarget < DistanceFromTarget || currentAction.activatingAction)//currentAction.agent.hasPath &&  // && distanceToTarget < DistanceFromTarget
             {
                 if (!invoked)
                 {
                     Invoke("CompleteAction", currentAction.duration);
                     invoked = true;
-
                 }
             }
             return;
         }
-        
+
         if (planner == null || actionQueue == null)
         {
             planner = new Planner();
@@ -88,19 +89,40 @@ public class NPCController : MonoBehaviour
             }
             planner = null;
         }
-        if (actionQueue != null && actionQueue.Count > 0 ){
+        if (actionQueue != null && actionQueue.Count > 0)
+        {
             currentAction = actionQueue.Dequeue();
-            if (currentAction.PrePerform()){
-                if (currentAction.target == null && currentAction.targetTag != ""){
-                    currentAction.target = GameObject.FindWithTag(currentAction.targetTag);
+            if (currentAction.PrePerform())
+            {
+                if (currentAction.target == null && currentAction.targetTag != "")
+                {
+                    currentAction.targets = GameObject.FindGameObjectsWithTag(currentAction.targetTag);
+                    if (currentAction.targets.Length > 0)
+                    {
+                        float bestDistance = Mathf.Infinity;
+                        int bestTarget = 0;
+                        for (int i = 0; i < currentAction.targets.Length; i++)
+                        {
+                            float distance = Vector3.Distance(transform.position, currentAction.targets[i].transform.position);
+                            if (distance > bestDistance)
+                            {
+                                bestDistance = distance;
+                                bestTarget = i;
+                            }
+                        }
+                        currentAction.target = currentAction.targets[bestTarget];
+                    }
                     //Debug.Log(currentAction.name + "Target is null" + currentAction.agent.destination);
                 }
-                if (currentAction.target != null){
-                    currentAction.running=true;
+                if (currentAction.target != null)
+                {
+                    currentAction.running = true;
                     currentAction.agent.SetDestination(currentAction.target.transform.position);
                     //Debug.Log(currentAction.name + "Target isn't null" + currentAction.agent.destination);
                 }
-            } else {
+            }
+            else
+            {
                 //Debug.Log(currentAction.name + "Ending Queue");
                 actionQueue = null;
             }

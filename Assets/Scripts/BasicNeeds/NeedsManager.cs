@@ -68,13 +68,11 @@ public class NeedsManager : MonoBehaviour
             // TODO calling functions may need to be moved to priority system
             if (worldStatusManager.currentTemperature < temperatureModule.GetCurrentTemperature() - temperatureModule.toleranceOffset)
             {
-                Debug.Log("first option");
                 nPCController.Invoke("GetTooCold", 0); //npc is too cold 
             }
             else if (worldStatusManager.currentTemperature > temperatureModule.GetCurrentTemperature() + temperatureModule.toleranceOffset)
             {
                 nPCController.Invoke("GetTooHot", 0); //npc is too hot
-                Debug.Log("Second Option");
             }
         }
     }

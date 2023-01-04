@@ -13,7 +13,6 @@ public class GoToKitchen : Actions
     public override bool PostPerform()
     {
         belief.ChangeState("HasFood", 0);
-        Debug.Log("Kitchen postState");
         return true;
     }
 }
