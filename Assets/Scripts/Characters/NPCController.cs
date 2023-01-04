@@ -53,6 +53,7 @@ public class NPCController : MonoBehaviour
     }
     void LateUpdate()
     {
+        
         if (currentAction != null && currentAction.running)
         {
             float distanceToTarget = Vector3.Distance(currentAction.target.transform.position, transform.position);
