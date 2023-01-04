@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Explore : BaseGoal
+public class ExploreGoal : BaseGoal
 {
     [SerializeField] int minPriority = 0;
     [SerializeField] int maxPriority = 30;

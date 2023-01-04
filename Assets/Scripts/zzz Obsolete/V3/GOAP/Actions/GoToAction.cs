@@ -5,9 +5,9 @@ using UnityEngine;
 public class GoToAction : BaseAction
 {
 
-    List<System.Type> GoalsActionAchieves = new List<System.Type>(new System.Type[] {typeof(GoTo)});
+    List<System.Type> GoalsActionAchieves = new List<System.Type>(new System.Type[] {typeof(GoToGoal)});
 
-    GoTo goToTarget;
+    GoToGoal goToTarget;
     public override List<System.Type> GetGoalsAchievedByAction()
     {
         return GoalsActionAchieves;
@@ -19,7 +19,7 @@ public class GoToAction : BaseAction
     public override void OnActionActivated(BaseGoal _linkedGoal)
     {
         base.OnActionActivated(_linkedGoal);
-        goToTarget = (GoTo)linkedGoal;
+        goToTarget = (GoToGoal)linkedGoal;
         agent.MoveTo(goToTarget.MoveToTarget());
 
     }

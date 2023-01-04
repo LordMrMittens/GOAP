@@ -2,28 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cook : BaseGoal
+public class WatchTVGoal : BaseGoal
 {
-    [SerializeField] float timeEating = 5f;
-    [SerializeField] float buildRate = .2f;
+    [SerializeField] float timeWatching = 3f;
+    [SerializeField] float buildRate = .4f;
 
     Transform CurrentTarget;
     Transform LookAtTarget;
     float currentPriority = 0;
 
-    bool IsEating = false;
-
-    public Vector3 FindFood(){
-        return GameObject.FindGameObjectWithTag("Food").transform.position;
+    public GameObject FindSofa(){
+        GameObject sofa = GameObject.FindGameObjectWithTag("Sofa");
+        if(sofa != null){
+        return sofa;} 
+        return null;
     }
-        public Vector3 FindTable(){
-        return GameObject.FindGameObjectWithTag("Table").transform.position;
+        public Vector3 FindTV(){
+        return GameObject.FindGameObjectWithTag("TV").transform.position;
     }
 
     public override void OnUpdate()
     {
-        if(!IsEating)
-        {currentPriority += buildRate * Time.deltaTime;}
+        if (agent.isAwake){
+            currentPriority += buildRate * Time.deltaTime;
+        }
     }
     public override void OnGoalActivated(BaseAction _linkedAction)
     {
@@ -44,19 +46,17 @@ public class Cook : BaseGoal
 
     public override bool CanDo()
     {
-        if(FindFood() == null || FindTable()==null)
+        if(FindSofa() == null || FindTV()==null)
         {
             return false;
         }
         return true;
     }
 
-    public IEnumerator GetSomeFood(){
-        IsEating = true;
-        agent.SetLookAtTarget(FindTable());
-        yield return new WaitForSeconds(timeEating);
+    public IEnumerator WatchSomeTV(){
+        agent.SetLookAtTarget(FindTV());
+        yield return new WaitForSeconds(timeWatching);
         currentPriority = 0;
-        IsEating = false;
         yield return null;
     }
 }

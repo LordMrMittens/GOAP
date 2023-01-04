@@ -87,8 +87,16 @@ public class NeedsManager : MonoBehaviour
     {
         nutritionModule.AddResource(100);
     }
+    public void QuenchThirst()
+    {
+        hydrationModule.AddResource(100);
+    }
+    public void RestoreEnergy()
+    {
+        tirednessModule.AddResource(100);
+    }
     public void ToggleJacket(bool IsWearingJacket)
     {
-         temperatureModule.isWearingAJacket = IsWearingJacket;
+        temperatureModule.isWearingAJacket = IsWearingJacket;
     }
 }

@@ -550,6 +550,9 @@ GameObject:
   - component: {fileID: 197827905}
   - component: {fileID: 197827904}
   - component: {fileID: 197827906}
+  - component: {fileID: 197827908}
+  - component: {fileID: 197827907}
+  - component: {fileID: 197827909}
   m_Layer: 0
   m_Name: ActionManager
   m_TagString: Untagged
@@ -623,6 +626,8 @@ MonoBehaviour:
   preConditions:
   - key: HasFood
     value: 0
+  - key: IsHungry
+    value: 0
   actionResults:
   - key: HasEaten
     value: 0
@@ -680,11 +685,11 @@ MonoBehaviour:
   targets: []
   targetTag: Food
   duration: 1
-  preConditions:
-  - key: IsHungry
-    value: 0
+  preConditions: []
   actionResults:
   - key: HasFood
+    value: 0
+  - key: NearKitchen
     value: 0
   agent: {fileID: 0}
   nPCInventory: {fileID: 0}
@@ -788,6 +793,98 @@ MonoBehaviour:
   activatingAction: 1
   needsManager: {fileID: 0}
   relatedItemIfAvailable: Jacket
+--- !u!114 &197827907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197827898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9309efbc905c6bd4d9fa47d91867ef0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Rest
+  cost: 1
+  target: {fileID: 0}
+  targets: []
+  targetTag: Bed
+  duration: 5
+  preConditions:
+  - key: IsNearBed
+    value: 0
+  - key: IsTired
+    value: 0
+  actionResults:
+  - key: IsRested
+    value: 0
+  agent: {fileID: 0}
+  nPCInventory: {fileID: 0}
+  running: 0
+  activatingAction: 1
+  needsManager: {fileID: 0}
+  relatedItemIfAvailable: 
+--- !u!114 &197827908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197827898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5a43326055b64141963933bb8e27f0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Goto Bed
+  cost: 1
+  target: {fileID: 0}
+  targets: []
+  targetTag: Bed
+  duration: 0
+  preConditions: []
+  actionResults:
+  - key: IsNearBed
+    value: 0
+  agent: {fileID: 0}
+  nPCInventory: {fileID: 0}
+  running: 0
+  activatingAction: 0
+  needsManager: {fileID: 0}
+  relatedItemIfAvailable: 
+--- !u!114 &197827909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197827898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48faf01b9b8bcdc47997e45922f1d4cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: DrinkWater
+  cost: 1
+  target: {fileID: 0}
+  targets: []
+  targetTag: Water
+  duration: 0
+  preConditions:
+  - key: IsThirsty
+    value: 0
+  - key: NearKitchen
+    value: 0
+  actionResults:
+  - key: QuenchThirst
+    value: 0
+  agent: {fileID: 0}
+  nPCInventory: {fileID: 0}
+  running: 0
+  activatingAction: 0
+  needsManager: {fileID: 0}
+  relatedItemIfAvailable: 
 --- !u!1 &233907614
 GameObject:
   m_ObjectHideFlags: 0
@@ -1876,6 +1973,103 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &637899938
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 637899942}
+  - component: {fileID: 637899941}
+  - component: {fileID: 637899940}
+  - component: {fileID: 637899939}
+  m_Layer: 0
+  m_Name: Water
+  m_TagString: Water
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!135 &637899939
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637899938}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &637899940
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637899938}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 6d90f0cdd84c7c9468f33984c356292b, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &637899941
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637899938}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &637899942
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637899938}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.53, y: 0, z: 8.61}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &666278500
 GameObject:
   m_ObjectHideFlags: 0
@@ -6710,7 +6904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxResource: 100
-  minResource: 0
+  minResource: 20
   <currentResource>k__BackingField: 0
   backgroundDecayRate: 0.005
   hasResource: 0

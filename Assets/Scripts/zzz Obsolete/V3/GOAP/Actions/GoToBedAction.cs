@@ -5,9 +5,9 @@ using UnityEngine;
 public class GoToBedAction : BaseAction
 {
 
-    List<System.Type> GoalsActionAchieves = new List<System.Type>(new System.Type[] {typeof(GoToBed)});
+    List<System.Type> GoalsActionAchieves = new List<System.Type>(new System.Type[] {typeof(GoToBedGoal)});
 
-    GoToBed goToTarget;
+    GoToBedGoal goToTarget;
     public override List<System.Type> GetGoalsAchievedByAction()
     {
         return GoalsActionAchieves;
@@ -19,7 +19,7 @@ public class GoToBedAction : BaseAction
     public override void OnActionActivated(BaseGoal _linkedGoal)
     {
         base.OnActionActivated(_linkedGoal);
-        goToTarget = (GoToBed)linkedGoal;
+        goToTarget = (GoToBedGoal)linkedGoal;
         agent.MoveTo(goToTarget.FindBed());
 
     }

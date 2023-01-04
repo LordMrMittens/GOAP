@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IdleAction : BaseAction
 {
-    List<System.Type> GoalsActionAchieves = new List<System.Type>(new System.Type[] {typeof(Idle)});
+    List<System.Type> GoalsActionAchieves = new List<System.Type>(new System.Type[] {typeof(IdleGoal)});
     public override List<System.Type> GetGoalsAchievedByAction()
     {
         return GoalsActionAchieves;

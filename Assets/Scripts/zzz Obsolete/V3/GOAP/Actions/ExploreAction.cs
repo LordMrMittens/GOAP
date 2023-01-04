@@ -6,7 +6,7 @@ public class ExploreAction : BaseAction
 {
     [SerializeField] float exploreRange = 20f;
 
-    List<System.Type> GoalsActionAchieves = new List<System.Type>(new System.Type[] {typeof(Explore)});
+    List<System.Type> GoalsActionAchieves = new List<System.Type>(new System.Type[] {typeof(ExploreGoal)});
     public override List<System.Type> GetGoalsAchievedByAction()
     {
         return GoalsActionAchieves;

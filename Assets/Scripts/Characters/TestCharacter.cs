@@ -9,7 +9,7 @@ public class TestCharacter : NPCController
         base.Start();
 
 
-        SubGoal s1 = new SubGoal("IsResting", 0, false);
+        SubGoal s1 = new SubGoal("IsRested", 0, false);
         goals.Add(s1, 5);
 
         SubGoal s2 = new SubGoal("HasEaten", 0, false);
@@ -19,9 +19,9 @@ public class TestCharacter : NPCController
         goals.Add(s3, 5);
         SubGoal s4 = new SubGoal("GetCold", 0, false);
         goals.Add(s4, 5);
-        SubGoal s5 = new SubGoal("HasDrunk", 0, false);
+        SubGoal s5 = new SubGoal("QuenchThirst", 0, false);
         goals.Add(s5, 5);
-
+        
     }
 
     public void GetHungry()

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoTo : BaseGoal
+public class GoToGoal : BaseGoal
 {
     [SerializeField] float minThresholdToStartAction = 1.5f;
     [SerializeField] float thresholdToStopAction = 1f;

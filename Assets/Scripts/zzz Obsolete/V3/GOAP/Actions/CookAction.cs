@@ -5,9 +5,9 @@ using UnityEngine;
 public class CookAction : BaseAction
 {
 
-    List<System.Type> GoalsActionAchieves = new List<System.Type>(new System.Type[] {typeof(Cook)});
+    List<System.Type> GoalsActionAchieves = new List<System.Type>(new System.Type[] {typeof(CookGoal)});
 
-    Cook goToTarget;
+    CookGoal goToTarget;
 
     bool hasFood;
     public override List<System.Type> GetGoalsAchievedByAction()
@@ -21,7 +21,7 @@ public class CookAction : BaseAction
     public override void OnActionActivated(BaseGoal _linkedGoal)
     {
         base.OnActionActivated(_linkedGoal);
-        goToTarget = (Cook)linkedGoal;
+        goToTarget = (CookGoal)linkedGoal;
         Vector3 food = goToTarget.FindFood();
         agent.MoveTo(food);
 

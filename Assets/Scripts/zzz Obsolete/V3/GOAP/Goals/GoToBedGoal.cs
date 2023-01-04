@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoToBed : BaseGoal
+public class GoToBedGoal : BaseGoal
 {
     [SerializeField] float timeResting = 3f;
     [SerializeField] float buildRate = 1f;

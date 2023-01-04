@@ -5,9 +5,9 @@ using UnityEngine;
 public class WatchTVAction : BaseAction
 {
 
-    List<System.Type> GoalsActionAchieves = new List<System.Type>(new System.Type[] {typeof(WatchTV)});
+    List<System.Type> GoalsActionAchieves = new List<System.Type>(new System.Type[] {typeof(WatchTVGoal)});
 
-    WatchTV goToTarget;
+    WatchTVGoal goToTarget;
     public override List<System.Type> GetGoalsAchievedByAction()
     {
         return GoalsActionAchieves;
@@ -19,7 +19,7 @@ public class WatchTVAction : BaseAction
     public override void OnActionActivated(BaseGoal _linkedGoal)
     {
         base.OnActionActivated(_linkedGoal);
-        goToTarget = (WatchTV)linkedGoal;
+        goToTarget = (WatchTVGoal)linkedGoal;
         agent.MoveTo(goToTarget.FindSofa().transform.position);
 
     }
