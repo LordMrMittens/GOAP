@@ -1052,6 +1052,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4913421296416443670}
   - component: {fileID: 4913421296416443669}
+  - component: {fileID: 6860364908005982067}
   - component: {fileID: -4578944316393918606}
   - component: {fileID: -6781447729628313691}
   - component: {fileID: 4359241635176777236}
@@ -1105,6 +1106,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &6860364908005982067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4913421296416443629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d211edc9f15e7ff429325b0448798d3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sword: {fileID: 0}
+  itemsEquipped: []
 --- !u!114 &-4578944316393918606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1119,11 +1134,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SetGoal: 
   actions: []
-  possibleActions: []
+  ActionHolder: {fileID: 1424862606913555236}
   currentAction: {fileID: 0}
   invoked: 0
   DistanceFromTarget: 1.3
   needsManager: {fileID: -6781447729628313691}
+  nPCInventory: {fileID: 6860364908005982067}
 --- !u!114 &-6781447729628313691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1136,12 +1152,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a98c64462b9021349b0e8be7b0916c32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nutritionModule: {fileID: 0}
-  temperatureModule: {fileID: 0}
-  hydrationModule: {fileID: 0}
-  tirednessModule: {fileID: 0}
-  nPCController: {fileID: 0}
-  tickFrequency: 0
+  nutritionModule: {fileID: 9209703962267718606}
+  temperatureModule: {fileID: 6175398960836005979}
+  hydrationModule: {fileID: 6978994666869021405}
+  tirednessModule: {fileID: 4359241635176777236}
+  nPCController: {fileID: -4578944316393918606}
+  tickFrequency: 1
 --- !u!114 &4359241635176777236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1171,11 +1187,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82f2fdfac8f3b45408876ed5d3702648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTemperature: 36.5
-  toleranceOffset: 0
+  targetTemperature: 20
+  toleranceOffset: 10
+  currentTemperature: 0
   <energyConsumptionRate>k__BackingField: 0.5
-  <waterConsumptionRate>k__BackingField: 0.1
+  <waterConsumptionRate>k__BackingField: 0.5
   isWarming: 0
+  isWearingAJacket: 0
+  reportedTemperature: 0
 --- !u!114 &6978994666869021405
 MonoBehaviour:
   m_ObjectHideFlags: 0

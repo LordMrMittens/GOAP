@@ -4,16 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - LightSwitch
-  - WeaponRack
-  - Bed
-  - Sofa
-  - TV
-  - Table
-  - Food
   - Deer
-  - Wardrobe
-  - Water
+  - Pond
+  - Pub
+  - Market
+  - Blacksmith
   layers:
   - Default
   - TransparentFX

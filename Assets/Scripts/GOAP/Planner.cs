@@ -30,6 +30,7 @@ public class Node{
 }
 public class Planner
 {
+    Dictionary<Actions, string> testDict = new Dictionary<Actions, string>();
     public Queue<Actions> Plan(List<Actions> actions, Dictionary<string,int> goal, WorldStates beliefStates){
         
         List<Actions> doableActions = new List<Actions>();
@@ -65,6 +66,7 @@ public class Planner
         while(n != null){
             if (n.action != null){
                 result.Insert(0,n.action);
+                
             }
             n = n.parent;
         }
