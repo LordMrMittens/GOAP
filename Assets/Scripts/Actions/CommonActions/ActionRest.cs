@@ -12,7 +12,7 @@ public class ActionRest : Actions
     public override bool PostPerform()
     {
         belief.RemoveState("IsTired");
-        needsManager.Invoke("RestoreEnergy", 0);
+        needsManager.RestoreEnergy();
         return true;
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public abstract class Actions : MonoBehaviour
 {
     public string actionName = "Action";
+    public string[] goalsRelatedTo;
     public float cost = 1f;
     public GameObject target;
     public GameObject[] targets;

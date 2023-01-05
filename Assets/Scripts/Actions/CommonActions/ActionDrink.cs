@@ -12,7 +12,7 @@ public class ActionDrink : Actions
     public override bool PostPerform()
     {
         belief.RemoveState("IsThirsty");
-        needsManager.Invoke("QuenchThirst", 0);
+        needsManager.QuenchThirst();
         return true;
     }
 }

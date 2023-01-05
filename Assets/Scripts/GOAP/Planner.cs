@@ -30,6 +30,7 @@ public class Node{
 }
 public class Planner
 {
+
     Dictionary<Actions, string> testDict = new Dictionary<Actions, string>();
     public Queue<Actions> Plan(List<Actions> actions, Dictionary<string,int> goal, WorldStates beliefStates){
         

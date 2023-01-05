@@ -33,15 +33,18 @@ public class NeedsManager : MonoBehaviour
             if (nutritionModule.currentResource < 20)
             {
                 nPCController.Invoke("GetHungry", 0);
+                nPCController.hasGoal=true;
                 //use  delegates instead??
             }
             if (hydrationModule.currentResource < hydrationModule.minResource)
             {
                 nPCController.Invoke("GetThirsty", 0);
+                nPCController.hasGoal=true;
             }
             if (tirednessModule.currentResource < 10)
             {
                 nPCController.Invoke("GetTired", 0);
+                nPCController.hasGoal=true;
             }
 
 
@@ -69,10 +72,12 @@ public class NeedsManager : MonoBehaviour
             if (worldStatusManager.currentTemperature < temperatureModule.GetCurrentTemperature() - temperatureModule.toleranceOffset)
             {
                 nPCController.Invoke("GetTooCold", 0); //npc is too cold 
+                nPCController.hasGoal=true;
             }
             else if (worldStatusManager.currentTemperature > temperatureModule.GetCurrentTemperature() + temperatureModule.toleranceOffset)
             {
                 nPCController.Invoke("GetTooHot", 0); //npc is too hot
+                nPCController.hasGoal=true;
             }
         }
     }
