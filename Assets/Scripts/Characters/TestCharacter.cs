@@ -7,45 +7,40 @@ public class TestCharacter : NPCController
     protected override void Start()
     {
         base.Start();
-
-        /*
-        SubGoal s1 = new SubGoal("IsRested", 0, false, "Rest");
-        goals.Add(s1, 5);
-        SubGoal s2 = new SubGoal("HasEaten", 0, false, "Food");
-        goals.Add(s2, 5);
-        SubGoal s3 = new SubGoal("GetWarm", 0, false, "Temperature");
-        goals.Add(s3, 5);
-        SubGoal s4 = new SubGoal("GetCold", 0, false, "Temperature");
-        goals.Add(s4, 5);
-        SubGoal s5 = new SubGoal("QuenchThirst", 0, false, "Drink");
-        goals.Add(s5, 5);
-        */
     }
 
     public void GetHungry()
     {
-        beliefs.ChangeState("IsHungry", 0);
-        AddSubGoal("IsRested", 0, true, "Rest");
+        beliefs.AddSingleState("IsHungry", 0);
+        AddSubGoal("HasEaten", 0, true, "Food");
+        Debug.Log("Triggering Hunger");
     }
 
     void GetTired()
     {
-        beliefs.ChangeState("IsTired", 0);
-        AddSubGoal("HasEaten", 0, false, "Food");
+        beliefs.AddSingleState("IsTired", 0);
+        AddSubGoal("IsRested", 0, true, "Rest");
+        Debug.Log("Triggering Rest");
     }
     void GetThirsty()
     {
-        beliefs.ChangeState("IsThirsty", 0);
+        beliefs.AddSingleState("IsThirsty", 0);
+        AddSubGoal("QuenchThirst", 0, true, "Drink");
+        Debug.Log("Triggering Drink");
     }
     void GetTooHot()
     {
         CheckForJacket();
-        beliefs.ChangeState("IsTooHot", 0);
+        beliefs.AddSingleState("IsTooHot", 0);
+        AddSubGoal("GetCold", 0, true, "Temperature");
+        Debug.Log("Triggering temp hot");
     }
     void GetTooCold()
     {
         CheckForJacket();
-        beliefs.ChangeState("IsTooCold", 0);
+        beliefs.AddSingleState("IsTooCold", 0);
+        AddSubGoal("GetWarm", 0, true, "Temperature");
+        Debug.Log("Triggering temp cold");
     }
 
         public void CheckForJacket()

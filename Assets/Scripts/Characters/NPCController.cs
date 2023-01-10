@@ -19,7 +19,6 @@ public class SubGoal
 
 public class NPCController : MonoBehaviour
 {
-    List<SubGoal> subGoals = new List<SubGoal>();
     public string SetGoal;
     public List<Actions> allAvailableActions = new List<Actions>();
     public Dictionary<SubGoal, int> goals = new Dictionary<SubGoal, int>();
@@ -69,15 +68,7 @@ public class NPCController : MonoBehaviour
 
         if (currentAction != null && currentAction.running)
         {
-            float distanceToTarget = Vector3.Distance(currentAction.target.transform.position, transform.position);
-            if (distanceToTarget < DistanceFromTarget)//currentAction.agent.hasPath &&  // && distanceToTarget < DistanceFromTarget && || currentAction.activatingAction
-            {
-                if (!invoked)
-                {
-                    Invoke("CompleteAction", currentAction.duration);
-                    invoked = true;
-                }
-            }
+            CheckForActionCompletion();
 
             return;
         }
@@ -85,95 +76,132 @@ public class NPCController : MonoBehaviour
         {
             if (planner == null || actionQueue == null)
             {
-                planner = new Planner();
-                var sortedGoals = from entry in goals orderby entry.Value descending select entry; //possibly remove goals until relevant?
-                List<Actions> relevantActions = new List<Actions>(); //add only actions related to goal? LIMIT THE NUMBER OF ACTIONS
-                foreach (KeyValuePair<SubGoal, int> subGoal in sortedGoals)
-                {
-                    foreach (Actions action in allAvailableActions)
-                    {
-                        if (action.goalsRelatedTo.Contains(subGoal.Key.keyword))
-                        {
-                            relevantActions.Add(action);
-                        }
-                    }
-                    actionQueue = planner.Plan(relevantActions, subGoal.Key.subGoals, beliefs);
-                    if (actionQueue != null)
-                    {
-                        currentGoal = subGoal.Key;
-                        break;
-                    }
-                }
+                CreatePlan();
             }
 
         }
         if (actionQueue != null && actionQueue.Count == 0)
         {
-            if (currentGoal.remove)
-            {
-                goals.Remove(currentGoal);
-            }
-            planner = null;
-            hasGoal = false;
+            DeletePlanner();
         }
         if (actionQueue != null && actionQueue.Count > 0)
         {
-            currentAction = actionQueue.Dequeue();
-            if (currentAction.PrePerform())
-            {
-                if (currentAction.defaultTarget != null)
-                {
-                    currentAction.target = currentAction.defaultTarget;
-                }
-                if (currentAction.target == null && currentAction.targetTag != "")
-                {
-                    currentAction.targets = GameObject.FindGameObjectsWithTag(currentAction.targetTag);
-                    if (currentAction.targets.Length > 0)
-                    {
-                        float bestDistance = Mathf.Infinity;
-                        int bestTarget = 0;
-                        for (int i = 0; i < currentAction.targets.Length; i++)
-                        {
-                            float distance = Vector3.Distance(transform.position, currentAction.targets[i].transform.position);
-                            if (distance > bestDistance)
-                            {
-                                bestDistance = distance;
-                                bestTarget = i;
-                            }
-                        }
-                        currentAction.target = currentAction.targets[bestTarget];
-                    }
-                    //Debug.Log(currentAction.name + "Target is null" + currentAction.agent.destination);
-                }
-                if (currentAction.target != null)
-                {
-                    currentAction.running = true;
-                    currentAction.agent.SetDestination(currentAction.target.transform.position);
-                    //Debug.Log(currentAction.name + "Target isn't null" + currentAction.agent.destination);
-                }
-                if (currentAction.target == null && currentAction.activatingAction) //target is added from previous action
-                {
-                    currentAction.target = previousTarget;
-                    currentAction.agent.SetDestination(currentAction.target.transform.position);
-                    currentAction.running = true;
-                }
-            }
-            else
-            {
-                //Debug.Log(currentAction.name + "Ending Queue");
-                actionQueue = null;
-
-            }
+            ExecutePlan();
         }
         tickCounter = 0;
 
 
     }
+
+    private void CheckForActionCompletion()
+    {
+        float distanceToTarget = Vector3.Distance(currentAction.target.transform.position, transform.position);
+        if (distanceToTarget < DistanceFromTarget)//currentAction.agent.hasPath &&  // && distanceToTarget < DistanceFromTarget && || currentAction.activatingAction
+        {
+            if (!invoked)
+            {
+                Invoke("CompleteAction", currentAction.duration);
+                invoked = true;
+            }
+        }
+    }
+
+    private void ExecutePlan()
+    {
+        currentAction = actionQueue.Dequeue();
+        if (currentAction.PrePerform())
+        {
+            if (currentAction.defaultTarget != null)
+            {
+                currentAction.target = currentAction.defaultTarget;
+            }
+            if (currentAction.target == null && currentAction.targetTag != "")
+            {
+                currentAction.targets = GameObject.FindGameObjectsWithTag(currentAction.targetTag);
+                if (currentAction.targets.Length > 0)
+                {
+                    float bestDistance = Mathf.Infinity;
+                    int bestTarget = 0;
+                    for (int i = 0; i < currentAction.targets.Length; i++)
+                    {
+                        float distance = Vector3.Distance(transform.position, currentAction.targets[i].transform.position);
+                        if (distance > bestDistance)
+                        {
+                            bestDistance = distance;
+                            bestTarget = i;
+                        }
+                    }
+                    currentAction.target = currentAction.targets[bestTarget];
+                }
+                //Debug.Log(currentAction.name + "Target is null" + currentAction.agent.destination);
+            }
+            if (currentAction.target != null)
+            {
+                currentAction.running = true;
+                currentAction.agent.SetDestination(currentAction.target.transform.position);
+                //Debug.Log(currentAction.name + "Target isn't null" + currentAction.agent.destination);
+            }
+            if (currentAction.target == null && currentAction.activatingAction) //target is added from previous action
+            {
+                currentAction.target = previousTarget;
+                currentAction.agent.SetDestination(currentAction.target.transform.position);
+                currentAction.running = true;
+            }
+        }
+        else
+        {
+            //Debug.Log(currentAction.name + "Ending Queue");
+            actionQueue = null;
+
+        }
+    }
+
+    private void DeletePlanner()
+    {
+        if (currentGoal.remove)
+        {
+            goals.Remove(currentGoal);
+        }
+        planner = null;
+        hasGoal = false;
+    }
+
+    private void CreatePlan()
+    {
+        planner = new Planner();
+        var sortedGoals = from entry in goals orderby entry.Value descending select entry; 
+        //LIMIT THE NUMBER OF ACTIONS??
+        List<Actions> relevantActions = new List<Actions>(); 
+        foreach (KeyValuePair<SubGoal, int> subGoal in sortedGoals)
+        {
+            foreach (Actions action in allAvailableActions)
+            {
+                if (action.goalsRelatedTo.Contains(subGoal.Key.keyword))
+                {
+                    relevantActions.Add(action);
+                }
+            }
+            actionQueue = planner.Plan(relevantActions, subGoal.Key.subGoals, beliefs);
+            if (actionQueue != null)
+            {
+                currentGoal = subGoal.Key;
+                break;
+            } else {
+                // if the plan has failed??? give mission to player???
+            }
+        }
+    }
+
     public void AddSubGoal(string goal, int value, bool canBeDeleted, string keyword)
     {
-
         SubGoal subGoalToAdd = new SubGoal(goal, value, canBeDeleted, keyword);
-        goals.Add(subGoalToAdd, 5);
-        subGoals.Add(subGoalToAdd);
+        if (!goals.ContainsKey(subGoalToAdd))
+        {
+            goals.Add(subGoalToAdd, 5);
+        }
+        else
+        {
+            return;
+        }
     }
 }

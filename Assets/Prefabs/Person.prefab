@@ -1133,13 +1133,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SetGoal: 
-  actions: []
+  allAvailableActions: []
   ActionHolder: {fileID: 1424862606913555236}
   currentAction: {fileID: 0}
   invoked: 0
   DistanceFromTarget: 1.3
   needsManager: {fileID: -6781447729628313691}
   nPCInventory: {fileID: 6860364908005982067}
+  tickFrequency: 1
+  canPlan: 0
 --- !u!114 &-6781447729628313691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1149,7 +1151,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4913421296416443629}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a98c64462b9021349b0e8be7b0916c32, type: 3}
+  m_Script: {fileID: 11500000, guid: 78a2cb9e576824c4c8557e4d4b8ed710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nutritionModule: {fileID: 9209703962267718606}

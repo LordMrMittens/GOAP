@@ -30,7 +30,7 @@ public class NeedsManager : MonoBehaviour
             ManageTemperature();
 
             //TODO add some sort of priority system
-            if (nutritionModule.currentResource < 20)
+            if (nutritionModule.currentResource < nutritionModule.minResource)
             {
                 nPCController.Invoke("GetHungry", 0);
                 nPCController.hasGoal=true;
@@ -41,7 +41,7 @@ public class NeedsManager : MonoBehaviour
                 nPCController.Invoke("GetThirsty", 0);
                 nPCController.hasGoal=true;
             }
-            if (tirednessModule.currentResource < 10)
+            if (tirednessModule.currentResource < tirednessModule.minResource)
             {
                 nPCController.Invoke("GetTired", 0);
                 nPCController.hasGoal=true;
