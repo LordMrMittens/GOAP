@@ -1141,7 +1141,7 @@ MonoBehaviour:
   needsManager: {fileID: -6781447729628313691}
   nPCInventory: {fileID: 6860364908005982067}
   tickFrequency: 1
-  canPlan: 0
+  canPlan: 1
 --- !u!114 &-6781447729628313691
 MonoBehaviour:
   m_ObjectHideFlags: 0

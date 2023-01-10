@@ -43,7 +43,9 @@ public class NPCController : MonoBehaviour
     float tickCounter;
 
     public bool hasGoal { get; set; }
-    public bool canPlan = false;
+    public bool canPlan = true;
+    //public List<string> failedGoals = new List<string>(); probably need only one or the other
+    public List<SubGoal> failedGoalsList = new List<SubGoal>();
 
     protected virtual void Start()
     {
@@ -76,7 +78,7 @@ public class NPCController : MonoBehaviour
         {
             if (planner == null || actionQueue == null)
             {
-                CreatePlan();
+               // CreatePlan(); //may have to activate from here?
             }
 
         }
@@ -164,13 +166,14 @@ public class NPCController : MonoBehaviour
         }
         planner = null;
         hasGoal = false;
+        canPlan = true;
+        failedGoalsList.Clear();
     }
 
     private void CreatePlan()
     {
         planner = new Planner();
         var sortedGoals = from entry in goals orderby entry.Value descending select entry; 
-        //LIMIT THE NUMBER OF ACTIONS??
         List<Actions> relevantActions = new List<Actions>(); 
         foreach (KeyValuePair<SubGoal, int> subGoal in sortedGoals)
         {
@@ -184,10 +187,12 @@ public class NPCController : MonoBehaviour
             actionQueue = planner.Plan(relevantActions, subGoal.Key.subGoals, beliefs);
             if (actionQueue != null)
             {
+                canPlan = false;
                 currentGoal = subGoal.Key;
                 break;
             } else {
-                // if the plan has failed??? give mission to player???
+                failedGoalsList.Add(subGoal.Key);
+                canPlan = true;
             }
         }
     }
@@ -195,13 +200,23 @@ public class NPCController : MonoBehaviour
     public void AddSubGoal(string goal, int value, bool canBeDeleted, string keyword)
     {
         SubGoal subGoalToAdd = new SubGoal(goal, value, canBeDeleted, keyword);
-        if (!goals.ContainsKey(subGoalToAdd))
-        {
-            goals.Add(subGoalToAdd, 5);
+        if (failedGoalsList.Count >0){
+            foreach (SubGoal sGoal in failedGoalsList)
+            {
+                if(sGoal.subGoals.ContainsKey(goal)){
+                    Debug.Log("failed to add goal in loop");
+                    return;
+                }
+            }
         }
-        else
+        if (goals.ContainsKey(subGoalToAdd) == false ) //|| failedGoals.Contains(subGoalToAdd.keyword) possible check? if so remove negative from fist check
         {
-            return;
+            Debug.Log("AddingSubgoal");
+            goals.Add(subGoalToAdd, 5);
+            if(canPlan){
+            CreatePlan();
+            Debug.Log("Creating plan");
+            }
         }
     }
 }
