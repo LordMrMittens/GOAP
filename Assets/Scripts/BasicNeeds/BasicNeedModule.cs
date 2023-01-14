@@ -37,7 +37,7 @@ public class BasicNeedModule : MonoBehaviour
         }
         hasResource = currentResource > 0;
     }
-    public void UpdateUIDisplay(){
+    public void UpdateUIDisplay(){ //might want to move this to needs manager
         StatusUI.statusUIInstance.UpdateGoal(this, displayName, currentResource);
     }
 }

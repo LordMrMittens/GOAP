@@ -48,7 +48,7 @@ public class NeedsManager : MonoBehaviour
             }
 
 
-
+            GenerateComentary(); // testing purposes only
             tickTimer = 0;
         }
     }
@@ -103,5 +103,12 @@ public class NeedsManager : MonoBehaviour
     public void ToggleJacket(bool IsWearingJacket)
     {
         temperatureModule.isWearingAJacket = IsWearingJacket;
+    }
+    //create a public void where dialogue manager can get priorities and generate dialogue
+    public void GenerateComentary() //move this to a dialogue manager turn this into get priorities
+    {
+        string dialogue = "Testing dialogue";
+        StatusUI.statusUIInstance.UpdateDialogue(this.gameObject.name, dialogue);
+
     }
 }

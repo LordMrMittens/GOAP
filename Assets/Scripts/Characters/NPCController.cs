@@ -44,6 +44,7 @@ public class NPCController : MonoBehaviour
 
     public bool hasGoal { get; set; }
     public bool canPlan = true;
+
     //public List<string> failedGoals = new List<string>(); probably need only one or the other
     public List<SubGoal> failedGoalsList = new List<SubGoal>();
 
@@ -189,6 +190,12 @@ public class NPCController : MonoBehaviour
             {
                 canPlan = false;
                 currentGoal = subGoal.Key;
+                string planToDisplay = "My plan is: \n";
+                foreach (Actions action in actionQueue)
+                {
+                    planToDisplay += action.actionName + ".\n";
+                }
+                StatusUI.statusUIInstance.UpdatePlanStatus(planToDisplay);
                 break;
             } else {
                 failedGoalsList.Add(subGoal.Key);
