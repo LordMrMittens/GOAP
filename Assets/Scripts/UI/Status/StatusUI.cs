@@ -12,6 +12,8 @@ public class StatusUI : MonoBehaviour
     [SerializeField] ComentaryDialogueUI dialogueUI;
     Dictionary<BasicNeedModule, NeedUI> displayedStats = new Dictionary<BasicNeedModule, NeedUI>();
     Vector3 spawnPoint;
+    float verticalPanelOffset = 50;
+    float horizontalPanelOffset= 320;
     void Awake()
     {
         statsDisplay.SetActive(true);
@@ -21,14 +23,22 @@ public class StatusUI : MonoBehaviour
     }
     public void UpdateStatusWindow(BasicNeedModule[] needs)
     {
+        int xCounter = 0;
+        int yCounter = 0;
         for (int i = 0; i < needs.Length; i++)
         {
+            if (i == 5)
+            {
+                xCounter++;
+                yCounter = 0;
+            }
             if (!displayedStats.ContainsKey(needs[i]))
             {
-                spawnPoint = new Vector3(rootPanel.transform.position.x, rootPanel.transform.position.y - (i * 50), rootPanel.transform.position.z);
+                spawnPoint = new Vector3(rootPanel.transform.position.x + (xCounter * horizontalPanelOffset), rootPanel.transform.position.y - (yCounter * verticalPanelOffset), rootPanel.transform.position.z);
                 displayedStats[needs[i]] = Instantiate(needPrefab, spawnPoint, Quaternion.identity, rootPanel).GetComponent<NeedUI>();
             }
-                displayedStats[needs[i]].UpdateGoalInfo(needs[i].displayName, needs[i].currentResource);
+            yCounter++;
+            displayedStats[needs[i]].UpdateGoalInfo(needs[i].displayName, needs[i].currentResource);
 
         }
 

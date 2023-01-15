@@ -55,7 +55,6 @@ public class TemperatureModule : BasicNeedModule
             currentTemperature += (value - currentTemperature) / 120; //this may be the wrong way for doing this
         }
         reportedTemperature = currentTemperature;
-        Debug.Log(reportedTemperature);
     }
 
     void WarmUp(){

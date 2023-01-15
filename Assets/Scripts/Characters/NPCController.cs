@@ -206,18 +206,15 @@ public class NPCController : MonoBehaviour
             foreach (SubGoal sGoal in failedGoalsList)
             {
                 if(sGoal.subGoals.ContainsKey(goal)){
-                    Debug.Log("failed to add goal in loop");
                     return;
                 }
             }
         }
         if (goals.ContainsKey(subGoalToAdd) == false ) //|| failedGoals.Contains(subGoalToAdd.keyword) possible check? if so remove negative from fist check
         {
-            Debug.Log("AddingSubgoal");
             goals.Add(subGoalToAdd, 5);
             if(canPlan){
             CreatePlan();
-            Debug.Log("Creating plan");
             }
         }
     }
