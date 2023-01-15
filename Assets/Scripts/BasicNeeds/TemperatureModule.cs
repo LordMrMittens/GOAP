@@ -13,12 +13,10 @@ public class TemperatureModule : BasicNeedModule
     public bool isWarming;
     public bool isWearingAJacket;
     public float reportedTemperature;
-
-
-    // Start is called before the first frame update
     void Start()
     {
         currentTemperature = targetTemperature;
+        isCommonNeed = false;
     }
 
    public bool AdjustTemperature(float value)
@@ -26,7 +24,6 @@ public class TemperatureModule : BasicNeedModule
         if (isWearingAJacket){
             currentTemperature += 20;
         }
-        reportedTemperature = currentTemperature;
         AffectTemperature(value);
         isWarming = false;
         return CorrectTemperature();
@@ -55,8 +52,10 @@ public class TemperatureModule : BasicNeedModule
         }
         else if (currentTemperature < value)
         {
-            currentTemperature += (value - currentTemperature) / 120; //this may be the wrong way fo doing this
+            currentTemperature += (value - currentTemperature) / 120; //this may be the wrong way for doing this
         }
+        reportedTemperature = currentTemperature;
+        Debug.Log(reportedTemperature);
     }
 
     void WarmUp(){
@@ -68,6 +67,7 @@ public class TemperatureModule : BasicNeedModule
         isWarming = false;
     }
     public float GetCurrentTemperature(){
+        currentResource = reportedTemperature;
         return reportedTemperature;
     }
 }

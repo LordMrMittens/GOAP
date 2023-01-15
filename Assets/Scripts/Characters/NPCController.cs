@@ -222,11 +222,6 @@ public class NPCController : MonoBehaviour
         }
     }
 
-    public void GetStatusInformation()
-    {
-
-    }
-
     public void GetPlanInformation()
     {
         string planToDisplay = "My plan is: \n";

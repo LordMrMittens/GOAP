@@ -25,15 +25,16 @@ public class StatusUI : MonoBehaviour
         {
             if (!displayedStats.ContainsKey(needs[i]))
             {
-                Debug.Log(i*50);
                 spawnPoint = new Vector3(rootPanel.transform.position.x, rootPanel.transform.position.y - (i * 50), rootPanel.transform.position.z);
                 displayedStats[needs[i]] = Instantiate(needPrefab, spawnPoint, Quaternion.identity, rootPanel).GetComponent<NeedUI>();
             }
-            displayedStats[needs[i]].UpdateGoalInfo(needs[i].displayName, needs[i].currentResource);
+                displayedStats[needs[i]].UpdateGoalInfo(needs[i].displayName, needs[i].currentResource);
+
         }
 
     }
-    public void UpdatePlanWindow(string _plan){
+    public void UpdatePlanWindow(string _plan)
+    {
         planUI.UpdatePlanText(_plan);
     }
 

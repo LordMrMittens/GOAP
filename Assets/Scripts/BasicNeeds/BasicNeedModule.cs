@@ -7,8 +7,9 @@ public class BasicNeedModule : MonoBehaviour
     [field :SerializeField] public string displayName {get; private set;}
     public float maxResource = 100;
     public float minResource = 0;
-    [ field : SerializeField] public float currentResource {get; private set;}
+    [ field : SerializeField] public float currentResource {get; set;}
     [field : SerializeField] public float backgroundDecayRate = .01f;
+    public bool isCommonNeed;
      
     public bool hasResource;
     

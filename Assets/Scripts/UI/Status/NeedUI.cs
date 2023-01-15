@@ -12,7 +12,7 @@ public class NeedUI : MonoBehaviour
     public void UpdateGoalInfo(string _name, float _priority)
     {
         needName.text = _name;
-        needPoints.text = Mathf.CeilToInt(_priority).ToString();
+        needPoints.text = _priority.ToString("F2");
         priority.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _priority*2.7f);
     }
 }
