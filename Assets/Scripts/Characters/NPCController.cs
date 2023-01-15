@@ -28,6 +28,7 @@ public class NPCController : MonoBehaviour
 
     Planner planner;
     public Queue<Actions> actionQueue;
+    List<Actions> actionsInPlan = new List<Actions>();
     public Actions currentAction;
     public Actions previousAction { get; private set; }
     public GameObject previousTarget { get; private set; }
@@ -44,8 +45,6 @@ public class NPCController : MonoBehaviour
 
     public bool hasGoal { get; set; }
     public bool canPlan = true;
-
-    //public List<string> failedGoals = new List<string>(); probably need only one or the other
     public List<SubGoal> failedGoalsList = new List<SubGoal>();
 
     protected virtual void Start()
@@ -165,6 +164,7 @@ public class NPCController : MonoBehaviour
         {
             goals.Remove(currentGoal);
         }
+        actionsInPlan.Clear();
         planner = null;
         hasGoal = false;
         canPlan = true;
@@ -186,16 +186,11 @@ public class NPCController : MonoBehaviour
                 }
             }
             actionQueue = planner.Plan(relevantActions, subGoal.Key.subGoals, beliefs);
+            actionsInPlan = actionQueue.ToList<Actions>();
             if (actionQueue != null)
             {
                 canPlan = false;
                 currentGoal = subGoal.Key;
-                string planToDisplay = "My plan is: \n";
-                foreach (Actions action in actionQueue)
-                {
-                    planToDisplay += action.actionName + ".\n";
-                }
-                StatusUI.statusUIInstance.UpdatePlanStatus(planToDisplay);
                 break;
             } else {
                 failedGoalsList.Add(subGoal.Key);
@@ -225,5 +220,26 @@ public class NPCController : MonoBehaviour
             Debug.Log("Creating plan");
             }
         }
+    }
+
+    public void GetStatusInformation()
+    {
+
+    }
+
+    public void GetPlanInformation()
+    {
+        string planToDisplay = "My plan is: \n";
+        if (actionsInPlan.Count > 0)
+        {
+            foreach (Actions action in actionsInPlan)
+            {
+                planToDisplay += action.actionName + ".\n";
+            }
+        }
+        else {
+            planToDisplay += "There is no plan";
+        }
+        StatusUI.statusUIInstance.UpdatePlanWindow(planToDisplay);
     }
 }

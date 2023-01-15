@@ -12,6 +12,7 @@ public class NeedsManager : MonoBehaviour
     [SerializeField] NPCController nPCController;
     [SerializeField] float tickFrequency;
     public NPCInventory nPCInventory { get; private set; }
+    public BasicNeedModule[] basicNeedModules {get; private set;}
 
     float tickTimer;
     //need reference to character controller,  can it be cast since they derive from a parent class?
@@ -19,6 +20,7 @@ public class NeedsManager : MonoBehaviour
     private void Awake()
     {
         worldStatusManager = GameObject.FindObjectOfType<WorldStatusManager>();
+        basicNeedModules = GetComponents<BasicNeedModule>();
         nPCInventory = nPCController.nPCInventory;
     }
     void Update()
@@ -46,9 +48,6 @@ public class NeedsManager : MonoBehaviour
                 nPCController.Invoke("GetTired", 0);
                 nPCController.hasGoal=true;
             }
-
-
-            GenerateComentary(); // testing purposes only
             tickTimer = 0;
         }
     }
@@ -111,4 +110,10 @@ public class NeedsManager : MonoBehaviour
         StatusUI.statusUIInstance.UpdateDialogue(this.gameObject.name, dialogue);
 
     }
+    public void UpdateStatsSheet()
+    {
+        StatusUI.statusUIInstance.UpdateStatusWindow(basicNeedModules);
+        GenerateComentary(); //move this to a dialogue manager?
+    }
 }
+

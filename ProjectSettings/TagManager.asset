@@ -9,6 +9,7 @@ TagManager:
   - Pub
   - Market
   - Blacksmith
+  - NPC
   layers:
   - Default
   - TransparentFX

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BasicNeedModule : MonoBehaviour
 {
-    [SerializeField] string displayName;
+    [field :SerializeField] public string displayName {get; private set;}
     public float maxResource = 100;
     public float minResource = 0;
     [ field : SerializeField] public float currentResource {get; private set;}
@@ -25,7 +25,6 @@ public class BasicNeedModule : MonoBehaviour
             currentResource = 0;
         }
         hasResource = currentResource > 0;
-        UpdateUIDisplay();
     }
 
     public void AddResource(float value)
@@ -36,8 +35,5 @@ public class BasicNeedModule : MonoBehaviour
             currentResource = maxResource;
         }
         hasResource = currentResource > 0;
-    }
-    public void UpdateUIDisplay(){ //might want to move this to needs manager
-        StatusUI.statusUIInstance.UpdateGoal(this, displayName, currentResource);
     }
 }

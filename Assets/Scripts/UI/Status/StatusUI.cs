@@ -5,34 +5,50 @@ using UnityEngine;
 public class StatusUI : MonoBehaviour
 {
     public static StatusUI statusUIInstance;
+    public GameObject statsDisplay;
     [SerializeField] GameObject needPrefab;
     [SerializeField] RectTransform rootPanel;
     [SerializeField] PlanUI planUI;
     [SerializeField] ComentaryDialogueUI dialogueUI;
-    Dictionary<MonoBehaviour, NeedUI> displayedStats = new Dictionary<MonoBehaviour, NeedUI>();
-    int needCounter = 0;
+    Dictionary<BasicNeedModule, NeedUI> displayedStats = new Dictionary<BasicNeedModule, NeedUI>();
+    Vector3 spawnPoint;
     void Awake()
     {
+        statsDisplay.SetActive(true);
         statusUIInstance = this;
+        spawnPoint = rootPanel.transform.position;
+        statsDisplay.SetActive(false);
     }
-    public void UpdateGoal(MonoBehaviour need, string _name, float _priority)
+    public void UpdateStatusWindow(BasicNeedModule[] needs)
     {
-        string name = "";
-        if (!displayedStats.ContainsKey(need))
+        for (int i = 0; i < needs.Length; i++)
         {
-            Vector3 spawnPoint = new Vector3(rootPanel.transform.position.x, rootPanel.transform.position.y - (needCounter*50), rootPanel.transform.position.z);
-            displayedStats[need] = Instantiate(needPrefab, spawnPoint , Quaternion.identity, rootPanel).GetComponent<NeedUI>();
-           needCounter ++;
+            if (!displayedStats.ContainsKey(needs[i]))
+            {
+                Debug.Log(i*50);
+                spawnPoint = new Vector3(rootPanel.transform.position.x, rootPanel.transform.position.y - (i * 50), rootPanel.transform.position.z);
+                displayedStats[needs[i]] = Instantiate(needPrefab, spawnPoint, Quaternion.identity, rootPanel).GetComponent<NeedUI>();
+            }
+            displayedStats[needs[i]].UpdateGoalInfo(needs[i].displayName, needs[i].currentResource);
         }
-        name = _name;
-        displayedStats[need].UpdateGoalInfo(name, _priority);
+
     }
-    public void UpdatePlanStatus(string _plan){
+    public void UpdatePlanWindow(string _plan){
         planUI.UpdatePlanText(_plan);
     }
 
     public void UpdateDialogue(string _nPCName, string _dialogue){
         dialogueUI.UpdateNameText(_nPCName);
         dialogueUI.UpdateDialogueText(_dialogue);
+    }
+    public void ClearStats()
+    {
+        foreach (KeyValuePair<BasicNeedModule, NeedUI> stat in displayedStats)
+        {
+            Destroy(stat.Value.gameObject);
+        }
+        displayedStats.Clear();
+        UpdateDialogue("", "");
+        UpdatePlanWindow("");
     }
 }

@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 4913421294744068778}
   - component: {fileID: 4913421294744068821}
   - component: {fileID: 4913421294744068820}
-  - component: {fileID: 4913421294744068779}
   m_Layer: 0
   m_Name: Shirt
   m_TagString: Untagged
@@ -115,19 +114,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4913421294744068779
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4913421294744068777}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4913421294756416934
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,7 +125,6 @@ GameObject:
   - component: {fileID: 4913421294756416935}
   - component: {fileID: 4913421294756416930}
   - component: {fileID: 4913421294756416929}
-  - component: {fileID: 4913421294756416928}
   m_Layer: 0
   m_Name: EyeWhite
   m_TagString: Untagged
@@ -212,19 +197,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &4913421294756416928
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4913421294756416934}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4913421294779195380
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,7 +208,6 @@ GameObject:
   - component: {fileID: 4913421294779195381}
   - component: {fileID: 4913421294779195376}
   - component: {fileID: 4913421294779195383}
-  - component: {fileID: 4913421294779195382}
   m_Layer: 0
   m_Name: Pupil
   m_TagString: Untagged
@@ -309,19 +280,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &4913421294779195382
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4913421294779195380}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4913421295058759992
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,7 +291,6 @@ GameObject:
   - component: {fileID: 4913421295058759993}
   - component: {fileID: 4913421295058759972}
   - component: {fileID: 4913421295058759995}
-  - component: {fileID: 4913421295058759994}
   m_Layer: 0
   m_Name: Pants
   m_TagString: Untagged
@@ -406,19 +363,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4913421295058759994
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4913421295058759992}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4913421295360128631
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,7 +374,6 @@ GameObject:
   - component: {fileID: 4913421295360128624}
   - component: {fileID: 4913421295360128627}
   - component: {fileID: 4913421295360128626}
-  - component: {fileID: 4913421295360128625}
   m_Layer: 0
   m_Name: Nose
   m_TagString: Untagged
@@ -503,19 +446,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &4913421295360128625
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4913421295360128631}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4913421295829996721
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,7 +457,6 @@ GameObject:
   - component: {fileID: 4913421295829996722}
   - component: {fileID: 4913421295829996733}
   - component: {fileID: 4913421295829996732}
-  - component: {fileID: 4913421295829996723}
   m_Layer: 0
   m_Name: EyeWhite
   m_TagString: Untagged
@@ -600,19 +529,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &4913421295829996723
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4913421295829996721}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4913421295842128902
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,7 +540,6 @@ GameObject:
   - component: {fileID: 4913421295842128903}
   - component: {fileID: 4913421295842128898}
   - component: {fileID: 4913421295842128897}
-  - component: {fileID: 4913421295842128896}
   m_Layer: 0
   m_Name: Hair
   m_TagString: Untagged
@@ -697,19 +612,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &4913421295842128896
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4913421295842128902}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4913421295845167670
 GameObject:
   m_ObjectHideFlags: 0
@@ -721,7 +623,6 @@ GameObject:
   - component: {fileID: 4913421295845167671}
   - component: {fileID: 4913421295845167666}
   - component: {fileID: 4913421295845167665}
-  - component: {fileID: 4913421295845167664}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -794,19 +695,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &4913421295845167664
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4913421295845167670}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4913421295865022153
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,7 +844,6 @@ GameObject:
   - component: {fileID: 4913421296214642001}
   - component: {fileID: 4913421296214642012}
   - component: {fileID: 4913421296214642003}
-  - component: {fileID: 4913421296214642002}
   m_Layer: 0
   m_Name: Pupil
   m_TagString: Untagged
@@ -1029,19 +916,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &4913421296214642002
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4913421296214642000}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4913421296416443629
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,12 +930,13 @@ GameObject:
   - component: {fileID: -4578944316393918606}
   - component: {fileID: -6781447729628313691}
   - component: {fileID: 4359241635176777236}
-  - component: {fileID: 6175398960836005979}
   - component: {fileID: 6978994666869021405}
   - component: {fileID: 9209703962267718606}
+  - component: {fileID: 6175398960836005979}
+  - component: {fileID: 6998019376920287083}
   m_Layer: 0
   m_Name: Person
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1172,31 +1047,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e3b4ce389d0a043b35615518ae1c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <displayName>k__BackingField: Energy
   maxResource: 100
   minResource: 0
   <currentResource>k__BackingField: 0
   backgroundDecayRate: 0.01
   hasResource: 0
---- !u!114 &6175398960836005979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4913421296416443629}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82f2fdfac8f3b45408876ed5d3702648, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetTemperature: 20
-  toleranceOffset: 10
-  currentTemperature: 0
-  <energyConsumptionRate>k__BackingField: 0.5
-  <waterConsumptionRate>k__BackingField: 0.5
-  isWarming: 0
-  isWearingAJacket: 0
-  reportedTemperature: 0
 --- !u!114 &6978994666869021405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1209,6 +1065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce27e4e9ecd0b15409d132dab6c4e8ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <displayName>k__BackingField: Hydration
   maxResource: 100
   minResource: 0
   <currentResource>k__BackingField: 0
@@ -1226,8 +1083,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7067cb95cf29f1d479f031a0e4c2d13f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <displayName>k__BackingField: Nutrition
   maxResource: 100
   minResource: 0
   <currentResource>k__BackingField: 0
   backgroundDecayRate: 0.01
   hasResource: 0
+--- !u!114 &6175398960836005979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4913421296416443629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82f2fdfac8f3b45408876ed5d3702648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <displayName>k__BackingField: Temperature
+  maxResource: 100
+  minResource: 0
+  <currentResource>k__BackingField: 0
+  backgroundDecayRate: 0.01
+  hasResource: 0
+  targetTemperature: 20
+  toleranceOffset: 10
+  currentTemperature: 0
+  <energyConsumptionRate>k__BackingField: 0.5
+  <waterConsumptionRate>k__BackingField: 0.5
+  isWarming: 0
+  isWearingAJacket: 0
+  reportedTemperature: 0
+--- !u!136 &6998019376920287083
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4913421296416443629}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 1.21
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.63, z: 0}

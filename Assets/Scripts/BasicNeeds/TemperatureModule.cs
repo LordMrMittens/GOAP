@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TemperatureModule : MonoBehaviour
+public class TemperatureModule : BasicNeedModule
 {
 
     [field : SerializeField] public float targetTemperature;
