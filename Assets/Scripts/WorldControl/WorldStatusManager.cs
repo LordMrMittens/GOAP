@@ -47,8 +47,8 @@ public class WorldStatusManager : MonoBehaviour
         hourTimer += Time.deltaTime;
         secondTimer += Time.deltaTime;
         if (secondTimer >= 1){
-            sun.transform.Rotate(1, 0, 0);
-            moon.transform.Rotate(1,0,0);
+            sun.transform.Rotate(1.5f, 0, 0);
+            moon.transform.Rotate(1.5f,0,0);
             secondTimer=0;
         }
         if (hourTimer >= secondsPerHour)

@@ -925,6 +925,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4913421296416443670}
+  - component: {fileID: 6998019376920287083}
   - component: {fileID: 4913421296416443669}
   - component: {fileID: 6860364908005982067}
   - component: {fileID: -4578944316393918606}
@@ -933,7 +934,6 @@ GameObject:
   - component: {fileID: 6978994666869021405}
   - component: {fileID: 9209703962267718606}
   - component: {fileID: 6175398960836005979}
-  - component: {fileID: 6998019376920287083}
   m_Layer: 0
   m_Name: Person
   m_TagString: NPC
@@ -959,6 +959,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!136 &6998019376920287083
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4913421296416443629}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 1.21
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.63, z: 0}
 --- !u!195 &4913421296416443669
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1052,6 +1066,7 @@ MonoBehaviour:
   minResource: 0
   <currentResource>k__BackingField: 0
   backgroundDecayRate: 0.01
+  isCommonNeed: 0
   hasResource: 0
 --- !u!114 &6978994666869021405
 MonoBehaviour:
@@ -1070,6 +1085,7 @@ MonoBehaviour:
   minResource: 0
   <currentResource>k__BackingField: 0
   backgroundDecayRate: 0.01
+  isCommonNeed: 0
   hasResource: 0
 --- !u!114 &9209703962267718606
 MonoBehaviour:
@@ -1088,6 +1104,7 @@ MonoBehaviour:
   minResource: 0
   <currentResource>k__BackingField: 0
   backgroundDecayRate: 0.01
+  isCommonNeed: 0
   hasResource: 0
 --- !u!114 &6175398960836005979
 MonoBehaviour:
@@ -1106,6 +1123,7 @@ MonoBehaviour:
   minResource: 0
   <currentResource>k__BackingField: 0
   backgroundDecayRate: 0.01
+  isCommonNeed: 0
   hasResource: 0
   targetTemperature: 20
   toleranceOffset: 10
@@ -1115,17 +1133,3 @@ MonoBehaviour:
   isWarming: 0
   isWearingAJacket: 0
   reportedTemperature: 0
---- !u!136 &6998019376920287083
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4913421296416443629}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 1.21
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.63, z: 0}
