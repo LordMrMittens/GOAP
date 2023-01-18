@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.AI;
 public class SubGoal
 {
     public Dictionary<string, int> subGoals;
@@ -20,6 +21,8 @@ public class SubGoal
 public class NPCController : MonoBehaviour
 {
     public string SetGoal;
+    
+    NavMeshAgent agent;
     public List<Actions> allAvailableActions = new List<Actions>();
     public Dictionary<SubGoal, int> goals = new Dictionary<SubGoal, int>();
     public Inventory inventory = new Inventory();
@@ -49,11 +52,8 @@ public class NPCController : MonoBehaviour
 
     protected virtual void Start()
     {
-        Actions[] myActions = ActionHolder.GetComponents<Actions>();
-        foreach (Actions action in myActions)
-        {
-            allAvailableActions.Add(action);
-        }
+        GetDefaultActions();
+        agent = GetComponent<NavMeshAgent>();
     }
     void CompleteAction()
     {
@@ -61,9 +61,35 @@ public class NPCController : MonoBehaviour
         previousTarget = currentAction.target;
         currentAction.running = false;
         currentAction.PostPerform();
-        currentAction.target = null; //so that it may choose a different target when several present
+        currentAction.target = null;//so that it may choose a different target when several present MIGHT NOT NEED THIS ANYMORE
+        if(!currentAction.defaultOwner){
+            allAvailableActions.Remove(currentAction);
+            previousAction.ResetOwnership();
+        }
         invoked = false;
 
+    }
+
+    void GetDefaultActions()
+    {
+        Actions[] myActions = FindObjectsOfType<Actions>();
+        foreach (Actions action in myActions)
+        {
+            if(action.defaultOwner){
+            allAvailableActions.Add(action);
+            action.SetupOwnership(this);
+            }
+        }
+    }
+    void GetAvailableRelevantActions(){
+        Actions[] AllActions = FindObjectsOfType<Actions>();
+        foreach (Actions action in AllActions)
+        {
+            if(!allAvailableActions.Contains(action) &&!action.defaultOwner && !action.hasOwner){
+            allAvailableActions.Add(action);
+            action.SetupOwnership(this);
+            }
+        }
     }
     void LateUpdate()
     {
@@ -74,14 +100,6 @@ public class NPCController : MonoBehaviour
 
             return;
         }
-        if (hasGoal)
-        {
-            if (planner == null || actionQueue == null)
-            {
-               // CreatePlan(); //may have to activate from here?
-            }
-
-        }
         if (actionQueue != null && actionQueue.Count == 0)
         {
             DeletePlanner();
@@ -91,8 +109,6 @@ public class NPCController : MonoBehaviour
             ExecutePlan();
         }
         tickCounter = 0;
-
-
     }
 
     private void CheckForActionCompletion()
@@ -140,13 +156,13 @@ public class NPCController : MonoBehaviour
             if (currentAction.target != null)
             {
                 currentAction.running = true;
-                currentAction.agent.SetDestination(currentAction.target.transform.position);
+                agent.SetDestination(currentAction.target.transform.position);
                 //Debug.Log(currentAction.name + "Target isn't null" + currentAction.agent.destination);
             }
             if (currentAction.target == null && currentAction.activatingAction) //target is added from previous action
             {
                 currentAction.target = previousTarget;
-                currentAction.agent.SetDestination(currentAction.target.transform.position);
+                agent.SetDestination(currentAction.target.transform.position);
                 currentAction.running = true;
             }
         }
@@ -176,6 +192,7 @@ public class NPCController : MonoBehaviour
         planner = new Planner();
         var sortedGoals = from entry in goals orderby entry.Value descending select entry; 
         List<Actions> relevantActions = new List<Actions>(); 
+        GetAvailableRelevantActions();
         foreach (KeyValuePair<SubGoal, int> subGoal in sortedGoals)
         {
             foreach (Actions action in allAvailableActions)

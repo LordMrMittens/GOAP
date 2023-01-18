@@ -22,6 +22,6 @@ public class SearchArea : Actions
         NavMeshHit hit;
         NavMesh.SamplePosition(randomDir, out hit, walkableRadius, 1);
         Vector3 finalPosition = hit.position;
-        agent.SetDestination(finalPosition);
+        //agent.SetDestination(finalPosition);
     }
 }

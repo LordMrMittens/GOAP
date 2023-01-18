@@ -15,28 +15,29 @@ public abstract class Actions : MonoBehaviour
     public float duration = 0f;
     public worldState[] preConditions;
     public worldState[] actionResults;
-    public NavMeshAgent agent;
+    //public NavMeshAgent agent;
     public Dictionary<string, int> preconditions;
     public Dictionary<string,int> actionresults;
     public Inventory inventory;
+    public NPCController currentOwner;
+    public NPCController defaultOwner;
     public NPCInventory nPCInventory;
     public WorldStates agentBelief;
     public WorldStates belief;
+    public NeedsManager needsManager;
+    
     public bool running = false;
     public bool activatingAction = false;
-    public NeedsManager needsManager;
-
     public string relatedItemIfAvailable;
 
-    
+    public bool hasOwner = false;
 
     public Actions(){
         preconditions = new Dictionary<string, int>();
         actionresults = new Dictionary<string, int>();
     }
     private void Awake() {
-        agent = GetComponentInParent<NavMeshAgent>();
-        needsManager = GetComponentInParent<NeedsManager>();
+
         if (preConditions != null){
             foreach (worldState state in preConditions)
             {
@@ -50,10 +51,22 @@ public abstract class Actions : MonoBehaviour
                 actionresults.Add(state.key, state.value);
             }
         }
-        inventory = GetComponentInParent<NPCController>().inventory;
-        nPCInventory = GetComponentInParent<NPCController>().nPCInventory;
-        belief = GetComponentInParent<NPCController>().beliefs;
-        
+
+    }
+    public void SetupOwnership(NPCController owner){
+        currentOwner = owner;
+        nPCInventory = owner.GetComponent<NPCController>().nPCInventory;
+        belief = owner.GetComponent<NPCController>().beliefs;
+        needsManager = owner.GetComponent<NeedsManager>();
+        hasOwner = true;
+        //agent = GetComponentInParent<NavMeshAgent>();
+    }
+    public void ResetOwnership(){
+        currentOwner = null;
+        nPCInventory=null;
+        belief = null;
+        needsManager = null;
+        hasOwner = false;
     }
 
     public bool IsAchievable()
