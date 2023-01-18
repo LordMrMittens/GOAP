@@ -7,9 +7,11 @@ public abstract class Actions : MonoBehaviour
 {
     public string actionName = "Action";
     public string[] goalsRelatedTo;
+    
+    [SerializeField] float defaultCost = 1;
     public float cost = 1f;
-    public GameObject target;
-    public GameObject[] targets;
+    public GameObject target {get; set;}
+    public GameObject[]  targets {get; set;}
     public GameObject defaultTarget;
     public string targetTag;
     public float duration = 0f;
@@ -19,18 +21,18 @@ public abstract class Actions : MonoBehaviour
     public Dictionary<string, int> preconditions;
     public Dictionary<string,int> actionresults;
     public Inventory inventory;
-    public NPCController currentOwner;
+    public NPCController currentOwner {get; set;}
     public NPCController defaultOwner;
-    public NPCInventory nPCInventory;
+    public NPCInventory nPCInventory {get; set;}
     public WorldStates agentBelief;
     public WorldStates belief;
-    public NeedsManager needsManager;
+    public NeedsManager needsManager {get; set;}
     
-    public bool running = false;
+    public bool running {get; set;} = false;
     public bool activatingAction = false;
     public string relatedItemIfAvailable;
 
-    public bool hasOwner = false;
+    public bool hasOwner {get; set;} = false;
 
     public Actions(){
         preconditions = new Dictionary<string, int>();
@@ -51,7 +53,7 @@ public abstract class Actions : MonoBehaviour
                 actionresults.Add(state.key, state.value);
             }
         }
-
+        ResetCost();
     }
     public void SetupOwnership(NPCController owner){
         currentOwner = owner;
@@ -66,7 +68,10 @@ public abstract class Actions : MonoBehaviour
         nPCInventory=null;
         belief = null;
         needsManager = null;
-        hasOwner = false;
+        hasOwner = false; 
+    }
+    public void ResetCost(){
+       cost = defaultCost;
     }
 
     public bool IsAchievable()

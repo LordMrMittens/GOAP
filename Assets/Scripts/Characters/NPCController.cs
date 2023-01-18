@@ -81,7 +81,7 @@ public class NPCController : MonoBehaviour
             }
         }
     }
-    void GetAvailableRelevantActions(){
+    void GetAvailableRelevantActions(){ //need keyword not to grab ALL actions
         Actions[] AllActions = FindObjectsOfType<Actions>();
         foreach (Actions action in AllActions)
         {
@@ -145,7 +145,7 @@ public class NPCController : MonoBehaviour
                     for (int i = 0; i < currentAction.targets.Length; i++)
                     {
                         float distance = Vector3.Distance(transform.position, currentAction.targets[i].transform.position);
-                        if (distance > bestDistance)
+                        if (distance < bestDistance)
                         {
                             bestDistance = distance;
                             bestTarget = i;
@@ -184,10 +184,13 @@ public class NPCController : MonoBehaviour
         }
         for (int i = 0; i < allAvailableActions.Count; i++)
         {
+            allAvailableActions[i].ResetCost();
             if (!allAvailableActions[i].defaultOwner)
             {
+
                 RemoveUnusedActions(i);
             }
+
         }
         actionsInPlan.Clear();
         planner = null;
@@ -199,9 +202,9 @@ public class NPCController : MonoBehaviour
     private void CreatePlan()
     {
         planner = new Planner();
-        var sortedGoals = from entry in goals orderby entry.Value descending select entry; 
-        List<Actions> relevantActions = new List<Actions>(); 
-        Debug.Log(sortedGoals.Count());
+        List<Actions> relevantActions = new List<Actions>();
+        var sortedGoals = from entry in goals orderby entry.Value descending select entry;
+        //implement priority system here possibly remove queque above
         GetAvailableRelevantActions();
         foreach (KeyValuePair<SubGoal, int> subGoal in sortedGoals)
         {
@@ -212,33 +215,70 @@ public class NPCController : MonoBehaviour
                     relevantActions.Add(action);
                 }
             }
+            SetActionCosts(relevantActions);
             actionQueue = planner.Plan(relevantActions, subGoal.Key.subGoals, beliefs);
             if (actionQueue != null)
             {
                 actionsInPlan = actionQueue.ToList<Actions>();
                 for (int i = 0; i < allAvailableActions.Count; i++)
                 {
-                    if (!allAvailableActions[i].defaultOwner && ! actionsInPlan.Contains(allAvailableActions[i]))
+                   // allAvailableActions[i].ResetCost();
+                    if (!allAvailableActions[i].defaultOwner && !actionsInPlan.Contains(allAvailableActions[i]))
                     {
                         RemoveUnusedActions(i);
                     }
                 }
                 canPlan = false;
                 currentGoal = subGoal.Key;
+                goals.Clear();
                 break;
             }
             else
             {
                 for (int i = 0; i < allAvailableActions.Count; i++)
                 {
+                    //allAvailableActions[i].ResetCost();
                     if (!allAvailableActions[i].defaultOwner)
                     {
                         RemoveUnusedActions(i);
                     }
                 }
                 failedGoalsList.Add(subGoal.Key);
-                goals.Clear();
                 canPlan = true;
+                goals.Clear();
+                break;
+            }
+        }
+
+    }
+
+    private void SetActionCosts(List<Actions> relevantActions)
+    {
+        foreach (Actions action in relevantActions)
+        {
+            if(action.activatingAction){
+                continue;
+            }
+            else if (action.defaultTarget != null)
+            {
+                float distance = Vector3.Distance(transform.position, action.defaultTarget.transform.position);
+                action.cost += distance;
+            }
+            else if (action.targetTag != "")
+            {
+                GameObject[] targets = GameObject.FindGameObjectsWithTag(action.targetTag);
+                float bestDistance = Mathf.Infinity;
+                int bestTarget = 0;
+                for (int i = 0; i < targets.Length; i++)
+                {
+                    float distance = Vector3.Distance(transform.position, targets[i].transform.position);
+                    if (distance < bestDistance)
+                    {
+                        bestDistance = distance;
+                        bestTarget = i;
+                    }
+                }
+                action.cost = bestDistance;
             }
         }
     }
@@ -252,21 +292,34 @@ public class NPCController : MonoBehaviour
     public void AddSubGoal(string goal, int value, bool canBeDeleted, string keyword)
     {
         SubGoal subGoalToAdd = new SubGoal(goal, value, canBeDeleted, keyword);
-        if (failedGoalsList.Count >0){
+        if (failedGoalsList.Count > 0)
+        {
             foreach (SubGoal sGoal in failedGoalsList)
             {
-                if(sGoal.subGoals.ContainsKey(goal)){
+                if (sGoal.keyword == keyword)
+                {
+                    return;
+                }
+
+            }
+        }
+        if (goals.Count > 0)
+        {
+            foreach (KeyValuePair<SubGoal, int> Sgoal in goals)
+            {
+                if (Sgoal.Key.keyword == keyword){
                     return;
                 }
             }
         }
-        if (goals.ContainsKey(subGoalToAdd) == false ) //|| failedGoals.Contains(subGoalToAdd.keyword) possible check? if so remove negative from fist check
+
+        
+        if (canPlan)
         {
-            goals.Add(subGoalToAdd, 5);
-            if(canPlan){
+            goals.Add(subGoalToAdd, 5); //what is the number? to eliminate queue and potentially crashing put this inside the canplan check
             CreatePlan();
-            }
         }
+
     }
 
     public void GetPlanInformation()

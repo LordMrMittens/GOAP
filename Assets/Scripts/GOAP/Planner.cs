@@ -50,7 +50,7 @@ public class Planner
         bool success = BuildGraph(start, leaves, doableActions, goal);
 
         if(!success){
-            Debug.Log("No Plan");
+            Debug.Log($"goal {goal.Keys} No Plan");
             return null;
         }
         Node cheapest = null;
