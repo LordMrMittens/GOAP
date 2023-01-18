@@ -76,11 +76,11 @@ public class Planner
         {
             queue.Enqueue(action);
         }
- //       Debug.Log("The plan is: ");
- //       foreach (Actions action in queue)
-  //      {
-//            Debug.Log($"Q: {action.actionName}");
-//        }
+        Debug.Log("The plan is: ");
+      foreach (Actions action in queue)
+       {
+           Debug.Log($"Q: {action.actionName}");
+       }
         return queue;
     }
 

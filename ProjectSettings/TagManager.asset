@@ -10,6 +10,8 @@ TagManager:
   - Market
   - Blacksmith
   - NPC
+  - PubBar
+  - PubTable
   layers:
   - Default
   - TransparentFX
