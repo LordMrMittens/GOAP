@@ -21,14 +21,14 @@ public class SubGoal
 public class NPCController : MonoBehaviour
 {
     public string SetGoal;
-    
+    public float worldSpeed = 1;
     NavMeshAgent agent;
     public List<Actions> allAvailableActions = new List<Actions>();
     public Dictionary<SubGoal, int> goals = new Dictionary<SubGoal, int>();
     public Inventory inventory = new Inventory();
     public WorldStates beliefs = new WorldStates();
     [SerializeField] GameObject ActionHolder;
-
+    public GameObject target;
     Planner planner;
     public Queue<Actions> actionQueue;
     List<Actions> actionsInPlan = new List<Actions>();
@@ -85,7 +85,7 @@ public class NPCController : MonoBehaviour
         Actions[] AllActions = FindObjectsOfType<Actions>();
         foreach (Actions action in AllActions)
         {
-            if(!allAvailableActions.Contains(action) &&!action.defaultOwner && !action.hasOwner){
+            if(!action.defaultOwner && !action.hasOwner){
             allAvailableActions.Add(action);
             action.SetupOwnership(this);
             }
@@ -93,7 +93,9 @@ public class NPCController : MonoBehaviour
     }
     void LateUpdate()
     {
-
+        Time.timeScale = worldSpeed;
+        if(currentAction)
+        target = currentAction.target;
         if (currentAction != null && currentAction.running)
         {
             CheckForActionCompletion();
@@ -180,6 +182,13 @@ public class NPCController : MonoBehaviour
         {
             goals.Remove(currentGoal);
         }
+        for (int i = 0; i < allAvailableActions.Count; i++)
+        {
+            if (!allAvailableActions[i].defaultOwner)
+            {
+                RemoveUnusedActions(i);
+            }
+        }
         actionsInPlan.Clear();
         planner = null;
         hasGoal = false;
@@ -192,6 +201,7 @@ public class NPCController : MonoBehaviour
         planner = new Planner();
         var sortedGoals = from entry in goals orderby entry.Value descending select entry; 
         List<Actions> relevantActions = new List<Actions>(); 
+        Debug.Log(sortedGoals.Count());
         GetAvailableRelevantActions();
         foreach (KeyValuePair<SubGoal, int> subGoal in sortedGoals)
         {
@@ -206,14 +216,37 @@ public class NPCController : MonoBehaviour
             if (actionQueue != null)
             {
                 actionsInPlan = actionQueue.ToList<Actions>();
+                for (int i = 0; i < allAvailableActions.Count; i++)
+                {
+                    if (!allAvailableActions[i].defaultOwner && ! actionsInPlan.Contains(allAvailableActions[i]))
+                    {
+                        RemoveUnusedActions(i);
+                    }
+                }
                 canPlan = false;
                 currentGoal = subGoal.Key;
                 break;
-            } else {
+            }
+            else
+            {
+                for (int i = 0; i < allAvailableActions.Count; i++)
+                {
+                    if (!allAvailableActions[i].defaultOwner)
+                    {
+                        RemoveUnusedActions(i);
+                    }
+                }
                 failedGoalsList.Add(subGoal.Key);
+                goals.Clear();
                 canPlan = true;
             }
         }
+    }
+
+    private void RemoveUnusedActions(int i)
+    {
+        allAvailableActions[i].ResetOwnership();
+        allAvailableActions.Remove(allAvailableActions[i]);
     }
 
     public void AddSubGoal(string goal, int value, bool canBeDeleted, string keyword)
