@@ -11,6 +11,12 @@ public class ActionPickDrink : Actions
     }
     public override bool PostPerform()
     {
-        return true;
+        if (target.GetComponent<ContainerObject>().RemoveObject(relatedItemIfAvailable))
+        {
+            nPCInventory.DepositObject(relatedItemIfAvailable);
+            return true;
+        }
+
+        return false;
     }
 }

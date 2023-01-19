@@ -32,7 +32,7 @@ public class Planner
 {
 
     Dictionary<Actions, string> testDict = new Dictionary<Actions, string>();
-    public Queue<Actions> Plan(List<Actions> actions, Dictionary<string,int> goal, WorldStates beliefStates){
+    public Queue<Actions> Plan(List<Actions> actions, Dictionary<string,int> goal, WorldStates beliefStates , Transform _NPCTransform){
         
         List<Actions> doableActions = new List<Actions>();
 
@@ -56,12 +56,37 @@ public class Planner
         Node cheapest = null;
         foreach (Node leaf in leaves)
         {
+            Node L = leaf;
+            while (L != null)
+            {
+                if (L.action != null)
+                {
+                    if (L.parent != null)
+                    {
+                        
+                        if (L.action.defaultTarget != null && L.parent.action != null && L.parent.action.defaultTarget !=null)
+                        {
+                            float distance = Vector3.Distance(L.action.defaultTarget.transform.position, L.parent.action.defaultTarget.transform.position);
+                             leaf.cost += distance;
+                        } else
+                        {
+                            if (L.action.defaultTarget != null)
+                            {
+                                float distance = Vector3.Distance(L.action.defaultTarget.transform.position, _NPCTransform.position);
+                                leaf.cost += distance;
+                            }
+                        }
+                    }
+                }
+                L = L.parent;
+            }
             if(cheapest == null){
                 cheapest = leaf;
             } else if (leaf.cost < cheapest.cost) {
                 cheapest = leaf;
             }
         }
+        Debug.Log($"cheapest Leaf cost {cheapest.cost}");
         List<Actions> result = new List<Actions>();
         Node n = cheapest;
         while(n != null){

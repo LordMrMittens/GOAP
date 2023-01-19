@@ -215,7 +215,7 @@ public class NPCController : MonoBehaviour
                 }
             }
             SetActionCosts(relevantActions);
-            actionQueue = planner.Plan(relevantActions, subGoal.Key.subGoals, beliefs);
+            actionQueue = planner.Plan(relevantActions, subGoal.Key.subGoals, beliefs, this.transform);
             if (actionQueue != null)
             {
                 actionsInPlan = actionQueue.ToList<Actions>();
