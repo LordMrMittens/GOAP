@@ -33,6 +33,7 @@ public abstract class Actions : MonoBehaviour
     public string relatedItemIfAvailable;
 
     public bool hasOwner {get; set;} = false;
+    [SerializeField] bool RequireOwnerItem;
 
    [SerializeField] ContainerObject containerUsed;
     public Actions(){
@@ -105,6 +106,11 @@ public abstract class Actions : MonoBehaviour
                 return true;
             }
         }
+        return false;
+    }
+    bool CheckIfOwnerItemAvailable(){
+        if(nPCInventory.itemsEquipped.Contains(relatedItemIfAvailable))
+        {return true;}
         return false;
     }
 }
