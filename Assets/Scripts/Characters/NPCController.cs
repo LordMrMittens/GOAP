@@ -75,7 +75,7 @@ public class NPCController : MonoBehaviour
         Actions[] myActions = FindObjectsOfType<Actions>();
         foreach (Actions action in myActions)
         {
-            if(action.defaultOwner){
+            if(action.defaultOwner == this){
             allAvailableActions.Add(action);
             action.SetupOwnership(this);
             }
@@ -172,7 +172,6 @@ public class NPCController : MonoBehaviour
         {
             //Debug.Log(currentAction.name + "Ending Queue");
             actionQueue = null;
-
         }
     }
 
@@ -222,7 +221,7 @@ public class NPCController : MonoBehaviour
                 actionsInPlan = actionQueue.ToList<Actions>();
                 for (int i = 0; i < allAvailableActions.Count; i++)
                 {
-                   // allAvailableActions[i].ResetCost();
+                   allAvailableActions[i].ResetCost();
                     if (!allAvailableActions[i].defaultOwner && !actionsInPlan.Contains(allAvailableActions[i]))
                     {
                         RemoveUnusedActions(i);
@@ -237,7 +236,7 @@ public class NPCController : MonoBehaviour
             {
                 for (int i = 0; i < allAvailableActions.Count; i++)
                 {
-                    //allAvailableActions[i].ResetCost();
+                    allAvailableActions[i].ResetCost();
                     if (!allAvailableActions[i].defaultOwner)
                     {
                         RemoveUnusedActions(i);
