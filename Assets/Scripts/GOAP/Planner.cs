@@ -9,21 +9,32 @@ public class Node{
     public Dictionary<string, int> state;
     public Actions action;
 
-    public Node(Node parent, float cost, Dictionary<string, int> allStates, Actions action) {
+    public Node(Node parent, float cost, Dictionary<string, int> allStates, Actions action, Transform _NPCTransform)
+    {
+        float distance = 0;
         this.parent = parent;
-        this.cost = cost;
+        if (action.defaultTarget != null && this.parent.action != null && this.parent.action.defaultTarget != null)
+        {
+            distance = Vector3.Distance(action.defaultTarget.transform.position, parent.action.defaultTarget.transform.position);
+        }
+        else if (this.parent.action == null && action.defaultTarget != null)
+        {
+            distance = Vector3.Distance(action.defaultTarget.transform.position, _NPCTransform.position);
+        }
+        this.cost = cost + distance;
         this.state = new Dictionary<string, int>(allStates);
         this.action = action;
     }
-        public Node(Node parent, float cost, Dictionary<string, int> allStates,Dictionary<string, int> beliefStates, Actions action) {
+    public Node(Node parent, float cost, Dictionary<string, int> allStates, Dictionary<string, int> beliefStates, Actions action)
+    {
         this.parent = parent;
         this.cost = cost;
         this.state = new Dictionary<string, int>(allStates);
 
-        
-        foreach(KeyValuePair<string, int> belief in beliefStates){
+        foreach (KeyValuePair<string, int> belief in beliefStates)
+        {
             if (!this.state.ContainsKey(belief.Key))
-                this.state.Add(belief.Key,belief.Value);
+                this.state.Add(belief.Key, belief.Value);
         }
         this.action = action;
     }
@@ -47,7 +58,7 @@ public class Planner
         
         Node start = new Node(null, 0, World.Instance.GetWorld().GetAllStates(),beliefStates.GetAllStates(),null);
 
-        bool success = BuildGraph(start, leaves, doableActions, goal);
+        bool success = BuildGraph(start, leaves, doableActions, goal, _NPCTransform);
 
         if(!success){
             Debug.Log($"No Plan");
@@ -56,37 +67,13 @@ public class Planner
         Node cheapest = null;
         foreach (Node leaf in leaves)
         {
-            Node L = leaf;
-            while (L != null)
-            {
-                if (L.action != null)
-                {
-                    if (L.parent != null)
-                    {
-                        
-                        if (L.action.defaultTarget != null && L.parent.action != null && L.parent.action.defaultTarget !=null)
-                        {
-                            float distance = Vector3.Distance(L.action.defaultTarget.transform.position, L.parent.action.defaultTarget.transform.position);
-                             leaf.cost += distance;
-                        } else
-                        {
-                            if (L.action.defaultTarget != null)
-                            {
-                                float distance = Vector3.Distance(L.action.defaultTarget.transform.position, _NPCTransform.position);
-                                leaf.cost += distance;
-                            }
-                        }
-                    }
-                }
-                L = L.parent;
-            }
             if(cheapest == null){
                 cheapest = leaf;
             } else if (leaf.cost < cheapest.cost) {
                 cheapest = leaf;
             }
         }
-        Debug.Log($"cheapest Leaf cost {cheapest.cost}");
+        //Debug.Log($"cheapest Leaf cost {cheapest.cost}");
         List<Actions> result = new List<Actions>();
         Node n = cheapest;
         while(n != null){
@@ -109,7 +96,7 @@ public class Planner
         return queue;
     }
 
-    bool BuildGraph(Node parent, List<Node> leaves, List<Actions> doableActions, Dictionary<string, int> goal){
+    bool BuildGraph(Node parent, List<Node> leaves, List<Actions> doableActions, Dictionary<string, int> goal, Transform _NPCTransform){
         bool foundPath = false;
         foreach (Actions action in doableActions)
         {
@@ -120,13 +107,13 @@ public class Planner
                     if(!currentState.ContainsKey(effect.Key)){
                         currentState.Add(effect.Key, effect.Value);
                     }
-                    Node node = new Node(parent, parent.cost + action.cost, currentState, action);
+                    Node node = new Node(parent, parent.cost + action.cost, currentState, action, _NPCTransform);
                     if(GoalAchieved(goal, currentState)){
                         leaves.Add(node);
                         foundPath = true;
                     } else {
                         List<Actions> subset = ActionSubset(doableActions, action);
-                        bool found = BuildGraph(node, leaves, subset, goal);
+                        bool found = BuildGraph(node, leaves, subset, goal, _NPCTransform);
                         if (found){
                             foundPath = true;
                         }

@@ -23,6 +23,7 @@ public abstract class Actions : MonoBehaviour
     public Inventory inventory;
     public NPCController currentOwner {get; set;}
     public NPCController defaultOwner;
+    public bool canHaveMultipleOwners; // set multiple owners
     public NPCInventory nPCInventory {get; set;}
     public WorldStates agentBelief;
     public WorldStates belief;

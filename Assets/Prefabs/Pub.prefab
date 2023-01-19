@@ -5707,8 +5707,8 @@ MonoBehaviour:
   typeOfObjectsContained:
   - Food
   - Drink
-  maxNumberOfItems: 5
-  numberOfObjectsToAdd: 1
+  maxNumberOfItems: 100
+  numberOfObjectsToAdd: 50
   storedObjects: []
 --- !u!1 &2684442838580108460
 GameObject:
