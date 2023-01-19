@@ -34,8 +34,7 @@ public abstract class Actions : MonoBehaviour
 
     public bool hasOwner {get; set;} = false;
 
-    [SerializeField] BaseContainer containerUsed;
-
+   [SerializeField] ContainerObject containerUsed;
     public Actions(){
         preconditions = new Dictionary<string, int>();
         actionresults = new Dictionary<string, int>();
@@ -79,7 +78,6 @@ public abstract class Actions : MonoBehaviour
     public bool IsAchievable()
     {
         if(containerUsed){
-            Debug.Log("IsAchievable");
         return CheckIfItemsAvailable();
         }
         return true;

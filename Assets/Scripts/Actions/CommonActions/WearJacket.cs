@@ -12,7 +12,7 @@ public class WearJacket : Actions
     }
     public override bool PostPerform()
     {
-        if (target.GetComponent<BaseContainer>().RemoveObject(relatedItemIfAvailable))
+        if (target.GetComponent<ContainerObject>().RemoveObject(relatedItemIfAvailable))
         {
             nPCInventory.DepositObject(relatedItemIfAvailable);
             needsManager.ToggleJacket(true);

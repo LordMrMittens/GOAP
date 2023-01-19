@@ -13,7 +13,7 @@ public class LeaveJacket : Actions
     }
     public override bool PostPerform()
     {
-        if (target.GetComponent<BaseContainer>().DepositObject(relatedItemIfAvailable))
+        if (target.GetComponent<ContainerObject>().DepositObject(relatedItemIfAvailable))
         {
             nPCInventory.RemoveObject(relatedItemIfAvailable);
             needsManager.ToggleJacket(false);

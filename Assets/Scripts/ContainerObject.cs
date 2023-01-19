@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class BaseContainer : MonoBehaviour
+
+public class ContainerObject : MonoBehaviour
 {
-    public List<string> typeOfObjectsContained = new List<string>();
+        public List<string> typeOfObjectsContained = new List<string>();
     [SerializeField] int maxNumberOfItems = 5;
     [SerializeField] int numberOfObjectsToAdd = 1;
 
@@ -40,5 +41,4 @@ public class BaseContainer : MonoBehaviour
 
         return false;
     }
-
 }
