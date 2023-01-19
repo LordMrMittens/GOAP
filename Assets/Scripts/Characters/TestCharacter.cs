@@ -38,7 +38,18 @@ public class TestCharacter : NPCController
         AddSubGoal("GetWarm", 0, true, "Temperature");
     }
 
-        public void CheckForJacket()
+    void PrepForNightTime()
+    {
+            beliefs.AddSingleState("IsTooDark", 0);
+            AddSubGoal("GetLight", 0, true, "Light");
+    }
+    void PrepForDayTime()
+    {
+            beliefs.AddSingleState("IsTooBright", 0);
+            AddSubGoal("SnuffLight", 0, true, "Light");
+    }
+
+    public void CheckForJacket()
     {
         if (nPCInventory.itemsEquipped.Contains("Jacket"))
         {

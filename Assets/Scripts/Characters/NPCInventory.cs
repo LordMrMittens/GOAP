@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class NPCInventory : MonoBehaviour
 {
-    bool hasSword = false;
-    [SerializeField] GameObject Sword;
-
     public List<string> itemsEquipped = new List<string>();
 
     public void DepositObject(string objectToAdd)
@@ -19,10 +16,5 @@ public class NPCInventory : MonoBehaviour
         {
             itemsEquipped.Remove(objectToRemove);
         }
-    }
-
-    public void EquipSword()
-    {
-        Sword.SetActive(true);
     }
 }

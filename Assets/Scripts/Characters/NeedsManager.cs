@@ -15,6 +15,7 @@ public class NeedsManager : MonoBehaviour
     public BasicNeedModule[] basicNeedModules {get; private set;}
 
     float tickTimer;
+    bool canSee = true;
     //need reference to character controller,  can it be cast since they derive from a parent class?
 
     private void Awake()
@@ -30,7 +31,18 @@ public class NeedsManager : MonoBehaviour
         {
             ConsumeBackgroundResources();
             ManageTemperature();
-
+            canSee = !worldStatusManager.isDark;
+            if(!canSee){
+                if (CheckForLight()==false){
+                nPCController.Invoke("PrepForNightTime", 0);
+                nPCController.hasGoal=true;
+                }
+            } else {
+                if(CheckForLight()== true){
+                nPCController.Invoke("PrepForDayTime", 0);
+                nPCController.hasGoal=true;
+                }
+            }
             //TODO add some sort of priority system
             if (nutritionModule.currentResource < nutritionModule.minResource)
             {
@@ -114,6 +126,15 @@ public class NeedsManager : MonoBehaviour
     {
         StatusUI.statusUIInstance.UpdateStatusWindow(basicNeedModules);
         GenerateComentary(); //move this to a dialogue manager?
+    }
+
+    public bool CheckForLight()
+    {
+        if (nPCInventory.itemsEquipped.Contains("Light"))
+        {
+            return true;
+        }
+        return false;
     }
 }
 

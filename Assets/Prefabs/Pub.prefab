@@ -13211,6 +13211,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3203237472829777925}
+  - component: {fileID: 141612438825812349}
+  - component: {fileID: 4336178995255889473}
+  - component: {fileID: 5182823575659468986}
+  - component: {fileID: 3211523866079965505}
   m_Layer: 0
   m_Name: PubClientPoint
   m_TagString: PubBar
@@ -13233,6 +13237,130 @@ Transform:
   m_Father: {fileID: 2944324583867805589}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &141612438825812349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3563500452820289342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba3223612c445764eb3663034e4b978b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Pick Drink
+  goalsRelatedTo:
+  - Drink
+  defaultCost: 0
+  cost: 1
+  defaultTarget: {fileID: 0}
+  targetTag: 
+  duration: 0
+  preConditions:
+  - key: AtBar
+    value: 0
+  - key: HasOrdered
+    value: 0
+  actionResults:
+  - key: HasDrink
+    value: 0
+  defaultOwner: {fileID: 0}
+  activatingAction: 1
+  relatedItemIfAvailable: 
+--- !u!114 &4336178995255889473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3563500452820289342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ca818bc07208ab41b7361c849b443b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Pick Food
+  goalsRelatedTo:
+  - Food
+  defaultCost: 0
+  cost: 1
+  defaultTarget: {fileID: 0}
+  targetTag: 
+  duration: 0
+  preConditions:
+  - key: AtBar
+    value: 0
+  - key: HasOrdered
+    value: 0
+  actionResults:
+  - key: HasFood
+    value: 0
+  defaultOwner: {fileID: 0}
+  activatingAction: 1
+  relatedItemIfAvailable: 
+--- !u!114 &5182823575659468986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3563500452820289342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b68f6570a66031044b48fe919286bd5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: GoToBar
+  goalsRelatedTo:
+  - Food
+  - Drink
+  defaultCost: 0
+  cost: 1
+  defaultTarget: {fileID: 3563500452820289342}
+  targetTag: PubBar
+  duration: 0
+  preConditions:
+  - key: AtPub
+    value: 0
+  actionResults:
+  - key: AtBar
+    value: 0
+  - key: HasOrdered
+    value: 0
+  defaultOwner: {fileID: 0}
+  activatingAction: 0
+  relatedItemIfAvailable: 
+--- !u!114 &3211523866079965505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3563500452820289342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 832bd4af3e462b240ad7ef4368f2135a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Go To Bar Table
+  goalsRelatedTo:
+  - Food
+  - Drink
+  defaultCost: 0
+  cost: 1
+  defaultTarget: {fileID: 0}
+  targetTag: PubTable
+  duration: 0
+  preConditions:
+  - key: HasOrdered
+    value: 0
+  actionResults:
+  - key: AtTable
+    value: 0
+  defaultOwner: {fileID: 0}
+  activatingAction: 0
+  relatedItemIfAvailable: 
 --- !u!1 &3762754417036938877
 GameObject:
   m_ObjectHideFlags: 0

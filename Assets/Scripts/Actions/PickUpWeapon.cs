@@ -24,7 +24,7 @@ public class PickUpWeapon : Actions
             activeWeaponsToTake.Remove(takenWeapon);
             inactiveWeaponsToTake.Add(takenWeapon);
             takenWeapon.SetActive(false);
-            this.GetComponent<NPCInventory>().EquipSword();
+            //this.GetComponent<NPCInventory>().EquipSword();
         }
     }
 }
