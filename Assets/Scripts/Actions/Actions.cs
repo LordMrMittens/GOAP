@@ -10,8 +10,9 @@ public abstract class Actions : MonoBehaviour
     
     [SerializeField] float defaultCost = 1;
     public float cost = 1f;
-    public GameObject target {get; set;}
-    public GameObject[]  targets {get; set;}
+    public GameObject target ;
+    public List<GameObject> freeTargets = new List<GameObject>();
+    public List<GameObject> targetsInUse = new List<GameObject>();
     public GameObject defaultTarget;
     public string targetTag;
     public float duration = 0f;
@@ -26,11 +27,10 @@ public abstract class Actions : MonoBehaviour
     public NPCController defaultOwner;
     public WorldStates belief;
     public NeedsManager needsManager {get; set;}
-    public bool running {get; set;} = false;
+    //public bool running {get; set;} = false;
     public bool activatingAction = false;
     public string relatedItemIfAvailable;
     public bool hasOwner {get; set;} = false;
-
    [SerializeField] ContainerObject containerUsed;
     public Actions(){
         preconditions = new Dictionary<string, int>();
@@ -55,6 +55,14 @@ public abstract class Actions : MonoBehaviour
             }
         }
         ResetCost();
+        if (defaultTarget != null)
+        {
+            target = defaultTarget;
+        }
+        if (target == null && targetTag != "" && freeTargets.Count ==0 ) //only adds targets automatically if the array is empty
+        {
+            freeTargets.AddRange(GameObject.FindGameObjectsWithTag(targetTag));
+        }
     }
     public void SetupOwnership(NPCController owner)
     {
@@ -105,5 +113,26 @@ public abstract class Actions : MonoBehaviour
             }
         }
         return false;
+    }
+    public void RemoveAvailableTarget(GameObject _targetToRemove)
+    {
+        if (freeTargets.Contains(_targetToRemove))
+        {
+            freeTargets.Remove(_targetToRemove);
+        }
+        targetsInUse.Add(_targetToRemove);
+        StartCoroutine(WaitForActionToComplete(_targetToRemove));
+    }
+    public void AddAvailableTarget(GameObject _targetToAdd)
+    {
+        if (targetsInUse.Contains(_targetToAdd))
+        {
+            targetsInUse.Remove(_targetToAdd);
+        }
+        freeTargets.Add(_targetToAdd);
+    }
+    IEnumerator WaitForActionToComplete(GameObject _target){
+        yield return new WaitForSeconds(duration);
+        AddAvailableTarget(_target);
     }
 }

@@ -10,20 +10,22 @@ public class BasicNeedModule : MonoBehaviour
     [ field : SerializeField] public float currentResource {get; set;}
     [field : SerializeField] public float backgroundDecayRate = .01f;
     public bool isCommonNeed;
-     
+    [SerializeField] float randomnessOffset;
     public bool hasResource;
     
     void Start()
     {
-        currentResource = maxResource;
+        currentResource = Random.Range(minResource + randomnessOffset, maxResource-randomnessOffset);
+        Debug.Log(currentResource);
     }
 
-    public void ConsumeResource(float value)
+    public virtual void ConsumeResource(float value)
     {
         currentResource -= value;
         if (currentResource < 0)
         {
             currentResource = 0;
+
         }
         hasResource = currentResource > 0;
     }

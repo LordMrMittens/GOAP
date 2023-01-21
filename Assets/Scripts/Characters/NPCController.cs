@@ -59,9 +59,7 @@ public class NPCController : MonoBehaviour
     {
         previousAction = currentAction;
         previousTarget = currentAction.target;
-        currentAction.running = false;
         currentAction.PostPerform(this);
-        currentAction.target = null;//so that it may choose a different target when several present MIGHT NOT NEED THIS ANYMORE
         if(!currentAction.defaultOwner){
             allAvailableActions.Remove(currentAction);
             previousAction.RemoveOwnership(this);
@@ -84,13 +82,14 @@ public class NPCController : MonoBehaviour
     }
     void LateUpdate()
     {
-        Time.timeScale = worldSpeed;
-        if(currentAction)
-        target = currentAction.target;
-        if (currentAction != null && currentAction.running)
-        {
-            CheckForActionCompletion();
 
+        Time.timeScale = worldSpeed;
+        if (currentAction && currentAction.target != null)
+        {
+            target = currentAction.target;
+        }
+        if (currentAction != null && !CheckForActionCompletion()) //&& currentAction.running
+        {
             return;
         }
         if (actionQueue != null && actionQueue.Count == 0)
@@ -104,64 +103,55 @@ public class NPCController : MonoBehaviour
         tickCounter = 0;
     }
 
-    private void CheckForActionCompletion()
+    private bool CheckForActionCompletion()
     {
-        float distanceToTarget = Vector3.Distance(currentAction.target.transform.position, transform.position);
+        float distanceToTarget = Vector3.Distance(target.transform.position, transform.position);
         if (distanceToTarget < DistanceFromTarget)//currentAction.agent.hasPath &&  // && distanceToTarget < DistanceFromTarget && || currentAction.activatingAction
         {
             if (!invoked)
             {
                 Invoke("CompleteAction", currentAction.duration);
                 invoked = true;
+                return true;
             }
         }
+        return false;
     }
 
     private void ExecutePlan()
     {
+        
         currentAction = actionQueue.Dequeue();
         if (currentAction.PrePerform())
         {
-            if (currentAction.defaultTarget != null)
+            if (currentAction.defaultTarget != null) //might have to add some else ifs?
             {
-                currentAction.target = currentAction.defaultTarget;
-            }
-            if (currentAction.target == null && currentAction.targetTag != "")
-            {
-                currentAction.targets = GameObject.FindGameObjectsWithTag(currentAction.targetTag);
-                if (currentAction.targets.Length > 0)
-                {
-                    float bestDistance = Mathf.Infinity;
-                    int bestTarget = 0;
-                    for (int i = 0; i < currentAction.targets.Length; i++)
-                    {
-                        float distance = Vector3.Distance(transform.position, currentAction.targets[i].transform.position);
-                        if (distance < bestDistance)
-                        {
-                            bestDistance = distance;
-                            bestTarget = i;
-                        }
-                    }
-                    currentAction.target = currentAction.targets[bestTarget];
-                }
-                //Debug.Log(currentAction.name + "Target is null" + currentAction.agent.destination);
+                target = currentAction.defaultTarget;
             }
             if (currentAction.target != null)
             {
-                currentAction.running = true;
-                agent.SetDestination(currentAction.target.transform.position);
-                //Debug.Log(currentAction.name + "Target isn't null" + currentAction.agent.destination);
+                target = currentAction.target;
             }
-            if (currentAction.target == null && currentAction.activatingAction) //target is added from previous action
+            if (currentAction.freeTargets.Count > 0)
             {
-                currentAction.target = previousTarget;
-                agent.SetDestination(currentAction.target.transform.position);
-                currentAction.running = true;
+                float bestDistance = Mathf.Infinity;
+                int bestTarget = 0;
+                for (int i = 0; i < currentAction.freeTargets.Count; i++)
+                {
+                    float distance = Vector3.Distance(transform.position, currentAction.freeTargets[i].transform.position);
+                    if (distance < bestDistance)
+                    {
+                        bestDistance = distance;
+                        bestTarget = i;
+                    }
+                }
+                target = currentAction.freeTargets[bestTarget];
+                currentAction.RemoveAvailableTarget(currentAction.freeTargets[bestTarget]);
             }
+            agent.SetDestination(target.transform.position);
         }
         else
         {
-            //Debug.Log(currentAction.name + "Ending Queue");
             actionQueue = null;
         }
     }
@@ -182,6 +172,8 @@ public class NPCController : MonoBehaviour
             }
 
         }
+        previousAction = null;
+        previousTarget=null;
         actionsInPlan.Clear();
         planner = null;
         hasGoal = false;

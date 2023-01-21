@@ -52,6 +52,9 @@ MonoBehaviour:
   - Drink
   defaultCost: 1
   cost: 1
+  target: {fileID: 0}
+  freeTargets: []
+  targetsInUse: []
   defaultTarget: {fileID: 7175100126831643892}
   targetTag: 
   duration: 0
@@ -4490,6 +4493,9 @@ MonoBehaviour:
   - Rest
   defaultCost: 1
   cost: 1
+  target: {fileID: 0}
+  freeTargets: []
+  targetsInUse: []
   defaultTarget: {fileID: 1692404119498533201}
   targetTag: 
   duration: 0
@@ -4524,6 +4530,9 @@ MonoBehaviour:
   - Rest
   defaultCost: 1
   cost: 1
+  target: {fileID: 0}
+  freeTargets: []
+  targetsInUse: []
   defaultTarget: {fileID: 0}
   targetTag: 
   duration: 0
@@ -5352,7 +5361,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6378030776884306199
 Transform:
   m_ObjectHideFlags: 0
@@ -7872,6 +7881,9 @@ MonoBehaviour:
   - Drink
   defaultCost: 1
   cost: 1
+  target: {fileID: 0}
+  freeTargets: []
+  targetsInUse: []
   defaultTarget: {fileID: 2198221440028808242}
   targetTag: 
   duration: 0
@@ -7932,6 +7944,9 @@ MonoBehaviour:
   - Food
   defaultCost: 1
   cost: 1
+  target: {fileID: 0}
+  freeTargets: []
+  targetsInUse: []
   defaultTarget: {fileID: 2198221440028808242}
   targetTag: 
   duration: 0
@@ -7966,6 +7981,9 @@ MonoBehaviour:
   - Drink
   defaultCost: 1
   cost: 1
+  target: {fileID: 0}
+  freeTargets: []
+  targetsInUse: []
   defaultTarget: {fileID: 2198221440028808242}
   targetTag: 
   duration: 0
@@ -20231,6 +20249,9 @@ MonoBehaviour:
   - Light
   defaultCost: 1
   cost: 1
+  target: {fileID: 0}
+  freeTargets: []
+  targetsInUse: []
   defaultTarget: {fileID: 6586456834114462017}
   targetTag: 
   duration: 0
@@ -21486,6 +21507,9 @@ MonoBehaviour:
   - Light
   defaultCost: 1
   cost: 1
+  target: {fileID: 0}
+  freeTargets: []
+  targetsInUse: []
   defaultTarget: {fileID: 7734759574920570394}
   targetTag: 
   duration: 0
@@ -21517,6 +21541,9 @@ MonoBehaviour:
   - Light
   defaultCost: 1
   cost: 1
+  target: {fileID: 0}
+  freeTargets: []
+  targetsInUse: []
   defaultTarget: {fileID: 7734759574920570394}
   targetTag: 
   duration: 0
@@ -21551,6 +21578,9 @@ MonoBehaviour:
   - Light
   defaultCost: 1
   cost: 1
+  target: {fileID: 0}
+  freeTargets: []
+  targetsInUse: []
   defaultTarget: {fileID: 7734759574920570394}
   targetTag: 
   duration: 0
@@ -21640,6 +21670,9 @@ MonoBehaviour:
   - Temperature
   defaultCost: 1
   cost: 1
+  target: {fileID: 0}
+  freeTargets: []
+  targetsInUse: []
   defaultTarget: {fileID: 7887579666846103021}
   targetTag: 
   duration: 0
@@ -21674,6 +21707,9 @@ MonoBehaviour:
   - Temperature
   defaultCost: 1
   cost: 1
+  target: {fileID: 0}
+  freeTargets: []
+  targetsInUse: []
   defaultTarget: {fileID: 7887579666846103021}
   targetTag: 
   duration: 0
@@ -21711,6 +21747,9 @@ MonoBehaviour:
   - Temperature
   defaultCost: 1
   cost: 1
+  target: {fileID: 0}
+  freeTargets: []
+  targetsInUse: []
   defaultTarget: {fileID: 7887579666846103021}
   targetTag: 
   duration: 0
