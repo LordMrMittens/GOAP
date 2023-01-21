@@ -9,10 +9,10 @@ public class ActionDrink : Actions
     {
         return true;
     }
-    public override bool PostPerform()
+    public override bool PostPerform(NPCController _nPCController)
     {
-        belief.RemoveState("IsThirsty");
-        needsManager.QuenchThirst();
+        _nPCController.beliefs.RemoveState("IsThirsty");
+        _nPCController.needsManager.QuenchThirst();
         return true;
     }
 }

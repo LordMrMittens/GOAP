@@ -9,7 +9,7 @@ public class TurnOnTV : Actions
     {
         return true;
     }
-    public override bool PostPerform()
+    public override bool PostPerform(NPCController _nPCController)
     {
         belief.RemoveState("IsBored");
         return true;

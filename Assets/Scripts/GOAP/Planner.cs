@@ -61,7 +61,7 @@ public class Planner
         bool success = BuildGraph(start, leaves, doableActions, goal, _NPCTransform);
 
         if(!success){
-            Debug.Log($"No Plan");
+           // Debug.Log($"No Plan");
             return null;
         }
         Node cheapest = null;
@@ -89,10 +89,10 @@ public class Planner
             queue.Enqueue(action);
         }
         Debug.Log("The plan is: ");
-      foreach (Actions action in queue)
-       {
-           Debug.Log($"Q: {action.actionName}");
-       }
+        foreach (Actions action in queue)
+        {
+            Debug.Log($"Q: {action.actionName}");
+        }
         return queue;
     }
 

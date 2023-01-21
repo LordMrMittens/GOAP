@@ -9,10 +9,10 @@ public class ActionRest : Actions
     {
         return true;
     }
-    public override bool PostPerform()
+    public override bool PostPerform(NPCController _nPCController)
     {
-        belief.RemoveState("IsTired");
-        needsManager.RestoreEnergy();
+        _nPCController.beliefs.RemoveState("IsTired");
+        _nPCController.needsManager.RestoreEnergy();
         return true;
     }
 }

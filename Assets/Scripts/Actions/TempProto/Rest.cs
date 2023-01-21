@@ -9,7 +9,7 @@ public class Rest : Actions
     {
         return true;
     }
-    public override bool PostPerform()
+    public override bool PostPerform(NPCController _nPCController)
     {
         belief.RemoveState("IsTired");
         needsManager.Invoke("RestoreEnergy", 0);

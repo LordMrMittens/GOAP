@@ -9,7 +9,7 @@ public class DrinkWater : Actions
     {
         return true;
     }
-    public override bool PostPerform()
+    public override bool PostPerform(NPCController _nPCController)
     {
         belief.RemoveState("IsThirsty");
         needsManager.Invoke("QuenchThirst", 0);

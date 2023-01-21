@@ -9,11 +9,11 @@ public class ActionEat : Actions
     {   
         return true;
     }
-    public override bool PostPerform()
+    public override bool PostPerform(NPCController _nPCController)
     {
-        belief.RemoveState("HasFood");
-        belief.RemoveState("IsHungry");
-        needsManager.SatiateHunger();
+        _nPCController.beliefs.RemoveState("HasFood");
+        _nPCController.beliefs.RemoveState("IsHungry");
+        _nPCController.needsManager.SatiateHunger();
         return true;
     }
 }

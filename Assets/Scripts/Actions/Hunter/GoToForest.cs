@@ -16,7 +16,7 @@ public class GoToForest : Actions
         }
         return true;
     }
-    public override bool PostPerform()
+    public override bool PostPerform(NPCController _nPCController)
     {
         World.Instance.GetWorld().ChangeState("CanHunt",1);
         //belief.ChangeState("IsHunting",1);

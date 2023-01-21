@@ -60,11 +60,11 @@ public class NPCController : MonoBehaviour
         previousAction = currentAction;
         previousTarget = currentAction.target;
         currentAction.running = false;
-        currentAction.PostPerform();
+        currentAction.PostPerform(this);
         currentAction.target = null;//so that it may choose a different target when several present MIGHT NOT NEED THIS ANYMORE
         if(!currentAction.defaultOwner){
             allAvailableActions.Remove(currentAction);
-            previousAction.ResetOwnership();
+            previousAction.RemoveOwnership(this);
         }
         invoked = false;
 
@@ -75,19 +75,10 @@ public class NPCController : MonoBehaviour
         Actions[] myActions = FindObjectsOfType<Actions>();
         foreach (Actions action in myActions)
         {
-            if(action.defaultOwner == this){
-            allAvailableActions.Add(action);
-            action.SetupOwnership(this);
-            }
-        }
-    }
-    void GetAvailableRelevantActions(){ //need keyword not to grab ALL actions
-        Actions[] AllActions = FindObjectsOfType<Actions>();
-        foreach (Actions action in AllActions)
-        {
-            if(!action.defaultOwner && !action.hasOwner){
-            allAvailableActions.Add(action);
-            action.SetupOwnership(this);
+            if (action.defaultOwner == this)
+            {
+                allAvailableActions.Add(action);
+                action.SetupOwnership(this);
             }
         }
     }
@@ -204,16 +195,10 @@ public class NPCController : MonoBehaviour
         List<Actions> relevantActions = new List<Actions>();
         var sortedGoals = from entry in goals orderby entry.Value descending select entry;
         //implement priority system here possibly remove queque above
-        GetAvailableRelevantActions();
+        Actions[] AllActions = FindObjectsOfType<Actions>();
         foreach (KeyValuePair<SubGoal, int> subGoal in sortedGoals)
         {
-            foreach (Actions action in allAvailableActions)
-            {
-                if (action.goalsRelatedTo.Contains(subGoal.Key.keyword))
-                {
-                    relevantActions.Add(action);
-                }
-            }
+            GetRelevantActions(relevantActions, AllActions, subGoal);
             SetActionCosts(relevantActions);
             actionQueue = planner.Plan(relevantActions, subGoal.Key.subGoals, beliefs, this.transform);
             if (actionQueue != null)
@@ -221,7 +206,7 @@ public class NPCController : MonoBehaviour
                 actionsInPlan = actionQueue.ToList<Actions>();
                 for (int i = 0; i < allAvailableActions.Count; i++)
                 {
-                   allAvailableActions[i].ResetCost();
+                    allAvailableActions[i].ResetCost();
                     if (!allAvailableActions[i].defaultOwner && !actionsInPlan.Contains(allAvailableActions[i]))
                     {
                         RemoveUnusedActions(i);
@@ -249,6 +234,25 @@ public class NPCController : MonoBehaviour
             }
         }
 
+    }
+
+    private void GetRelevantActions(List<Actions> relevantActions, Actions[] AllActions, KeyValuePair<SubGoal, int> subGoal)
+    {
+        foreach (Actions action in AllActions)
+        {
+            if (action.goalsRelatedTo.Contains(subGoal.Key.keyword) && !action.defaultOwner && action.currentOwners.Count < action.maxOwners)
+            {
+                allAvailableActions.Add(action);
+            }
+        }
+        foreach (Actions action in allAvailableActions)
+        {
+            if (action.goalsRelatedTo.Contains(subGoal.Key.keyword))
+            {
+                relevantActions.Add(action);
+                action.SetupOwnership(this);
+            }
+        }
     }
 
     private void SetActionCosts(List<Actions> relevantActions)
@@ -284,7 +288,7 @@ public class NPCController : MonoBehaviour
 
     private void RemoveUnusedActions(int i)
     {
-        allAvailableActions[i].ResetOwnership();
+        allAvailableActions[i].RemoveOwnership(this);
         allAvailableActions.Remove(allAvailableActions[i]);
     }
 

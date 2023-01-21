@@ -11,13 +11,13 @@ public class LeaveLight : Actions
 
         return true;
     }
-    public override bool PostPerform()
+    public override bool PostPerform(NPCController _nPCController)
     {
         if (target.GetComponent<ContainerObject>().DepositObject(relatedItemIfAvailable))
         {
-            nPCInventory.RemoveObject(relatedItemIfAvailable);
+            _nPCController.nPCInventory.RemoveObject(relatedItemIfAvailable);
         }
-        belief.RemoveState("IsTooBright");
+        _nPCController.beliefs.RemoveState("IsTooBright");
         return true;
     }
 }

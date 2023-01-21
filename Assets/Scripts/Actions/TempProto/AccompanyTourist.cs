@@ -16,7 +16,7 @@ public class AccompanyTourist : Actions
         }
         return true;
     }
-    public override bool PostPerform()
+    public override bool PostPerform(NPCController _nPCController)
     {
         World.Instance.GetWorld().ChangeState("HuntingWithTourist",1);
         World.Instance.AddDeer(target);

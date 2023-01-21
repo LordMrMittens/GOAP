@@ -9,7 +9,7 @@ public class HarvestDeer : Actions
     {
         return true;
     }
-    public override bool PostPerform()
+    public override bool PostPerform(NPCController _nPCController)
     {
         return true;
     }

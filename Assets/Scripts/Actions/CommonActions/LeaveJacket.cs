@@ -11,16 +11,16 @@ public class LeaveJacket : Actions
 
         return true;
     }
-    public override bool PostPerform()
+    public override bool PostPerform(NPCController _nPCController)
     {
         if (target.GetComponent<ContainerObject>().DepositObject(relatedItemIfAvailable))
         {
-            nPCInventory.RemoveObject(relatedItemIfAvailable);
-            needsManager.ToggleJacket(false);
+            _nPCController.nPCInventory.RemoveObject(relatedItemIfAvailable);
+            _nPCController.needsManager.ToggleJacket(false);
         }
-        belief.ChangeState("IsNotWearingJacket", 0);
-        belief.RemoveState("IsWearingJacket");
-        belief.RemoveState("IsTooHot");
+        _nPCController.beliefs.ChangeState("IsNotWearingJacket", 0);
+        _nPCController.beliefs.RemoveState("IsWearingJacket");
+        _nPCController.beliefs.RemoveState("IsTooHot");
         return true;
     }
 }

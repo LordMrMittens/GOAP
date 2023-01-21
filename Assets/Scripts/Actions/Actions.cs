@@ -17,24 +17,18 @@ public abstract class Actions : MonoBehaviour
     public float duration = 0f;
     public worldState[] preConditions;
     public worldState[] actionResults;
-    //public NavMeshAgent agent;
     public Dictionary<string, int> preconditions;
     public Dictionary<string,int> actionresults;
     public Inventory inventory;
-    public NPCController currentOwner {get; set;}
+    public int maxOwners = 1;
+    public List<NPCController> currentOwners = new List<NPCController>();
     public NPCController defaultOwner;
-    public bool canHaveMultipleOwners; // set multiple owners
-    public NPCInventory nPCInventory {get; set;}
-    public WorldStates agentBelief;
     public WorldStates belief;
     public NeedsManager needsManager {get; set;}
-    
     public bool running {get; set;} = false;
     public bool activatingAction = false;
     public string relatedItemIfAvailable;
-
     public bool hasOwner {get; set;} = false;
-    [SerializeField] bool RequireOwnerItem;
 
    [SerializeField] ContainerObject containerUsed;
     public Actions(){
@@ -58,20 +52,19 @@ public abstract class Actions : MonoBehaviour
         }
         ResetCost();
     }
-    public void SetupOwnership(NPCController owner){
-        currentOwner = owner;
-        nPCInventory = owner.GetComponent<NPCController>().nPCInventory;
-        belief = owner.GetComponent<NPCController>().beliefs;
-        needsManager = owner.GetComponent<NeedsManager>();
-        hasOwner = true;
-        //agent = GetComponentInParent<NavMeshAgent>();
+    public void SetupOwnership(NPCController owner)
+    {
+        if (currentOwners.Count < maxOwners)
+        {
+            currentOwners.Add(owner);
+            
+        } else if (defaultOwner != owner) {
+            Debug.LogWarning($"Owner {owner.gameObject.name} was not added because action {actionName} was full");
+        }
     }
-    public void ResetOwnership(){
-        currentOwner = null;
-        nPCInventory=null;
-        belief = null;
-        needsManager = null;
-        hasOwner = false; 
+    public void RemoveOwnership(NPCController owner)
+    {
+        currentOwners.Remove(owner);
     }
     public void ResetCost(){
        cost = defaultCost;
@@ -97,7 +90,7 @@ public abstract class Actions : MonoBehaviour
         return true;
     }
     public abstract bool PrePerform();
-    public abstract bool PostPerform();
+    public abstract bool PostPerform(NPCController _nPCController);
 
     bool CheckIfItemsAvailable()
     {
@@ -107,11 +100,6 @@ public abstract class Actions : MonoBehaviour
                 return true;
             }
         }
-        return false;
-    }
-    bool CheckIfOwnerItemAvailable(){
-        if(nPCInventory.itemsEquipped.Contains(relatedItemIfAvailable))
-        {return true;}
         return false;
     }
 }

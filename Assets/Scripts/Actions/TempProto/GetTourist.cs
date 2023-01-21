@@ -25,7 +25,7 @@ public class GetTourist : Actions
         World.Instance.GetWorld().ChangeState("AvailableDeer", -1);
         return true;
     }
-    public override bool PostPerform()
+    public override bool PostPerform(NPCController _nPCController)
     {
         World.Instance.GetWorld().ChangeState("Tourist_Waiting",-1);
         if(target){

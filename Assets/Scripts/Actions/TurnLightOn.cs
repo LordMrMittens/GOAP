@@ -11,7 +11,7 @@ public class TurnLightOn : Actions
         SwitchLightOn();
         return true;
     }
-    public override bool PostPerform()
+    public override bool PostPerform(NPCController _nPCController)
     {
             World.Instance.GetWorld().ChangeState("LightOn", 1);
             World.Instance.GetWorld().RemoveState("LightOff");
