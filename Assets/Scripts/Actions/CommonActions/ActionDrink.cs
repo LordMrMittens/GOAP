@@ -12,7 +12,9 @@ public class ActionDrink : Actions
     public override bool PostPerform(NPCController _nPCController)
     {
         _nPCController.beliefs.RemoveState("IsThirsty");
+        _nPCController.beliefs.RemoveState("HasDrink");
         _nPCController.needsManager.QuenchThirst();
+        _nPCController.nPCInventory.RemoveObject(relatedItemIfAvailable);
         return true;
     }
 }

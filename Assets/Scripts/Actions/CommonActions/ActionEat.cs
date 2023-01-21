@@ -14,6 +14,7 @@ public class ActionEat : Actions
         _nPCController.beliefs.RemoveState("HasFood");
         _nPCController.beliefs.RemoveState("IsHungry");
         _nPCController.needsManager.SatiateHunger();
+        _nPCController.nPCInventory.RemoveObject(relatedItemIfAvailable);
         return true;
     }
 }

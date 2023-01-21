@@ -39543,9 +39543,13 @@ MonoBehaviour:
   actionResults:
   - key: AtMarket
     value: 0
+    carryOver: 0
+  maxOwners: 1
+  currentOwners: []
   defaultOwner: {fileID: 0}
   activatingAction: 0
   relatedItemIfAvailable: 
+  containerUsed: {fileID: 0}
 --- !u!1 &6630497361685881423
 GameObject:
   m_ObjectHideFlags: 0
