@@ -18,7 +18,8 @@ public abstract class Actions : MonoBehaviour
     public worldState[] preConditions;
     public worldState[] actionResults;
     public Dictionary<string, int> preconditions;
-    public Dictionary<string,int> actionresults;
+    public Dictionary<string, int> actionresults;
+    public List<string> nonPermanentEffects {get; set;} = new List<string>();
     public Inventory inventory;
     public int maxOwners = 1;
     public List<NPCController> currentOwners = new List<NPCController>();
@@ -48,6 +49,9 @@ public abstract class Actions : MonoBehaviour
             foreach (worldState state in actionResults)
             {
                 actionresults.Add(state.key, state.value);
+                if (!state.carryOver){
+                    nonPermanentEffects.Add(state.key);
+                }
             }
         }
         ResetCost();

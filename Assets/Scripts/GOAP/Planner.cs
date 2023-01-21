@@ -23,6 +23,15 @@ public class Node{
         }
         this.cost = cost + distance;
         this.state = new Dictionary<string, int>(allStates);
+        if (parent.action != null)
+        {
+            for (int i = 0; i < parent.action.nonPermanentEffects.Count; i++)
+            {
+               if (this.state.ContainsKey(parent.action.nonPermanentEffects[i])){
+                this.state.Remove(parent.action.nonPermanentEffects[i]);
+               }
+            }
+        }
         this.action = action;
     }
     public Node(Node parent, float cost, Dictionary<string, int> allStates, Dictionary<string, int> beliefStates, Actions action)
@@ -61,7 +70,7 @@ public class Planner
         bool success = BuildGraph(start, leaves, doableActions, goal, _NPCTransform);
 
         if(!success){
-           // Debug.Log($"No Plan");
+            Debug.Log($"No Plan");
             return null;
         }
         Node cheapest = null;
@@ -89,10 +98,10 @@ public class Planner
             queue.Enqueue(action);
         }
         Debug.Log("The plan is: ");
-        foreach (Actions action in queue)
-        {
-            Debug.Log($"Q: {action.actionName}");
-        }
+      foreach (Actions action in queue)
+       {
+           Debug.Log($"Q: {action.actionName}");
+       }
         return queue;
     }
 

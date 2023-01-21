@@ -6,6 +6,7 @@ public class worldState
 {
     public string key;
     public int value;
+    public bool carryOver = true;
 }
 public class WorldStates
 {

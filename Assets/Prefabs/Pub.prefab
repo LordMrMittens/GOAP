@@ -7140,7 +7140,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 39
+  m_VersionIndex: 42
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -13279,15 +13279,19 @@ MonoBehaviour:
   preConditions:
   - key: AtBar
     value: 0
+    carryOver: 1
   - key: HasOrdered
     value: 0
+    carryOver: 1
   actionResults:
   - key: HasDrink
     value: 0
+    carryOver: 1
+  maxOwners: 1
+  currentOwners: []
   defaultOwner: {fileID: 0}
   activatingAction: 1
   relatedItemIfAvailable: Drink
-  RequireOwnerItem: 0
   containerUsed: {fileID: 9161036148303679534}
 --- !u!114 &4336178995255889473
 MonoBehaviour:
@@ -13312,15 +13316,19 @@ MonoBehaviour:
   preConditions:
   - key: AtBar
     value: 0
+    carryOver: 1
   - key: HasOrdered
     value: 0
+    carryOver: 1
   actionResults:
   - key: HasFood
     value: 0
+    carryOver: 1
+  maxOwners: 1
+  currentOwners: []
   defaultOwner: {fileID: 0}
   activatingAction: 1
   relatedItemIfAvailable: Food
-  RequireOwnerItem: 0
   containerUsed: {fileID: 9161036148303679534}
 --- !u!114 &5182823575659468986
 MonoBehaviour:
@@ -13346,15 +13354,19 @@ MonoBehaviour:
   preConditions:
   - key: AtPub
     value: 0
+    carryOver: 0
   actionResults:
   - key: AtBar
     value: 0
+    carryOver: 0
   - key: HasOrdered
     value: 0
+    carryOver: 1
+  maxOwners: 1
+  currentOwners: []
   defaultOwner: {fileID: 0}
   activatingAction: 0
   relatedItemIfAvailable: 
-  RequireOwnerItem: 0
   containerUsed: {fileID: 0}
 --- !u!114 &3211523866079965505
 MonoBehaviour:
@@ -13380,13 +13392,16 @@ MonoBehaviour:
   preConditions:
   - key: HasOrdered
     value: 0
+    carryOver: 1
   actionResults:
   - key: AtTable
     value: 0
+    carryOver: 0
+  maxOwners: 1
+  currentOwners: []
   defaultOwner: {fileID: 0}
   activatingAction: 0
   relatedItemIfAvailable: 
-  RequireOwnerItem: 0
   containerUsed: {fileID: 0}
 --- !u!1 &3762754417036938877
 GameObject:
@@ -21599,6 +21614,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6373974629588538723}
+  - component: {fileID: 101369898873103497}
   m_Layer: 0
   m_Name: PubPoint
   m_TagString: Pub
@@ -21621,6 +21637,38 @@ Transform:
   m_Father: {fileID: 2944324583867805589}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &101369898873103497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6586456834114462017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7da9aaa5bf9345c40a7cdb2a20581efe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Go To Pub
+  goalsRelatedTo:
+  - Food
+  - Drink
+  defaultCost: 0
+  cost: 1
+  defaultTarget: {fileID: 6586456834114462017}
+  targetTag: Pub
+  duration: 0
+  preConditions: []
+  actionResults:
+  - key: AtPub
+    value: 0
+    carryOver: 0
+  maxOwners: 8
+  currentOwners: []
+  defaultOwner: {fileID: 0}
+  activatingAction: 0
+  relatedItemIfAvailable: 
+  containerUsed: {fileID: 0}
 --- !u!1 &6643496769859806870
 GameObject:
   m_ObjectHideFlags: 0

@@ -58,13 +58,16 @@ MonoBehaviour:
   preConditions:
   - key: AtHome
     value: 0
+    carryOver: 0
   actionResults:
   - key: AtTable
     value: 0
+    carryOver: 0
+  maxOwners: 1
+  currentOwners: []
   defaultOwner: {fileID: 6538929300454656666}
   activatingAction: 0
   relatedItemIfAvailable: 
-  RequireOwnerItem: 0
   containerUsed: {fileID: 0}
 --- !u!1 &401763948923997951
 GameObject:
@@ -4493,13 +4496,16 @@ MonoBehaviour:
   preConditions:
   - key: AtHome
     value: 0
+    carryOver: 1
   actionResults:
   - key: AtBed
     value: 0
+    carryOver: 0
+  maxOwners: 1
+  currentOwners: []
   defaultOwner: {fileID: 6538929300454656666}
   activatingAction: 0
   relatedItemIfAvailable: 
-  RequireOwnerItem: 0
   containerUsed: {fileID: 0}
 --- !u!114 &2975132905557108330
 MonoBehaviour:
@@ -4524,15 +4530,19 @@ MonoBehaviour:
   preConditions:
   - key: IsTired
     value: 0
+    carryOver: 1
   - key: AtBed
     value: 0
+    carryOver: 1
   actionResults:
   - key: IsRested
     value: 0
+    carryOver: 1
+  maxOwners: 1
+  currentOwners: []
   defaultOwner: {fileID: 6538929300454656666}
   activatingAction: 1
   relatedItemIfAvailable: 
-  RequireOwnerItem: 0
   containerUsed: {fileID: 0}
 --- !u!1 &1717665995750453412
 GameObject:
@@ -7868,13 +7878,16 @@ MonoBehaviour:
   preConditions:
   - key: AtHome
     value: 0
+    carryOver: 1
   actionResults:
   - key: AtKitchen
     value: 0
+    carryOver: 0
+  maxOwners: 1
+  currentOwners: []
   defaultOwner: {fileID: 6538929300454656666}
   activatingAction: 0
   relatedItemIfAvailable: 
-  RequireOwnerItem: 0
   containerUsed: {fileID: 0}
 --- !u!114 &1487396696835980915
 MonoBehaviour:
@@ -7925,13 +7938,16 @@ MonoBehaviour:
   preConditions:
   - key: AtKitchen
     value: 0
+    carryOver: 1
   actionResults:
   - key: HasFood
     value: 0
+    carryOver: 1
+  maxOwners: 1
+  currentOwners: []
   defaultOwner: {fileID: 6538929300454656666}
   activatingAction: 1
   relatedItemIfAvailable: Food
-  RequireOwnerItem: 0
   containerUsed: {fileID: 1487396696835980915}
 --- !u!114 &6079367874937909488
 MonoBehaviour:
@@ -7956,13 +7972,16 @@ MonoBehaviour:
   preConditions:
   - key: AtKitchen
     value: 0
+    carryOver: 1
   actionResults:
   - key: HasDrink
     value: 0
+    carryOver: 1
+  maxOwners: 1
+  currentOwners: []
   defaultOwner: {fileID: 6538929300454656666}
   activatingAction: 1
   relatedItemIfAvailable: Drink
-  RequireOwnerItem: 0
   containerUsed: {fileID: 1487396696835980915}
 --- !u!1 &2703664691043879978
 GameObject:
@@ -20219,10 +20238,12 @@ MonoBehaviour:
   actionResults:
   - key: AtHome
     value: 0
+    carryOver: 1
+  maxOwners: 1
+  currentOwners: []
   defaultOwner: {fileID: 6538929300454656666}
   activatingAction: 0
   relatedItemIfAvailable: 
-  RequireOwnerItem: 0
   containerUsed: {fileID: 0}
 --- !u!1 &7175100126831643892
 GameObject:
@@ -21472,10 +21493,12 @@ MonoBehaviour:
   actionResults:
   - key: AtToolshed
     value: 0
+    carryOver: 0
+  maxOwners: 1
+  currentOwners: []
   defaultOwner: {fileID: 6538929300454656666}
   activatingAction: 0
   relatedItemIfAvailable: 
-  RequireOwnerItem: 0
   containerUsed: {fileID: 0}
 --- !u!114 &2990453456917463792
 MonoBehaviour:
@@ -21500,13 +21523,16 @@ MonoBehaviour:
   preConditions:
   - key: AtToolshed
     value: 0
+    carryOver: 1
   actionResults:
   - key: SnuffLight
     value: 0
+    carryOver: 1
+  maxOwners: 1
+  currentOwners: []
   defaultOwner: {fileID: 6538929300454656666}
   activatingAction: 1
   relatedItemIfAvailable: Light
-  RequireOwnerItem: 0
   containerUsed: {fileID: 0}
 --- !u!114 &4463631769016829239
 MonoBehaviour:
@@ -21531,13 +21557,16 @@ MonoBehaviour:
   preConditions:
   - key: AtToolshed
     value: 0
+    carryOver: 1
   actionResults:
   - key: GetLight
     value: 0
+    carryOver: 1
+  maxOwners: 1
+  currentOwners: []
   defaultOwner: {fileID: 6538929300454656666}
   activatingAction: 1
   relatedItemIfAvailable: Light
-  RequireOwnerItem: 0
   containerUsed: {fileID: 5233869548145432261}
 --- !u!1 &7887579666846103021
 GameObject:
@@ -21617,13 +21646,16 @@ MonoBehaviour:
   preConditions:
   - key: AtHome
     value: 0
+    carryOver: 1
   actionResults:
   - key: AtWardrobe
     value: 0
+    carryOver: 1
+  maxOwners: 1
+  currentOwners: []
   defaultOwner: {fileID: 6538929300454656666}
   activatingAction: 0
   relatedItemIfAvailable: 
-  RequireOwnerItem: 0
   containerUsed: {fileID: 0}
 --- !u!114 &6624088380790573572
 MonoBehaviour:
@@ -21648,15 +21680,19 @@ MonoBehaviour:
   preConditions:
   - key: AtWardrobe
     value: 0
+    carryOver: 0
   - key: IsWearingJacket
     value: 0
+    carryOver: 1
   actionResults:
   - key: GetCold
     value: 0
+    carryOver: 1
+  maxOwners: 1
+  currentOwners: []
   defaultOwner: {fileID: 6538929300454656666}
   activatingAction: 1
   relatedItemIfAvailable: Jacket
-  RequireOwnerItem: 0
   containerUsed: {fileID: 0}
 --- !u!114 &8828360780090809153
 MonoBehaviour:
@@ -21681,15 +21717,19 @@ MonoBehaviour:
   preConditions:
   - key: AtWardrobe
     value: 0
+    carryOver: 1
   - key: IsNotWearingJacket
     value: 0
+    carryOver: 1
   actionResults:
   - key: GetWarm
     value: 0
+    carryOver: 1
+  maxOwners: 1
+  currentOwners: []
   defaultOwner: {fileID: 6538929300454656666}
   activatingAction: 1
   relatedItemIfAvailable: Jacket
-  RequireOwnerItem: 0
   containerUsed: {fileID: 4901537051844606402}
 --- !u!1 &8497414939084942894
 GameObject:
