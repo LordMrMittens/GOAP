@@ -13,7 +13,7 @@ public class BasicNeedModule : MonoBehaviour
     [SerializeField] float randomnessOffset;
     public bool hasResource;
     
-    void Start()
+    protected virtual void Start()
     {
         currentResource = Random.Range(minResource + randomnessOffset, maxResource-randomnessOffset);
         Debug.Log(currentResource);

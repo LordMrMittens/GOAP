@@ -16,7 +16,6 @@ public class ActionPickFood : Actions
             _nPCController.nPCInventory.DepositObject(relatedItemIfAvailable);
             return true;
         }
-
         return false;
     }
 }

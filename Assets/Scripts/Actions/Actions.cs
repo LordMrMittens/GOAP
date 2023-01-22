@@ -7,7 +7,6 @@ public abstract class Actions : MonoBehaviour
 {
     public string actionName = "Action";
     public string[] goalsRelatedTo;
-    
     [SerializeField] float defaultCost = 1;
     public float cost = 1f;
     public GameObject target ;
@@ -30,7 +29,6 @@ public abstract class Actions : MonoBehaviour
     //public bool running {get; set;} = false;
     public bool activatingAction = false;
     public string relatedItemIfAvailable;
-    public bool hasOwner {get; set;} = false;
    [SerializeField] ContainerObject containerUsed;
     public Actions(){
         preconditions = new Dictionary<string, int>();

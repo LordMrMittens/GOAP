@@ -52,34 +52,19 @@ public class NPCController : MonoBehaviour
 
     protected virtual void Start()
     {
-        GetDefaultActions();
         agent = GetComponent<NavMeshAgent>();
     }
     void CompleteAction()
     {
+
         previousAction = currentAction;
         previousTarget = currentAction.target;
         currentAction.PostPerform(this);
-        if(!currentAction.defaultOwner){
-            allAvailableActions.Remove(currentAction);
-            previousAction.RemoveOwnership(this);
-        }
+        allAvailableActions.Remove(currentAction);
+        currentAction.RemoveOwnership(this);
         invoked = false;
-
     }
 
-    void GetDefaultActions()
-    {
-        Actions[] myActions = FindObjectsOfType<Actions>();
-        foreach (Actions action in myActions)
-        {
-            if (action.defaultOwner == this)
-            {
-                allAvailableActions.Add(action);
-                action.SetupOwnership(this);
-            }
-        }
-    }
     void LateUpdate()
     {
 
@@ -88,8 +73,9 @@ public class NPCController : MonoBehaviour
         {
             target = currentAction.target;
         }
-        if (currentAction != null && !CheckForActionCompletion()) //&& currentAction.running
+        if (currentAction != null && currentAction.currentOwners.Contains(this)) //&& currentAction.running
         {
+            CheckForActionCompletion();
             return;
         }
         if (actionQueue != null && actionQueue.Count == 0)
@@ -103,19 +89,17 @@ public class NPCController : MonoBehaviour
         tickCounter = 0;
     }
 
-    private bool CheckForActionCompletion()
+    private void CheckForActionCompletion()
     {
         float distanceToTarget = Vector3.Distance(target.transform.position, transform.position);
-        if (distanceToTarget < DistanceFromTarget)//currentAction.agent.hasPath &&  // && distanceToTarget < DistanceFromTarget && || currentAction.activatingAction
+        if (distanceToTarget < DistanceFromTarget || currentAction.activatingAction)
         {
             if (!invoked)
             {
                 Invoke("CompleteAction", currentAction.duration);
                 invoked = true;
-                return true;
             }
         }
-        return false;
     }
 
     private void ExecutePlan()
@@ -165,11 +149,7 @@ public class NPCController : MonoBehaviour
         for (int i = 0; i < allAvailableActions.Count; i++)
         {
             allAvailableActions[i].ResetCost();
-            if (!allAvailableActions[i].defaultOwner)
-            {
-
-                RemoveUnusedActions(i);
-            }
+            RemoveUnusedActions(i);
 
         }
         previousAction = null;
@@ -199,7 +179,7 @@ public class NPCController : MonoBehaviour
                 for (int i = 0; i < allAvailableActions.Count; i++)
                 {
                     allAvailableActions[i].ResetCost();
-                    if (!allAvailableActions[i].defaultOwner && !actionsInPlan.Contains(allAvailableActions[i]))
+                    if (!actionsInPlan.Contains(allAvailableActions[i]) || !relevantActions.Contains(allAvailableActions[i]))
                     {
                         RemoveUnusedActions(i);
                     }
@@ -214,10 +194,9 @@ public class NPCController : MonoBehaviour
                 for (int i = 0; i < allAvailableActions.Count; i++)
                 {
                     allAvailableActions[i].ResetCost();
-                    if (!allAvailableActions[i].defaultOwner)
-                    {
-                        RemoveUnusedActions(i);
-                    }
+
+                    RemoveUnusedActions(i);
+
                 }
                 failedGoalsList.Add(subGoal.Key);
                 canPlan = true;
@@ -234,6 +213,9 @@ public class NPCController : MonoBehaviour
         {
             if (action.goalsRelatedTo.Contains(subGoal.Key.keyword) && !action.defaultOwner && action.currentOwners.Count < action.maxOwners)
             {
+                allAvailableActions.Add(action);
+            }
+            if(action.defaultOwner ==this){
                 allAvailableActions.Add(action);
             }
         }
