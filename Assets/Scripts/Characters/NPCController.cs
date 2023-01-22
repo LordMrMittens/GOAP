@@ -80,6 +80,7 @@ public class NPCController : MonoBehaviour
         }
         if (actionQueue != null && actionQueue.Count == 0)
         {
+            Debug.Log("DeletingPlanner");
             DeletePlanner();
         }
         if (actionQueue != null && actionQueue.Count > 0)
@@ -172,7 +173,7 @@ public class NPCController : MonoBehaviour
         {
             GetRelevantActions(relevantActions, AllActions, subGoal);
             SetActionCosts(relevantActions);
-            actionQueue = planner.Plan(relevantActions, subGoal.Key.subGoals, beliefs, this.transform);
+            actionQueue = planner.Plan(relevantActions, subGoal.Key.subGoals, beliefs, this.transform, this);
             if (actionQueue != null)
             {
                 actionsInPlan = actionQueue.ToList<Actions>();

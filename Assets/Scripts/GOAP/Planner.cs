@@ -52,13 +52,13 @@ public class Planner
 {
 
     Dictionary<Actions, string> testDict = new Dictionary<Actions, string>();
-    public Queue<Actions> Plan(List<Actions> actions, Dictionary<string,int> goal, WorldStates beliefStates , Transform _NPCTransform){
+    public Queue<Actions> Plan(List<Actions> actions, Dictionary<string,int> goal, WorldStates beliefStates , Transform _NPCTransform, NPCController _controller){
         
         List<Actions> doableActions = new List<Actions>();
 
         foreach (Actions action in actions)
         {
-            if (action.IsAchievable()){
+            if (action.IsAchievable(_controller)){
 
                 doableActions.Add(action);
             }

@@ -29,7 +29,7 @@ public abstract class Actions : MonoBehaviour
     //public bool running {get; set;} = false;
     public bool activatingAction = false;
     public string relatedItemIfAvailable;
-   [SerializeField] ContainerObject containerUsed;
+   [SerializeField] ContainerObject containerUsed; //if depositing item container used should be blank
     public Actions(){
         preconditions = new Dictionary<string, int>();
         actionresults = new Dictionary<string, int>();
@@ -80,10 +80,10 @@ public abstract class Actions : MonoBehaviour
        cost = defaultCost;
     }
 
-    public bool IsAchievable()
+    public bool IsAchievable(NPCController _nPCController)
     {
         if(containerUsed){
-        return CheckIfItemsAvailable();
+        return CheckIfItemsAvailable(_nPCController);
         }
         return true;
     }
@@ -102,13 +102,16 @@ public abstract class Actions : MonoBehaviour
     public abstract bool PrePerform();
     public abstract bool PostPerform(NPCController _nPCController);
 
-    bool CheckIfItemsAvailable()
+    bool CheckIfItemsAvailable(NPCController _nPCController)
     {
-        if (containerUsed.storedObjects.Count > 0)
+        if (containerUsed.storedObjects.Contains(relatedItemIfAvailable)) //if depositing item container used should be blank
         {
-            if(containerUsed.storedObjects.Contains(relatedItemIfAvailable)){
-                return true;
-            }
+            return true;
+        }
+        else if (defaultOwner == _nPCController)
+        {
+            Debug.Log($"HasNo{relatedItemIfAvailable}Stored");
+            _nPCController.beliefs.AddSingleState($"HasNo{relatedItemIfAvailable}Stored", 0);
         }
         return false;
     }

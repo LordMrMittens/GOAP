@@ -49,6 +49,17 @@ public class TestCharacter : NPCController
             AddSubGoal("SnuffLight", 0, true, "Light");
     }
 
+
+    void RestockFood()
+    {
+        //beliefs.AddSingleState("HasNoFoodStored", 0);
+        AddSubGoal("StoredFood", 0, true, "Groceries");
+    }
+        void RestockDrink()
+    {
+        //beliefs.AddSingleState("HasNoFoodStored", 0);
+        AddSubGoal("StoredDrink", 0, true, "Groceries");
+    }
     public void CheckForJacket()
     {
         if (nPCInventory.itemsEquipped.Contains("Jacket"))

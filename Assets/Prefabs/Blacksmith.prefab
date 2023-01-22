@@ -35720,6 +35720,9 @@ MonoBehaviour:
   - FILL THIS PROPERLY
   defaultCost: 1
   cost: 1
+  target: {fileID: 0}
+  freeTargets: []
+  targetsInUse: []
   defaultTarget: {fileID: 6586456834114462017}
   targetTag: 
   duration: 0

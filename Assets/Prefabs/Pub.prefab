@@ -13273,6 +13273,9 @@ MonoBehaviour:
   - Drink
   defaultCost: 0
   cost: 1
+  target: {fileID: 0}
+  freeTargets: []
+  targetsInUse: []
   defaultTarget: {fileID: 2198221440028808242}
   targetTag: 
   duration: 0
@@ -13310,6 +13313,9 @@ MonoBehaviour:
   - Food
   defaultCost: 0
   cost: 1
+  target: {fileID: 0}
+  freeTargets: []
+  targetsInUse: []
   defaultTarget: {fileID: 2198221440028808242}
   targetTag: 
   duration: 0
@@ -13348,6 +13354,9 @@ MonoBehaviour:
   - Drink
   defaultCost: 0
   cost: 1
+  target: {fileID: 0}
+  freeTargets: []
+  targetsInUse: []
   defaultTarget: {fileID: 3563500452820289342}
   targetTag: PubBar
   duration: 0
@@ -13386,6 +13395,9 @@ MonoBehaviour:
   - Drink
   defaultCost: 0
   cost: 1
+  target: {fileID: 0}
+  freeTargets: []
+  targetsInUse: []
   defaultTarget: {fileID: 0}
   targetTag: PubTable
   duration: 0
@@ -21655,6 +21667,9 @@ MonoBehaviour:
   - Drink
   defaultCost: 0
   cost: 1
+  target: {fileID: 0}
+  freeTargets: []
+  targetsInUse: []
   defaultTarget: {fileID: 6586456834114462017}
   targetTag: Pub
   duration: 0

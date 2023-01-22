@@ -12104,7 +12104,6 @@ GameObject:
   - component: {fileID: 6786963729032343109}
   - component: {fileID: 3979677991724401732}
   - component: {fileID: 6561356605445672202}
-  - component: {fileID: 2557991889055946950}
   m_Layer: 0
   m_Name: Stand
   m_TagString: Untagged
@@ -14092,22 +14091,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.8039303, y: 1.5216198, z: 1.5096474}
   m_Center: {x: 0, y: -0.13485613, z: 0}
---- !u!114 &2557991889055946950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2509880607699474724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ce35516635fe5e47809e8e5eaa6674a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  typeOfObjectsContained: []
-  maxNumberOfItems: 5
-  numberOfObjectsToAdd: 1
-  storedObjects: []
 --- !u!1 &2534146707266587985
 GameObject:
   m_ObjectHideFlags: 0
@@ -16816,7 +16799,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 36
+  m_VersionIndex: 42
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -39496,6 +39479,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6373974629588538723}
   - component: {fileID: 7001807506605421157}
+  - component: {fileID: 291434123179499859}
+  - component: {fileID: 3715477485773846895}
+  - component: {fileID: 4117095977283836253}
   m_Layer: 0
   m_Name: MarketPoint
   m_TagString: Untagged
@@ -39532,10 +39518,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: Go To Market
   goalsRelatedTo:
-  - Food
-  - Drink
+  - Groceries
   defaultCost: 1
   cost: 1
+  target: {fileID: 0}
+  freeTargets: []
+  targetsInUse: []
   defaultTarget: {fileID: 6586456834114462017}
   targetTag: 
   duration: 0
@@ -39544,12 +39532,102 @@ MonoBehaviour:
   - key: AtMarket
     value: 0
     carryOver: 0
-  maxOwners: 1
+  maxOwners: 3
   currentOwners: []
   defaultOwner: {fileID: 0}
   activatingAction: 0
   relatedItemIfAvailable: 
   containerUsed: {fileID: 0}
+--- !u!114 &291434123179499859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6586456834114462017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56d3683c704780c41893d2e582cc6631, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Buy Drink
+  goalsRelatedTo:
+  - Groceries
+  defaultCost: 1
+  cost: 1
+  target: {fileID: 0}
+  freeTargets: []
+  targetsInUse: []
+  defaultTarget: {fileID: 6586456834114462017}
+  targetTag: 
+  duration: 3
+  preConditions:
+  - key: AtMarket
+    value: 0
+    carryOver: 0
+  actionResults:
+  - key: HasDrinkGroceries
+    value: 0
+    carryOver: 0
+  maxOwners: 3
+  currentOwners: []
+  defaultOwner: {fileID: 0}
+  activatingAction: 1
+  relatedItemIfAvailable: Drink
+  containerUsed: {fileID: 4117095977283836253}
+--- !u!114 &3715477485773846895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6586456834114462017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d3f4e8a6fd7d434b9bdebae54fea4f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Buy Food
+  goalsRelatedTo:
+  - Groceries
+  defaultCost: 1
+  cost: 1
+  target: {fileID: 0}
+  freeTargets: []
+  targetsInUse: []
+  defaultTarget: {fileID: 6586456834114462017}
+  targetTag: 
+  duration: 3
+  preConditions:
+  - key: AtMarket
+    value: 0
+    carryOver: 0
+  actionResults:
+  - key: HasFoodGroceries
+    value: 0
+    carryOver: 0
+  maxOwners: 3
+  currentOwners: []
+  defaultOwner: {fileID: 0}
+  activatingAction: 1
+  relatedItemIfAvailable: Food
+  containerUsed: {fileID: 4117095977283836253}
+--- !u!114 &4117095977283836253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6586456834114462017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ce35516635fe5e47809e8e5eaa6674a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeOfObjectsContained: []
+  maxNumberOfItems: 5
+  numberOfObjectsToAdd: 1
+  storedObjects: []
 --- !u!1 &6630497361685881423
 GameObject:
   m_ObjectHideFlags: 0

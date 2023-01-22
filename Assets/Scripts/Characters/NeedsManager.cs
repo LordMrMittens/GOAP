@@ -60,6 +60,14 @@ public class NeedsManager : MonoBehaviour
                 nPCController.Invoke("GetTired", 0);
                 nPCController.hasGoal=true;
             }
+            if(nPCController.beliefs.GetAllStates().ContainsKey("HasNoFoodStored")){
+                nPCController.Invoke("RestockFood", 0);
+                nPCController.hasGoal=true;
+            }
+            if(nPCController.beliefs.GetAllStates().ContainsKey("HasNoDrinkStored")){
+                nPCController.Invoke("RestockDrink", 0);
+                nPCController.hasGoal=true;
+            }
             tickTimer = 0;
         }
     }
