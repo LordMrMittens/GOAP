@@ -52,12 +52,10 @@ public class TestCharacter : NPCController
 
     void RestockFood()
     {
-        //beliefs.AddSingleState("HasNoFoodStored", 0);
         AddSubGoal("StoredFood", 0, true, "Groceries");
     }
         void RestockDrink()
     {
-        //beliefs.AddSingleState("HasNoFoodStored", 0);
         AddSubGoal("StoredDrink", 0, true, "Groceries");
     }
     public void CheckForJacket()

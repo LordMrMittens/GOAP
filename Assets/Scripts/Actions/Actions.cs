@@ -8,28 +8,29 @@ public abstract class Actions : MonoBehaviour
     public string actionName = "Action";
     public string[] goalsRelatedTo;
     [SerializeField] float defaultCost = 1;
-    public float cost = 1f;
-    public GameObject target ;
-    public List<GameObject> freeTargets = new List<GameObject>();
-    public List<GameObject> targetsInUse = new List<GameObject>();
+    public float cost {get; set;} = 1f;
+    public GameObject target {get; set;}
+    public List<GameObject> freeTargets {get; set;} = new List<GameObject>();
+    public List<GameObject> targetsInUse {get; set;} = new List<GameObject>();
     public GameObject defaultTarget;
     public string targetTag;
     public float duration = 0f;
-    public worldState[] preConditions;
-    public worldState[] actionResults;
     public Dictionary<string, int> preconditions;
     public Dictionary<string, int> actionresults;
     public List<string> nonPermanentEffects {get; set;} = new List<string>();
     public Inventory inventory;
     public int maxOwners = 1;
-    public List<NPCController> currentOwners = new List<NPCController>();
+    public List<NPCController> currentOwners {get; set;} = new List<NPCController>();
     public NPCController defaultOwner;
     public WorldStates belief;
     public NeedsManager needsManager {get; set;}
     //public bool running {get; set;} = false;
+     [SerializeField] ContainerObject containerUsed; //if depositing item container used should be blank
     public bool activatingAction = false;
     public string relatedItemIfAvailable;
-   [SerializeField] ContainerObject containerUsed; //if depositing item container used should be blank
+    public worldState[] preConditions;
+    public worldState[] actionResults;
+   
     public Actions(){
         preconditions = new Dictionary<string, int>();
         actionresults = new Dictionary<string, int>();
@@ -110,7 +111,6 @@ public abstract class Actions : MonoBehaviour
         }
         else if (defaultOwner == _nPCController)
         {
-            Debug.Log($"HasNo{relatedItemIfAvailable}Stored");
             _nPCController.beliefs.AddSingleState($"HasNo{relatedItemIfAvailable}Stored", 0);
         }
         return false;

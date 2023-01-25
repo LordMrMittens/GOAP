@@ -39520,24 +39520,19 @@ MonoBehaviour:
   goalsRelatedTo:
   - Groceries
   defaultCost: 1
-  cost: 1
-  target: {fileID: 0}
-  freeTargets: []
-  targetsInUse: []
   defaultTarget: {fileID: 6586456834114462017}
   targetTag: 
   duration: 0
+  maxOwners: 3
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 0}
+  activatingAction: 0
+  relatedItemIfAvailable: 
   preConditions: []
   actionResults:
   - key: AtMarket
     value: 0
     carryOver: 0
-  maxOwners: 3
-  currentOwners: []
-  defaultOwner: {fileID: 0}
-  activatingAction: 0
-  relatedItemIfAvailable: 
-  containerUsed: {fileID: 0}
 --- !u!114 &291434123179499859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39554,13 +39549,14 @@ MonoBehaviour:
   goalsRelatedTo:
   - Groceries
   defaultCost: 1
-  cost: 1
-  target: {fileID: 0}
-  freeTargets: []
-  targetsInUse: []
   defaultTarget: {fileID: 6586456834114462017}
   targetTag: 
   duration: 3
+  maxOwners: 3
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 4117095977283836253}
+  activatingAction: 1
+  relatedItemIfAvailable: Drink
   preConditions:
   - key: AtMarket
     value: 0
@@ -39569,12 +39565,6 @@ MonoBehaviour:
   - key: HasDrinkGroceries
     value: 0
     carryOver: 0
-  maxOwners: 3
-  currentOwners: []
-  defaultOwner: {fileID: 0}
-  activatingAction: 1
-  relatedItemIfAvailable: Drink
-  containerUsed: {fileID: 4117095977283836253}
 --- !u!114 &3715477485773846895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39591,13 +39581,14 @@ MonoBehaviour:
   goalsRelatedTo:
   - Groceries
   defaultCost: 1
-  cost: 1
-  target: {fileID: 0}
-  freeTargets: []
-  targetsInUse: []
   defaultTarget: {fileID: 6586456834114462017}
   targetTag: 
   duration: 3
+  maxOwners: 3
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 4117095977283836253}
+  activatingAction: 1
+  relatedItemIfAvailable: Food
   preConditions:
   - key: AtMarket
     value: 0
@@ -39606,12 +39597,6 @@ MonoBehaviour:
   - key: HasFoodGroceries
     value: 0
     carryOver: 0
-  maxOwners: 3
-  currentOwners: []
-  defaultOwner: {fileID: 0}
-  activatingAction: 1
-  relatedItemIfAvailable: Food
-  containerUsed: {fileID: 4117095977283836253}
 --- !u!114 &4117095977283836253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40877,6 +40862,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6842202718072043989}
+  - component: {fileID: 3138728597267341302}
+  - component: {fileID: 9037862027136245381}
+  - component: {fileID: 1511698375032644485}
+  - component: {fileID: 4372192372978561819}
+  - component: {fileID: 8436145513691480243}
+  - component: {fileID: 8698073283536632008}
   m_Layer: 0
   m_Name: MarketJobPoint
   m_TagString: Untagged
@@ -40899,6 +40890,201 @@ Transform:
   m_Father: {fileID: 2944324583867805589}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3138728597267341302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7202391109514973031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 601368241b5ea7640b7a92726a67c7a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Go To Market
+  goalsRelatedTo:
+  - MarketJob
+  defaultCost: 1
+  defaultTarget: {fileID: 7202391109514973031}
+  targetTag: 
+  duration: 0
+  maxOwners: 1
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 0}
+  activatingAction: 0
+  relatedItemIfAvailable: 
+  preConditions: []
+  actionResults:
+  - key: AtMarket
+    value: 0
+    carryOver: 0
+--- !u!114 &9037862027136245381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7202391109514973031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52441cb736c1f764b93e0d838e94d1bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Tend To Shop
+  goalsRelatedTo:
+  - MarketJob
+  defaultCost: 1
+  defaultTarget: {fileID: 7202391109514973031}
+  targetTag: 
+  duration: 0
+  maxOwners: 1
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 0}
+  activatingAction: 1
+  relatedItemIfAvailable: 
+  preConditions:
+  - key: AtMarket
+    value: 0
+    carryOver: 0
+  actionResults:
+  - key: IsWorking
+    value: 0
+    carryOver: 1
+--- !u!114 &1511698375032644485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7202391109514973031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a706c8bfd1f6b479cf904be7627ba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Check Food Stock
+  goalsRelatedTo:
+  - MarketJob
+  defaultCost: 1
+  defaultTarget: {fileID: 7202391109514973031}
+  targetTag: 
+  duration: 0
+  maxOwners: 1
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 4117095977283836253}
+  activatingAction: 1
+  relatedItemIfAvailable: Food
+  preConditions:
+  - key: IsWorking
+    value: 0
+    carryOver: 0
+  actionResults:
+  - key: CheckedFoodStock
+    value: 0
+    carryOver: 1
+--- !u!114 &4372192372978561819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7202391109514973031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a706c8bfd1f6b479cf904be7627ba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Check Drink Stock
+  goalsRelatedTo:
+  - MarketJob
+  defaultCost: 1
+  defaultTarget: {fileID: 7202391109514973031}
+  targetTag: 
+  duration: 0
+  maxOwners: 1
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 4117095977283836253}
+  activatingAction: 1
+  relatedItemIfAvailable: Drink
+  preConditions:
+  - key: IsWorking
+    value: 0
+    carryOver: 0
+  actionResults:
+  - key: CheckedDrinkStock
+    value: 0
+    carryOver: 1
+--- !u!114 &8436145513691480243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7202391109514973031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8acaf0a448032c48a4487afff95eeee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Restock Drink
+  goalsRelatedTo:
+  - MarketJob
+  defaultCost: 1
+  defaultTarget: {fileID: 6586456834114462017}
+  targetTag: 
+  duration: 2
+  maxOwners: 1
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 0}
+  activatingAction: 1
+  relatedItemIfAvailable: Drink
+  preConditions:
+  - key: HasDrink
+    value: 0
+    carryOver: 0
+  - key: AtMarket
+    value: 0
+    carryOver: 0
+  actionResults:
+  - key: RestockedMarketDrink
+    value: 0
+    carryOver: 0
+--- !u!114 &8698073283536632008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7202391109514973031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8acaf0a448032c48a4487afff95eeee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Restock Food
+  goalsRelatedTo:
+  - MarketJob
+  defaultCost: 1
+  defaultTarget: {fileID: 6586456834114462017}
+  targetTag: 
+  duration: 2
+  maxOwners: 1
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 0}
+  activatingAction: 1
+  relatedItemIfAvailable: Food
+  preConditions:
+  - key: HasFood
+    value: 0
+    carryOver: 0
+  - key: AtMarket
+    value: 0
+    carryOver: 0
+  actionResults:
+  - key: RestockedMarketFood
+    value: 0
+    carryOver: 0
 --- !u!1 &7211320298741271842
 GameObject:
   m_ObjectHideFlags: 0

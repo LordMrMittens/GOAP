@@ -80,7 +80,6 @@ public class NPCController : MonoBehaviour
         }
         if (actionQueue != null && actionQueue.Count == 0)
         {
-            Debug.Log("DeletingPlanner");
             DeletePlanner();
         }
         if (actionQueue != null && actionQueue.Count > 0)

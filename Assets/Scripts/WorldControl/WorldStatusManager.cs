@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WorldStatusManager : MonoBehaviour
 {
+    public static WorldStatusManager WSMInstance;
     [SerializeField] GameObject sun;
     [SerializeField] GameObject moon;
     public float timeOfDay;
@@ -17,6 +18,9 @@ public class WorldStatusManager : MonoBehaviour
     [SerializeField] float temperatureDeviation;
     public bool isDark;
     // Start is called before the first frame update
+    private void Awake() {
+        WSMInstance = this;
+    }
     void Start()
     {
         UpdateDayNightCycle();

@@ -13,6 +13,7 @@ public class ActionDepositDrink : Actions
         if (target.GetComponent<ContainerObject>().DepositObject(relatedItemIfAvailable))
         {
             _nPCController.nPCInventory.RemoveObject(relatedItemIfAvailable);
+            _nPCController.beliefs.RemoveState($"HasNo{relatedItemIfAvailable}Stored");
         }
     return true;
     }
