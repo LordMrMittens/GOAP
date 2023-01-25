@@ -10,10 +10,11 @@ public class ActionCheckForStock : Actions
     }
     public override bool PostPerform(NPCController _nPCController)
     {
-        if (target.GetComponent<ContainerObject>().DepositObject(relatedItemIfAvailable))
+        if (!target.GetComponent<ContainerObject>().storedObjects.Contains(relatedItemIfAvailable))
         {
             _nPCController.beliefs.AddSingleState($"ShopHasNo{relatedItemIfAvailable}Stored", 0);
         }
+        _nPCController.beliefs.RemoveState($"ShouldCheckStock");
         return true;
     }
 }
