@@ -13272,13 +13272,14 @@ MonoBehaviour:
   goalsRelatedTo:
   - Drink
   defaultCost: 0
-  cost: 1
-  target: {fileID: 0}
-  freeTargets: []
-  targetsInUse: []
   defaultTarget: {fileID: 2198221440028808242}
   targetTag: 
   duration: 0
+  maxOwners: 1
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 9161036148303679534}
+  activatingAction: 1
+  relatedItemIfAvailable: Drink
   preConditions:
   - key: AtBar
     value: 0
@@ -13290,12 +13291,6 @@ MonoBehaviour:
   - key: HasDrink
     value: 0
     carryOver: 1
-  maxOwners: 1
-  currentOwners: []
-  defaultOwner: {fileID: 0}
-  activatingAction: 1
-  relatedItemIfAvailable: Drink
-  containerUsed: {fileID: 9161036148303679534}
 --- !u!114 &4336178995255889473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13312,13 +13307,14 @@ MonoBehaviour:
   goalsRelatedTo:
   - Food
   defaultCost: 0
-  cost: 1
-  target: {fileID: 0}
-  freeTargets: []
-  targetsInUse: []
   defaultTarget: {fileID: 2198221440028808242}
   targetTag: 
   duration: 0
+  maxOwners: 1
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 9161036148303679534}
+  activatingAction: 1
+  relatedItemIfAvailable: Food
   preConditions:
   - key: AtBar
     value: 0
@@ -13330,12 +13326,6 @@ MonoBehaviour:
   - key: HasFood
     value: 0
     carryOver: 1
-  maxOwners: 1
-  currentOwners: []
-  defaultOwner: {fileID: 0}
-  activatingAction: 1
-  relatedItemIfAvailable: Food
-  containerUsed: {fileID: 9161036148303679534}
 --- !u!114 &5182823575659468986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13353,13 +13343,14 @@ MonoBehaviour:
   - Food
   - Drink
   defaultCost: 0
-  cost: 1
-  target: {fileID: 0}
-  freeTargets: []
-  targetsInUse: []
   defaultTarget: {fileID: 3563500452820289342}
   targetTag: PubBar
   duration: 0
+  maxOwners: 1
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 0}
+  activatingAction: 0
+  relatedItemIfAvailable: 
   preConditions:
   - key: AtPub
     value: 0
@@ -13371,12 +13362,6 @@ MonoBehaviour:
   - key: HasOrdered
     value: 0
     carryOver: 1
-  maxOwners: 1
-  currentOwners: []
-  defaultOwner: {fileID: 0}
-  activatingAction: 0
-  relatedItemIfAvailable: 
-  containerUsed: {fileID: 0}
 --- !u!114 &3211523866079965505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13394,13 +13379,14 @@ MonoBehaviour:
   - Food
   - Drink
   defaultCost: 0
-  cost: 1
-  target: {fileID: 0}
-  freeTargets: []
-  targetsInUse: []
   defaultTarget: {fileID: 0}
   targetTag: PubTable
   duration: 0
+  maxOwners: 1
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 0}
+  activatingAction: 0
+  relatedItemIfAvailable: 
   preConditions:
   - key: HasOrdered
     value: 0
@@ -13409,12 +13395,6 @@ MonoBehaviour:
   - key: AtTable
     value: 0
     carryOver: 0
-  maxOwners: 1
-  currentOwners: []
-  defaultOwner: {fileID: 0}
-  activatingAction: 0
-  relatedItemIfAvailable: 
-  containerUsed: {fileID: 0}
 --- !u!1 &3762754417036938877
 GameObject:
   m_ObjectHideFlags: 0
@@ -21595,6 +21575,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 456487276162349648}
+  - component: {fileID: 6215082364427580620}
+  - component: {fileID: 5764285946847562318}
+  - component: {fileID: 66718813837245482}
+  - component: {fileID: 5503651506507847839}
+  - component: {fileID: 5046005539198458294}
+  - component: {fileID: 8658119334484157118}
   m_Layer: 0
   m_Name: PubJobPoint
   m_TagString: Untagged
@@ -21617,6 +21603,201 @@ Transform:
   m_Father: {fileID: 2944324583867805589}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6215082364427580620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544054778784658295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 601368241b5ea7640b7a92726a67c7a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Go To Pub
+  goalsRelatedTo:
+  - PubJob
+  defaultCost: 1
+  defaultTarget: {fileID: 6544054778784658295}
+  targetTag: 
+  duration: 0
+  maxOwners: 1
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 0}
+  activatingAction: 0
+  relatedItemIfAvailable: 
+  preConditions: []
+  actionResults:
+  - key: AtPub
+    value: 0
+    carryOver: 0
+--- !u!114 &5764285946847562318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544054778784658295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52441cb736c1f764b93e0d838e94d1bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Tend To Pub
+  goalsRelatedTo:
+  - PubJob
+  defaultCost: 1
+  defaultTarget: {fileID: 0}
+  targetTag: 
+  duration: 0
+  maxOwners: 1
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 0}
+  activatingAction: 1
+  relatedItemIfAvailable: 
+  preConditions:
+  - key: AtPub
+    value: 0
+    carryOver: 0
+  actionResults:
+  - key: IsWorking
+    value: 0
+    carryOver: 1
+--- !u!114 &66718813837245482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544054778784658295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a706c8bfd1f6b479cf904be7627ba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Check For Drink Stock
+  goalsRelatedTo:
+  - PubJob
+  defaultCost: 1
+  defaultTarget: {fileID: 2198221440028808242}
+  targetTag: 
+  duration: 0
+  maxOwners: 1
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 9161036148303679534}
+  activatingAction: 1
+  relatedItemIfAvailable: Drink
+  preConditions:
+  - key: IsWorking
+    value: 0
+    carryOver: 0
+  actionResults:
+  - key: CheckedDrinkStock
+    value: 0
+    carryOver: 1
+--- !u!114 &5503651506507847839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544054778784658295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a706c8bfd1f6b479cf904be7627ba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Check For Food Stock
+  goalsRelatedTo:
+  - PubJob
+  defaultCost: 1
+  defaultTarget: {fileID: 0}
+  targetTag: 
+  duration: 0
+  maxOwners: 1
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 9161036148303679534}
+  activatingAction: 1
+  relatedItemIfAvailable: 
+  preConditions:
+  - key: IsWorking
+    value: 0
+    carryOver: 0
+  actionResults:
+  - key: CheckedFoodStock
+    value: 0
+    carryOver: 1
+--- !u!114 &5046005539198458294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544054778784658295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8acaf0a448032c48a4487afff95eeee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Restock Drink
+  goalsRelatedTo:
+  - PubJob
+  defaultCost: 1
+  defaultTarget: {fileID: 2198221440028808242}
+  targetTag: 
+  duration: 2
+  maxOwners: 1
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 0}
+  activatingAction: 1
+  relatedItemIfAvailable: Drink
+  preConditions:
+  - key: HasDrink
+    value: 0
+    carryOver: 0
+  - key: AtPub
+    value: 0
+    carryOver: 0
+  actionResults:
+  - key: RestockedJobDrink
+    value: 0
+    carryOver: 0
+--- !u!114 &8658119334484157118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544054778784658295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 039e0aa0ad5f3ff49b6cceab9514f00b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: RestockFood
+  goalsRelatedTo:
+  - PubJob
+  defaultCost: 1
+  defaultTarget: {fileID: 2198221440028808242}
+  targetTag: 
+  duration: 2
+  maxOwners: 1
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 0}
+  activatingAction: 1
+  relatedItemIfAvailable: Food
+  preConditions:
+  - key: HasFood
+    value: 0
+    carryOver: 0
+  - key: AtPub
+    value: 0
+    carryOver: 0
+  actionResults:
+  - key: RestockedJobFood
+    value: 0
+    carryOver: 0
 --- !u!1 &6586456834114462017
 GameObject:
   m_ObjectHideFlags: 0
@@ -21666,24 +21847,19 @@ MonoBehaviour:
   - Food
   - Drink
   defaultCost: 0
-  cost: 1
-  target: {fileID: 0}
-  freeTargets: []
-  targetsInUse: []
   defaultTarget: {fileID: 6586456834114462017}
   targetTag: Pub
   duration: 0
+  maxOwners: 8
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 0}
+  activatingAction: 0
+  relatedItemIfAvailable: 
   preConditions: []
   actionResults:
   - key: AtPub
     value: 0
     carryOver: 0
-  maxOwners: 8
-  currentOwners: []
-  defaultOwner: {fileID: 0}
-  activatingAction: 0
-  relatedItemIfAvailable: 
-  containerUsed: {fileID: 0}
 --- !u!1 &6643496769859806870
 GameObject:
   m_ObjectHideFlags: 0

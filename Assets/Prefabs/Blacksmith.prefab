@@ -3448,7 +3448,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2944324583867805589}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5160581604604111869
 MonoBehaviour:
@@ -12657,6 +12657,166 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!1 &1520955016766573515
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6016994743643316734}
+  - component: {fileID: 5743815816270827043}
+  - component: {fileID: 6811423848589364377}
+  - component: {fileID: 2527640238189404144}
+  - component: {fileID: 8317511378961684919}
+  m_Layer: 0
+  m_Name: BlacksmithJobPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6016994743643316734
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520955016766573515}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 7.53, y: 0.37, z: 2.56}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2944324583867805589}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5743815816270827043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520955016766573515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 601368241b5ea7640b7a92726a67c7a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Go To Blacksmith
+  goalsRelatedTo:
+  - BlacksmithJob
+  defaultCost: 1
+  defaultTarget: {fileID: 1520955016766573515}
+  targetTag: 
+  duration: 0
+  maxOwners: 1
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 0}
+  activatingAction: 0
+  relatedItemIfAvailable: 
+  preConditions: []
+  actionResults:
+  - key: AtBlacksmith
+    value: 0
+    carryOver: 0
+--- !u!114 &6811423848589364377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520955016766573515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52441cb736c1f764b93e0d838e94d1bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Tend To Smithy
+  goalsRelatedTo:
+  - BlacksmithJob
+  defaultCost: 1
+  defaultTarget: {fileID: 0}
+  targetTag: 
+  duration: 0
+  maxOwners: 1
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 0}
+  activatingAction: 1
+  relatedItemIfAvailable: 
+  preConditions:
+  - key: AtBlacksmith
+    value: 0
+    carryOver: 0
+  actionResults:
+  - key: IsWorking
+    value: 0
+    carryOver: 1
+--- !u!114 &2527640238189404144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520955016766573515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a706c8bfd1f6b479cf904be7627ba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Check For Coal Stock
+  goalsRelatedTo:
+  - BlacksmithJob
+  defaultCost: 1
+  defaultTarget: {fileID: 6479170669016162619}
+  targetTag: 
+  duration: 0
+  maxOwners: 1
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 8224451293326630926}
+  activatingAction: 1
+  relatedItemIfAvailable: Coal
+  preConditions:
+  - key: IsWorking
+    value: 0
+    carryOver: 0
+  actionResults:
+  - key: CheckedCoalStock
+    value: 0
+    carryOver: 1
+--- !u!114 &8317511378961684919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520955016766573515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a706c8bfd1f6b479cf904be7627ba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Check For Metal lStock
+  goalsRelatedTo:
+  - BlacksmithJob
+  defaultCost: 1
+  defaultTarget: {fileID: 6479170669016162619}
+  targetTag: 
+  duration: 0
+  maxOwners: 1
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 8224451293326630926}
+  activatingAction: 1
+  relatedItemIfAvailable: Metal
+  preConditions:
+  - key: IsWorking
+    value: 0
+    carryOver: 0
+  actionResults:
+  - key: CheckedMetalStock
+    value: 0
+    carryOver: 1
 --- !u!1 &1849962375016024419
 GameObject:
   m_ObjectHideFlags: 0
@@ -17703,11 +17863,11 @@ Transform:
   m_Children:
   - {fileID: 2944324583144301826}
   - {fileID: 6373974629588538723}
-  - {fileID: 6842202718072043989}
   - {fileID: 7973718418109624024}
   - {fileID: 4513055312975226867}
   - {fileID: 1717432759013487736}
   - {fileID: 521285678586796547}
+  - {fileID: 6016994743643316734}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -27599,7 +27759,7 @@ Transform:
   - {fileID: 4546643619893668975}
   - {fileID: 5516598200566849129}
   m_Father: {fileID: 2944324583867805589}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2861388250546967423
 MonoBehaviour:
@@ -31605,6 +31765,7 @@ GameObject:
   - component: {fileID: 2441040365458404236}
   - component: {fileID: 4972557004535388827}
   - component: {fileID: 6629094846430616451}
+  - component: {fileID: 8224451293326630926}
   m_Layer: 0
   m_Name: CoalBox
   m_TagString: Untagged
@@ -31645,7 +31806,7 @@ Transform:
   - {fileID: 6483115590139540115}
   - {fileID: 8895370214322996188}
   m_Father: {fileID: 2944324583867805589}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2222353484056418080
 MonoBehaviour:
@@ -35311,6 +35472,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &8224451293326630926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6479170669016162619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ce35516635fe5e47809e8e5eaa6674a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeOfObjectsContained:
+  - Coal
+  - Metal
+  maxNumberOfItems: 20
+  numberOfObjectsToAdd: 5
+  storedObjects: []
 --- !u!1 &6495443725393390161
 GameObject:
   m_ObjectHideFlags: 0
@@ -35719,24 +35898,19 @@ MonoBehaviour:
   - Job
   - FILL THIS PROPERLY
   defaultCost: 1
-  cost: 1
-  target: {fileID: 0}
-  freeTargets: []
-  targetsInUse: []
   defaultTarget: {fileID: 6586456834114462017}
   targetTag: 
   duration: 0
+  maxOwners: 1
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 0}
+  activatingAction: 0
+  relatedItemIfAvailable: 
   preConditions: []
   actionResults:
   - key: AtBlacksmith
     value: 0
     carryOver: 0
-  maxOwners: 1
-  currentOwners: []
-  defaultOwner: {fileID: 0}
-  activatingAction: 0
-  relatedItemIfAvailable: 
-  containerUsed: {fileID: 0}
 --- !u!1 &6715300380218945714
 GameObject:
   m_ObjectHideFlags: 0
@@ -35804,7 +35978,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2944324583867805589}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &3169170653746660706
 MonoBehaviour:
@@ -39198,37 +39372,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!1 &7202391109514973031
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6842202718072043989}
-  m_Layer: 0
-  m_Name: BlacksmithJobPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6842202718072043989
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7202391109514973031}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.401, y: 0.37, z: 2.57}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2944324583867805589}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7241895909494614678
 GameObject:
   m_ObjectHideFlags: 0

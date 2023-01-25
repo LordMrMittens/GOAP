@@ -40867,7 +40867,7 @@ GameObject:
   - component: {fileID: 1511698375032644485}
   - component: {fileID: 4372192372978561819}
   - component: {fileID: 8436145513691480243}
-  - component: {fileID: 8698073283536632008}
+  - component: {fileID: 8344273254294908068}
   m_Layer: 0
   m_Name: MarketJobPoint
   m_TagString: Untagged
@@ -41047,10 +41047,10 @@ MonoBehaviour:
     value: 0
     carryOver: 0
   actionResults:
-  - key: RestockedMarketDrink
+  - key: RestockedJobDrink
     value: 0
     carryOver: 0
---- !u!114 &8698073283536632008
+--- !u!114 &8344273254294908068
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41059,7 +41059,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7202391109514973031}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8acaf0a448032c48a4487afff95eeee, type: 3}
+  m_Script: {fileID: 11500000, guid: 039e0aa0ad5f3ff49b6cceab9514f00b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   actionName: Restock Food
@@ -41082,9 +41082,9 @@ MonoBehaviour:
     value: 0
     carryOver: 0
   actionResults:
-  - key: RestockedMarketFood
+  - key: RestockedJobFood
     value: 0
-    carryOver: 0
+    carryOver: 1
 --- !u!1 &7211320298741271842
 GameObject:
   m_ObjectHideFlags: 0
