@@ -8,7 +8,7 @@ public class BaseJobModule : MonoBehaviour
     [SerializeField] int shiftEnd;
     [SerializeField] bool nightShift = false;
     public NPCController nPCController{get ; set;}
-    public bool isAtWork {get ; set;}
+    public bool isAtWork ;
     protected virtual void Start()
     {
         nPCController = GetComponent<NPCController>();

@@ -7,7 +7,7 @@ public class DebugUI : MonoBehaviour
 {
 
     public Text states;
-    public TestCharacter person;
+    public BaseCharacter person;
 
     void LateUpdate() {
 

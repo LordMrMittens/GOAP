@@ -14,7 +14,8 @@ public class JobModuleShopKeeper : BaseJobModule
         {
             if (stockCheckTimer > stockCheckFrequency)
             {
-                nPCController.beliefs.AddSingleState($"ShouldCheckStock", 0);
+                nPCController.beliefs.AddSingleState($"ShouldCheckFoodStock", 0);
+                nPCController.beliefs.AddSingleState($"ShouldCheckDrinkStock", 0);
                 stockCheckTimer = 0;
             }
             stockCheckTimer += Time.deltaTime;

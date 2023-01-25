@@ -14,7 +14,8 @@ public class ActionCheckForStock : Actions
         {
             _nPCController.beliefs.AddSingleState($"ShopHasNo{relatedItemIfAvailable}Stored", 0);
         }
-        _nPCController.beliefs.RemoveState($"ShouldCheckStock");
+        _nPCController.beliefs.RemoveState($"ShouldCheck{relatedItemIfAvailable}Stock");
+        Debug.Log($"Checked for {relatedItemIfAvailable}  Stock");
         return true;
     }
 }

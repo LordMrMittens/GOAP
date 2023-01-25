@@ -14,6 +14,8 @@ public class ActionDepositDrink : Actions
         {
             _nPCController.nPCInventory.RemoveObject(relatedItemIfAvailable);
             _nPCController.beliefs.RemoveState($"HasNo{relatedItemIfAvailable}Stored");
+            _nPCController.beliefs.RemoveState($"ShopHasNo{relatedItemIfAvailable}Stored");
+
         }
     return true;
     }

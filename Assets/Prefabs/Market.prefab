@@ -40967,7 +40967,7 @@ MonoBehaviour:
   goalsRelatedTo:
   - MarketJob
   defaultCost: 1
-  defaultTarget: {fileID: 7202391109514973031}
+  defaultTarget: {fileID: 6586456834114462017}
   targetTag: 
   duration: 0
   maxOwners: 1
@@ -40999,7 +40999,7 @@ MonoBehaviour:
   goalsRelatedTo:
   - MarketJob
   defaultCost: 1
-  defaultTarget: {fileID: 7202391109514973031}
+  defaultTarget: {fileID: 6586456834114462017}
   targetTag: 
   duration: 0
   maxOwners: 1
