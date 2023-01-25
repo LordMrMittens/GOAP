@@ -50,7 +50,7 @@ public class NPCController : MonoBehaviour
     public bool canPlan = true;
     public List<SubGoal> failedGoalsList = new List<SubGoal>();
     float failedTaskListResetTimer = 0;
-    float failedTaskListResetFrequency = 3;
+    float failedTaskListResetFrequency = Mathf.Infinity;
 
     protected virtual void Start()
     {
@@ -294,9 +294,10 @@ public class NPCController : MonoBehaviour
             }
         }
 
-        goals.Add(subGoalToAdd, 5); //what is the number? to eliminate queue and potentially crashing put this inside the canplan check
+         
         if (canPlan)
         {
+            goals.Add(subGoalToAdd, 5);//what is the number? to eliminate queue and potentially crashing put this inside the canplan check
             CreatePlan();
         }
 

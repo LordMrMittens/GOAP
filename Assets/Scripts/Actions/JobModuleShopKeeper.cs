@@ -7,6 +7,7 @@ public class JobModuleShopKeeper : BaseJobModule
     [SerializeField] float stockCheckTimer;
     [SerializeField] float stockCheckFrequency;
 
+
     protected override void Update()
     {
         base.Update();

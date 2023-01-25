@@ -40972,7 +40972,7 @@ MonoBehaviour:
   duration: 0
   maxOwners: 1
   defaultOwner: {fileID: 0}
-  containerUsed: {fileID: 4117095977283836253}
+  containerUsed: {fileID: 0}
   activatingAction: 1
   relatedItemIfAvailable: Food
   preConditions:
@@ -41004,7 +41004,7 @@ MonoBehaviour:
   duration: 0
   maxOwners: 1
   defaultOwner: {fileID: 0}
-  containerUsed: {fileID: 4117095977283836253}
+  containerUsed: {fileID: 0}
   activatingAction: 1
   relatedItemIfAvailable: Drink
   preConditions:

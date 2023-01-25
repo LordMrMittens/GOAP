@@ -16,7 +16,6 @@ public class BasicNeedModule : MonoBehaviour
     protected virtual void Start()
     {
         currentResource = Random.Range(minResource + randomnessOffset, maxResource-randomnessOffset);
-        Debug.Log(currentResource);
     }
 
     public virtual void ConsumeResource(float value)

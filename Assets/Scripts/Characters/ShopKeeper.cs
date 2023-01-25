@@ -50,18 +50,17 @@ public class ShopKeeper : BaseCharacter
     }
     public void CheckFoodStocks()
     {
-        AddSubGoal("CheckedFoodStock", 2, true, jobGoalRelatedTo);
-
+        AddSubGoal("CheckedFoodStock", 0, true, jobGoalRelatedTo);
     }
     public void CheckDrinkStocks()
     {
-        AddSubGoal("CheckedDrinkStock", 2, true, jobGoalRelatedTo);
+        AddSubGoal("CheckedDrinkStock", 0, true, jobGoalRelatedTo);
     }
     public void RestockStoreDrink()
     {
-        AddSubGoal("RestockedJobDrink", 3, true, jobGoalRelatedTo);
+        AddSubGoal("RestockedJobDrink", 0, true, jobGoalRelatedTo);
     }
     public void RestockStoreFood(){
-        AddSubGoal("RestockedJobFood", 3, true, jobGoalRelatedTo);
+        AddSubGoal("RestockedJobFood", 0, true, jobGoalRelatedTo);
     }
 }

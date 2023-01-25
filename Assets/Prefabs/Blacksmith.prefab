@@ -12774,7 +12774,7 @@ MonoBehaviour:
   duration: 0
   maxOwners: 1
   defaultOwner: {fileID: 0}
-  containerUsed: {fileID: 8224451293326630926}
+  containerUsed: {fileID: 0}
   activatingAction: 1
   relatedItemIfAvailable: Coal
   preConditions:
@@ -12806,7 +12806,7 @@ MonoBehaviour:
   duration: 0
   maxOwners: 1
   defaultOwner: {fileID: 0}
-  containerUsed: {fileID: 8224451293326630926}
+  containerUsed: {fileID: 0}
   activatingAction: 1
   relatedItemIfAvailable: Metal
   preConditions:

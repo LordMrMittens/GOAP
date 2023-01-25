@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GoToHome : Actions
 {
-    // Start is called before the first frame update
     public override bool PrePerform()
     {
         return true;

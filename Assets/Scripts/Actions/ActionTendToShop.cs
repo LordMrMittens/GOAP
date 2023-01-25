@@ -10,6 +10,7 @@ public class ActionTendToShop : Actions
     }
     public override bool PostPerform(NPCController _nPCController)
     {
+        _nPCController.canPlan = true;
         return true;
     }
 }
