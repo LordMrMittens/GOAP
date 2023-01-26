@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class JobModuleShopKeeper : BaseJobModule
 {
-    [SerializeField] float stockCheckTimer;
+    float stockCheckTimer;
     [SerializeField] float stockCheckFrequency;
 
 
