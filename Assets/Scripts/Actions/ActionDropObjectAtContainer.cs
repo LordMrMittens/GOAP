@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ActionDropObjectAtContainer : Actions
 {
+    [SerializeField] bool dropAllObjects = false;
     public override bool PrePerform()
     {
 
@@ -11,10 +12,35 @@ public class ActionDropObjectAtContainer : Actions
     }
     public override bool PostPerform(NPCController _nPCController)
     {
-        if (target.GetComponent<ContainerObject>().DepositObject(relatedItemIfAvailable))
+        if (dropAllObjects)
         {
-            _nPCController.nPCInventory.RemoveObject(relatedItemIfAvailable);
+            if (target.GetComponent<ContainerObject>().DepositObject(relatedItemIfAvailable))
+            {
+                List<string> itemsInInventory = new List<string>();
+
+                foreach (string item in _nPCController.nPCInventory.itemsEquipped)
+                {
+                    if (item == relatedItemIfAvailable)
+                    {
+                        itemsInInventory.Add(item);
+                    }
+                }
+                for (int i = 0; i < itemsInInventory.Count; i++)
+                {
+                    target.GetComponent<ContainerObject>().DepositObject(relatedItemIfAvailable);
+                    _nPCController.nPCInventory.RemoveObject(relatedItemIfAvailable);
+                }
+            }
         }
-    return true;
+        else
+        {
+            if (target.GetComponent<ContainerObject>().DepositObject(relatedItemIfAvailable))
+            {
+                _nPCController.nPCInventory.RemoveObject(relatedItemIfAvailable);
+            }
+        }
+        return true;
     }
 }
+
+

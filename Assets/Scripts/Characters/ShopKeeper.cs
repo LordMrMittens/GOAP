@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ShopKeeper : BaseCharacter
 {
-    [SerializeField] string jobGoalRelatedTo; // eg MarketJob
-    // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class BaseCharacter : NPCController
 {
-
+    public string jobGoalRelatedTo; // eg MarketJob
     protected override void Start()
     {
         base.Start();
