@@ -108,33 +108,40 @@ public class NPCController : MonoBehaviour
 
     private void ExecutePlan()
     {
-        
+
         currentAction = actionQueue.Dequeue();
         if (currentAction.PrePerform())
         {
-            if (currentAction.defaultTarget != null) //might have to add some else ifs?
+            if (currentAction.goalsRelatedTo.Contains("Idle"))
             {
-                target = currentAction.defaultTarget;
+                target = currentAction.freeTargets[Random.Range(0, currentAction.freeTargets.Count)];
             }
-            if (currentAction.target != null)
+            else
             {
-                target = currentAction.target;
-            }
-            if (currentAction.freeTargets.Count > 0)
-            {
-                float bestDistance = Mathf.Infinity;
-                int bestTarget = 0;
-                for (int i = 0; i < currentAction.freeTargets.Count; i++)
+                if (currentAction.defaultTarget != null) //might have to add some else ifs?
                 {
-                    float distance = Vector3.Distance(transform.position, currentAction.freeTargets[i].transform.position);
-                    if (distance < bestDistance)
-                    {
-                        bestDistance = distance;
-                        bestTarget = i;
-                    }
+                    target = currentAction.defaultTarget;
                 }
-                target = currentAction.freeTargets[bestTarget];
-                currentAction.RemoveAvailableTarget(currentAction.freeTargets[bestTarget]);
+                if (currentAction.target != null)
+                {
+                    target = currentAction.target;
+                }
+                if (currentAction.freeTargets.Count > 0)
+                {
+                    float bestDistance = Mathf.Infinity;
+                    int bestTarget = 0;
+                    for (int i = 0; i < currentAction.freeTargets.Count; i++)
+                    {
+                        float distance = Vector3.Distance(transform.position, currentAction.freeTargets[i].transform.position);
+                        if (distance < bestDistance)
+                        {
+                            bestDistance = distance;
+                            bestTarget = i;
+                        }
+                    }
+                    target = currentAction.freeTargets[bestTarget];
+                    currentAction.RemoveAvailableTarget(currentAction.freeTargets[bestTarget]);
+                }
             }
             agent.SetDestination(target.transform.position);
         }

@@ -12,6 +12,7 @@ TagManager:
   - NPC
   - PubBar
   - PubTable
+  - IdlingLocation
   layers:
   - Default
   - TransparentFX

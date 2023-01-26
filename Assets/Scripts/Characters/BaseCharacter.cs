@@ -9,6 +9,11 @@ public class BaseCharacter : NPCController
         base.Start();
     }
 
+    public void BeIdle()
+    {
+        AddSubGoal("Wander", 0, true, "Idle");
+    }
+
     public void GetHungry()
     {
         beliefs.AddSingleState("IsHungry", 0);

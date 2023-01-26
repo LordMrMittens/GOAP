@@ -1035,6 +1035,7 @@ MonoBehaviour:
   nPCInventory: {fileID: 6860364908005982067}
   tickFrequency: 1
   canPlan: 1
+  jobGoalRelatedTo: 
 --- !u!114 &-6781447729628313691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1053,6 +1054,7 @@ MonoBehaviour:
   tirednessModule: {fileID: 4359241635176777236}
   nPCController: {fileID: -4578944316393918606}
   tickFrequency: 1
+  jobModule: {fileID: 0}
 --- !u!114 &4359241635176777236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1153,6 +1155,7 @@ GameObject:
   - component: {fileID: 5502869304871599163}
   - component: {fileID: 5331453730778557672}
   - component: {fileID: 247091818369783937}
+  - component: {fileID: 1805352962889116187}
   m_Layer: 0
   m_Name: ActionManager
   m_TagString: Untagged
@@ -1191,13 +1194,14 @@ MonoBehaviour:
   goalsRelatedTo:
   - Rest
   defaultCost: 1
-  cost: 1
-  target: {fileID: 0}
-  freeTargets: []
-  targetsInUse: []
   defaultTarget: {fileID: 0}
   targetTag: 
   duration: 0
+  maxOwners: 1
+  defaultOwner: {fileID: -4578944316393918606}
+  containerUsed: {fileID: 0}
+  activatingAction: 1
+  relatedItemIfAvailable: 
   preConditions:
   - key: IsTired
     value: 0
@@ -1209,12 +1213,6 @@ MonoBehaviour:
   - key: IsRested
     value: 0
     carryOver: 1
-  maxOwners: 1
-  currentOwners: []
-  defaultOwner: {fileID: -4578944316393918606}
-  activatingAction: 1
-  relatedItemIfAvailable: 
-  containerUsed: {fileID: 0}
 --- !u!114 &5331453730778557672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1231,13 +1229,14 @@ MonoBehaviour:
   goalsRelatedTo:
   - Food
   defaultCost: 1
-  cost: 1
-  target: {fileID: 0}
-  freeTargets: []
-  targetsInUse: []
   defaultTarget: {fileID: 0}
   targetTag: 
   duration: 0
+  maxOwners: 1
+  defaultOwner: {fileID: -4578944316393918606}
+  containerUsed: {fileID: 0}
+  activatingAction: 1
+  relatedItemIfAvailable: Food
   preConditions:
   - key: IsHungry
     value: 0
@@ -1252,12 +1251,6 @@ MonoBehaviour:
   - key: HasEaten
     value: 0
     carryOver: 1
-  maxOwners: 1
-  currentOwners: []
-  defaultOwner: {fileID: -4578944316393918606}
-  activatingAction: 1
-  relatedItemIfAvailable: Food
-  containerUsed: {fileID: 0}
 --- !u!114 &247091818369783937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1274,13 +1267,14 @@ MonoBehaviour:
   goalsRelatedTo:
   - Drink
   defaultCost: 1
-  cost: 1
-  target: {fileID: 0}
-  freeTargets: []
-  targetsInUse: []
   defaultTarget: {fileID: 0}
   targetTag: 
   duration: 2
+  maxOwners: 1
+  defaultOwner: {fileID: -4578944316393918606}
+  containerUsed: {fileID: 0}
+  activatingAction: 1
+  relatedItemIfAvailable: Drink
   preConditions:
   - key: IsThirsty
     value: 0
@@ -1295,12 +1289,35 @@ MonoBehaviour:
   - key: QuenchThirst
     value: 0
     carryOver: 1
-  maxOwners: 1
-  currentOwners: []
-  defaultOwner: {fileID: -4578944316393918606}
-  activatingAction: 1
-  relatedItemIfAvailable: Drink
+--- !u!114 &1805352962889116187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6327330763404635773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b83ef3c5f1d376c4a99abc829669d0da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Idle Wander
+  goalsRelatedTo:
+  - Idle
+  defaultCost: 1
+  defaultTarget: {fileID: 0}
+  targetTag: IdlingLocation
+  duration: 0
+  maxOwners: 100
+  defaultOwner: {fileID: 0}
   containerUsed: {fileID: 0}
+  activatingAction: 0
+  relatedItemIfAvailable: 
+  preConditions: []
+  actionResults:
+  - key: Wander
+    value: 0
+    carryOver: 0
 --- !u!1001 &1989731529363538473
 PrefabInstance:
   m_ObjectHideFlags: 0

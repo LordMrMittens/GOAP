@@ -13,6 +13,7 @@ public class NeedsManager : MonoBehaviour
     [SerializeField] float tickFrequency;
     public NPCInventory nPCInventory { get; private set; }
     public BasicNeedModule[] basicNeedModules {get; private set;}
+    public BaseJobModule jobModule;
 
     float tickTimer;
     bool canSee = true;
@@ -22,6 +23,7 @@ public class NeedsManager : MonoBehaviour
     {
         worldStatusManager = GameObject.FindObjectOfType<WorldStatusManager>();
         basicNeedModules = GetComponents<BasicNeedModule>();
+        jobModule = GetComponent<BaseJobModule>();
         nPCInventory = nPCController.nPCInventory;
     }
     void Update()
@@ -66,7 +68,12 @@ public class NeedsManager : MonoBehaviour
             }
             if(nPCController.beliefs.GetAllStates().ContainsKey("HasNoDrinkStored")){
                 nPCController.Invoke("RestockDrink", 0);
-                nPCController.hasGoal=true;
+                nPCController.hasGoal = true;
+            }
+            if (nPCController.goals.Count <= 0 && jobModule && !jobModule.isAtWork) //&& not insocial hours can remove first check when everyone has a job module
+            {
+                nPCController.Invoke("BeIdle", 0);
+                nPCController.hasGoal = true;
             }
             tickTimer = 0;
         }
