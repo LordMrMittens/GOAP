@@ -46,18 +46,18 @@ public class NeedsManager : MonoBehaviour
                 }
             }
             //TODO add some sort of priority system
-            if (nutritionModule.currentResource < nutritionModule.minResource)
+            if (nutritionModule.currentResource < nutritionModule.minResource && jobModule && !jobModule.isAtWork)
             {
                 nPCController.Invoke("GetHungry", 0);
                 nPCController.hasGoal=true;
                 //use  delegates instead??
             }
-            if (hydrationModule.currentResource < hydrationModule.minResource)
+            if (hydrationModule.currentResource < hydrationModule.minResource && jobModule && !jobModule.isAtWork) 
             {
                 nPCController.Invoke("GetThirsty", 0);
                 nPCController.hasGoal=true;
             }
-            if (tirednessModule.currentResource < tirednessModule.minResource)
+            if (tirednessModule.currentResource < tirednessModule.minResource  && jobModule && !jobModule.isAtWork)
             {
                 nPCController.Invoke("GetTired", 0);
                 nPCController.hasGoal=true;

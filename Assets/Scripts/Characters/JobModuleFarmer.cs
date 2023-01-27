@@ -7,7 +7,6 @@ public class JobModuleFarmer : BaseJobModule
  [SerializeField] int maxProductCarried;
  [SerializeField] string itemBeingFarmed;
  bool RecentlyWorked;
- 
  NPCInventory nPCInventory;
 
 

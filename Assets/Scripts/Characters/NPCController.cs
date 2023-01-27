@@ -209,6 +209,7 @@ public class NPCController : MonoBehaviour
                     RemoveUnusedActions(i);
 
                 }
+                Debug.Log($" {gameObject.name} has No Plan for {subGoal.Key.keyword}");
                 failedGoalsList.Add(subGoal.Key);
                 canPlan = true;
                 goals.Clear();
