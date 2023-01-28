@@ -10,28 +10,20 @@ public class BaseJobModule : MonoBehaviour
 
     public NPCController nPCController { get; set; }
     public bool isAtWork;
-    public float minimumJobDistance = 2;
-    public Transform jobLocation;
-    protected virtual void Start()
+
+    float callBackToWorkTimer = 10;
+    float timeOffWorkAllowed = 0;
+    protected virtual void Awake()
     {
         nPCController = GetComponent<NPCController>();
-    } 
+    }
     protected virtual void Update()
     {
         if (!nightShift)
         {
             if (WorldStatusManager.WSMInstance.timeOfDay > shiftStart && WorldStatusManager.WSMInstance.timeOfDay < shiftEnd)
             {
-                float distanceFromJob = Vector3.Distance(transform.position, jobLocation.transform.position);
-                if (distanceFromJob > minimumJobDistance)
-                {
-                    nPCController.beliefs.AddSingleState($"ShouldBeWorking", 0);
-                }
-                else
-                {
-                    nPCController.beliefs.RemoveState($"ShouldBeWorking");
-                }
-                isAtWork = true;
+                UpdateWorkStatus();
             }
             else
             {
@@ -41,19 +33,41 @@ public class BaseJobModule : MonoBehaviour
         }
         else if (WorldStatusManager.WSMInstance.timeOfDay > shiftStart || WorldStatusManager.WSMInstance.timeOfDay < shiftEnd)
         {
-            float distanceFromJob = Vector3.Distance(transform.position, jobLocation.transform.position);
-            if (distanceFromJob > minimumJobDistance)
-            { nPCController.beliefs.AddSingleState($"ShouldBeWorking", 0); }
-            else
-            {
-                nPCController.beliefs.RemoveState($"ShouldBeWorking");
-            }
-            isAtWork = true;
+            UpdateWorkStatus();
         }
         else
         {
             nPCController.beliefs.RemoveState($"ShouldBeWorking");
             isAtWork = false;
         }
+    }
+
+    private void UpdateWorkStatus()
+    {
+        List<string> goalsOfCurrentAction = new List<string>();
+        if (nPCController.currentAction)
+        {
+            for (int i = 0; i < nPCController.currentAction.goalsRelatedTo.Length; i++)
+            {
+                goalsOfCurrentAction.Add(nPCController.currentAction.goalsRelatedTo[i]);
+            }
+            if (!goalsOfCurrentAction.Contains(nPCController.jobGoalRelatedTo))
+            {
+                callBackToWorkTimer += Time.deltaTime;
+                if (callBackToWorkTimer > timeOffWorkAllowed)
+                {
+                    nPCController.beliefs.AddSingleState($"ShouldBeWorking", 0);
+                    timeOffWorkAllowed = 0;
+                }
+            }
+            else
+            {
+                nPCController.beliefs.RemoveState($"ShouldBeWorking");
+                timeOffWorkAllowed = 0;
+            }
+        } else{
+            nPCController.beliefs.AddSingleState($"ShouldBeWorking", 0);
+        }
+        isAtWork = true;
     }
 }

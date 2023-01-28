@@ -33,8 +33,6 @@ public class NPCController : MonoBehaviour
     public Queue<Actions> actionQueue;
     List<Actions> actionsInPlan = new List<Actions>();
     public Actions currentAction;
-    public Actions previousAction { get; private set; }
-    public GameObject previousTarget { get; private set; }
     public SubGoal currentGoal;
     public bool invoked = false;
 
@@ -46,11 +44,13 @@ public class NPCController : MonoBehaviour
     public float tickFrequency = 1f;
     public float tickCounter {get; set;}
 
+
     public bool hasGoal { get; set; }
     public bool canPlan = true;
     public List<SubGoal> failedGoalsList = new List<SubGoal>();
     float failedTaskListResetTimer = 0;
     float failedTaskListResetFrequency = Mathf.Infinity;
+    public string jobGoalRelatedTo; // eg MarketJob
 
     protected virtual void Start()
     {
@@ -58,9 +58,6 @@ public class NPCController : MonoBehaviour
     }
     void CompleteAction()
     {
-
-        previousAction = currentAction;
-        previousTarget = currentAction.target;
         currentAction.PostPerform(this);
         allAvailableActions.Remove(currentAction);
         currentAction.RemoveOwnership(this);
@@ -163,8 +160,6 @@ public class NPCController : MonoBehaviour
             RemoveUnusedActions(i);
 
         }
-        previousAction = null;
-        previousTarget=null;
         actionsInPlan.Clear();
         planner = null;
         hasGoal = false;

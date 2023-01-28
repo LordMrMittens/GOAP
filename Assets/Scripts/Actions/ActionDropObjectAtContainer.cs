@@ -27,9 +27,14 @@ public class ActionDropObjectAtContainer : Actions
                 }
                 for (int i = 0; i < itemsInInventory.Count; i++)
                 {
-                    target.GetComponent<ContainerObject>().DepositObject(relatedItemIfAvailable);
-                    _nPCController.nPCInventory.RemoveObject(relatedItemIfAvailable);
+                    if (target.GetComponent<ContainerObject>().DepositObject(relatedItemIfAvailable))
+                    {
+                        _nPCController.nPCInventory.RemoveObject(relatedItemIfAvailable);
+                    }
                 }
+                _nPCController.beliefs.RemoveState($"HasNo{relatedItemIfAvailable}Stored");
+                _nPCController.beliefs.RemoveState($"ShopHasNo{relatedItemIfAvailable}Stored");
+                return true;
             }
         }
         else
@@ -37,9 +42,12 @@ public class ActionDropObjectAtContainer : Actions
             if (target.GetComponent<ContainerObject>().DepositObject(relatedItemIfAvailable))
             {
                 _nPCController.nPCInventory.RemoveObject(relatedItemIfAvailable);
+                _nPCController.beliefs.RemoveState($"HasNo{relatedItemIfAvailable}Stored");
+                _nPCController.beliefs.RemoveState($"ShopHasNo{relatedItemIfAvailable}Stored");
+                return true;
             }
         }
-        return true;
+        return false;
     }
 }
 

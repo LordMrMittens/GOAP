@@ -25,7 +25,7 @@ public class ContainerObject : MonoBehaviour
     {
         if (typeOfObjectsContained.Contains(objectToAdd))
         {
-            if (storedObjects.Count + 1 <= maxNumberOfItems)
+            if (storedObjects.Count <= maxNumberOfItems)
             {
                 storedObjects.Add(objectToAdd);
                 return true;

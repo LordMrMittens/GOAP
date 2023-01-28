@@ -40866,8 +40866,6 @@ GameObject:
   - component: {fileID: 9037862027136245381}
   - component: {fileID: 1511698375032644485}
   - component: {fileID: 4372192372978561819}
-  - component: {fileID: 8436145513691480243}
-  - component: {fileID: 8344273254294908068}
   m_Layer: 0
   m_Name: MarketJobPoint
   m_TagString: Untagged
@@ -41013,76 +41011,6 @@ MonoBehaviour:
     carryOver: 0
   actionResults:
   - key: CheckedDrinkStock
-    value: 0
-    carryOver: 1
---- !u!114 &8436145513691480243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7202391109514973031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8acaf0a448032c48a4487afff95eeee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actionName: Restock Drink
-  goalsRelatedTo:
-  - MarketJob
-  defaultCost: 1
-  defaultTarget: {fileID: 6586456834114462017}
-  targetTag: 
-  duration: 2
-  maxOwners: 1
-  defaultOwner: {fileID: 0}
-  containerUsed: {fileID: 0}
-  activatingAction: 1
-  relatedItemIfAvailable: Drink
-  preConditions:
-  - key: HasDrink
-    value: 0
-    carryOver: 0
-  - key: AtMarket
-    value: 0
-    carryOver: 0
-  actionResults:
-  - key: RestockedJobDrink
-    value: 0
-    carryOver: 0
---- !u!114 &8344273254294908068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7202391109514973031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 039e0aa0ad5f3ff49b6cceab9514f00b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actionName: Restock Food
-  goalsRelatedTo:
-  - MarketJob
-  defaultCost: 1
-  defaultTarget: {fileID: 6586456834114462017}
-  targetTag: 
-  duration: 2
-  maxOwners: 1
-  defaultOwner: {fileID: 0}
-  containerUsed: {fileID: 0}
-  activatingAction: 1
-  relatedItemIfAvailable: Food
-  preConditions:
-  - key: HasFood
-    value: 0
-    carryOver: 0
-  - key: AtMarket
-    value: 0
-    carryOver: 0
-  actionResults:
-  - key: RestockedJobFood
     value: 0
     carryOver: 1
 --- !u!1 &7211320298741271842
