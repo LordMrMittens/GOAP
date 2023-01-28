@@ -70,7 +70,10 @@ public class Planner
         bool success = BuildGraph(start, leaves, doableActions, goal, _NPCTransform);
 
         if(!success){
-            Debug.Log($"No Plan");
+            foreach (KeyValuePair<string, int> failedGoal in goal)
+            {
+                Debug.Log($" {_NPCTransform.gameObject.name} has No Plan for {failedGoal.Key} with the keyword {_controller.currentGoal.keyword}");
+            }
             return null;
         }
         Node cheapest = null;

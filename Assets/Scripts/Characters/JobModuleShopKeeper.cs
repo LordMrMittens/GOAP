@@ -6,6 +6,7 @@ public class JobModuleShopKeeper : BaseJobModule
 {
     float stockCheckTimer;
     [SerializeField] float stockCheckFrequency;
+    [SerializeField] string[] stockItemsToCheck;
 
 
     protected override void Update()
@@ -15,8 +16,10 @@ public class JobModuleShopKeeper : BaseJobModule
         {
             if (stockCheckTimer > stockCheckFrequency)
             {
-                nPCController.beliefs.AddSingleState($"ShouldCheckFoodStock", 0);
-                nPCController.beliefs.AddSingleState($"ShouldCheckDrinkStock", 0);
+                foreach (string itemTocheckFor in stockItemsToCheck)
+                {
+                    nPCController.beliefs.AddSingleState($"ShouldCheck{itemTocheckFor}Stock", 0);
+                }
                 stockCheckTimer = 0;
             }
             stockCheckTimer += Time.deltaTime;

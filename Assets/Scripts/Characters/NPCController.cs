@@ -35,7 +35,7 @@ public class NPCController : MonoBehaviour
     public Actions currentAction;
     public Actions previousAction { get; private set; }
     public GameObject previousTarget { get; private set; }
-    SubGoal currentGoal;
+    public SubGoal currentGoal;
     public bool invoked = false;
 
     [SerializeField] float DistanceFromTarget = 1.3f;
@@ -209,7 +209,7 @@ public class NPCController : MonoBehaviour
                     RemoveUnusedActions(i);
 
                 }
-                Debug.Log($" {gameObject.name} has No Plan for {subGoal.Key.keyword}");
+                //Debug.Log($" {gameObject.name} has No Plan for {subGoal.Key.keyword}");
                 failedGoalsList.Add(subGoal.Key);
                 canPlan = true;
                 goals.Clear();
