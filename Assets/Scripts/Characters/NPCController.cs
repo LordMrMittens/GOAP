@@ -20,6 +20,7 @@ public class SubGoal
 
 public class NPCController : MonoBehaviour
 {
+    ExcelImporter excelImporter;
     public string SetGoal;
     public float worldSpeed = 1;
     NavMeshAgent agent;
@@ -54,8 +55,21 @@ public class NPCController : MonoBehaviour
 
     protected virtual void Start()
     {
+        AssignName();
         agent = GetComponent<NavMeshAgent>();
     }
+
+    private void AssignName()
+    {
+        excelImporter = FindObjectOfType<ExcelImporter>();
+        if (excelImporter.text.ContainsKey("Names"))
+        {
+            int randomName = Random.Range(0, excelImporter.text["Names"].Count);
+            this.gameObject.name = excelImporter.text["Names"][randomName];
+            excelImporter.text["Names"].RemoveAt(randomName);
+        }
+    }
+
     void CompleteAction()
     {
         currentAction.PostPerform(this);
