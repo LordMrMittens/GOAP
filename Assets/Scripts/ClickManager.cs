@@ -28,18 +28,21 @@ public class ClickManager : MonoBehaviour
         excelImporter = FindObjectOfType<ExcelImporter>();
         NPCController nPCController = selectedNPC.GetComponent<NPCController>();
         NeedsManager needsManager = selectedNPC.GetComponent<NeedsManager>();
-        BasicNeedModule mostNeedyStat = needsManager.ReturnLowestStat();
+        BasicNeedModule mostNeedyStat = needsManager.GetLowestStat();
+        TemperatureModule temperatureModule = needsManager.GetTemperatureModule();
         string commentary = "";
         if (mostNeedyStat != null)
         {
-           commentary = GenerateComentary(mostNeedyStat.resourceType);
+           commentary = GenerateComentaryOnNeeds(mostNeedyStat.resourceType);
         }
         needsManager.UpdateStatsSheet();
         nPCController.GetPlanInformation();
         StatusUI.statusUIInstance.UpdateDialogue(nPCController.gameObject.name, commentary);
         StatusUI.statusUIInstance.statsDisplay.SetActive(true);
     }
-        public string GenerateComentary(string keyword) 
+
+    // TODO MOVE ALL BELOW TO THEIR OWN CLASS
+        public string GenerateComentaryOnNeeds(string keyword) 
     {
         string dialogue = "Nothing to report";
         switch (keyword)
@@ -65,6 +68,29 @@ public class ClickManager : MonoBehaviour
         }
         return dialogue;
     }
+        void GenerateTemperatureCommentary(TemperatureModule _temperatureModule){
+
+        if(_temperatureModule.isWarming){
+            //its cold
+        } else{
+            //its hot
+        }
+
+        //check for jacket in inventory
+    }
+
+    void GenerateComentaryOnPlans()
+    {
+
+    }
+    void GenerateComentaryOnInventory()
+    {
+
+    }
+    void GenerateComentaryOnJob()
+    {
+
+    }
 
     private string GetDialogue(string dialogue, string keywordDialogue)
     {
@@ -78,4 +104,6 @@ public class ClickManager : MonoBehaviour
 
         return dialogue;
     }
+
+
 }

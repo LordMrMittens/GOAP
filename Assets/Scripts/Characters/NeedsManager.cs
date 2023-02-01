@@ -148,7 +148,10 @@ public class NeedsManager : MonoBehaviour
         return false;
     }
 
-    public BasicNeedModule ReturnLowestStat(){
+    public TemperatureModule GetTemperatureModule(){
+        return temperatureModule;
+    }
+    public BasicNeedModule GetLowestStat(){
         BasicNeedModule lowestModule = null;
         float lowestStat = Mathf.Infinity;
         if (basicNeedModules.Length > 0)
@@ -157,7 +160,7 @@ public class NeedsManager : MonoBehaviour
             {
                 if (module.currentResource < lowestStat)
                 {
-                    if (module.resourceType != "Temperature")
+                    if (module != temperatureModule)
                     {
                         lowestStat = module.currentResource;
                         lowestModule = module;
