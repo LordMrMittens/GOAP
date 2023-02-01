@@ -4,5 +4,9 @@ using UnityEngine;
 
 public class NutritionModule : BasicNeedModule
 {
-
+    protected override void Start()
+    {
+        base.Start();
+        resourceType = "Nutrition";
+    }
 }

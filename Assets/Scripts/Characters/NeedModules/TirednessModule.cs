@@ -6,8 +6,10 @@ using UnityEngine.AI;
 public class TirednessModule : BasicNeedModule
 {
     NavMeshAgent agent;
-    private void Start() {
+    protected override void Start() {
+        base.Start();
         agent = GetComponent<NavMeshAgent>();
+        resourceType = "Tiredness";
     }
     public override void ConsumeResource(float value)
     {

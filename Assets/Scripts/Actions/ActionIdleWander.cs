@@ -10,7 +10,6 @@ public class ActionIdleWander : Actions
     }
     public override bool PostPerform(NPCController _nPCController)
     {
-        Debug.Log("Completed Idling in action");
         return true;
     }
 }

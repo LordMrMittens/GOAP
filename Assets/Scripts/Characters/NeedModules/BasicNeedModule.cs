@@ -12,6 +12,8 @@ public class BasicNeedModule : MonoBehaviour
     public bool isCommonNeed;
     [SerializeField] float randomnessOffset;
     public bool hasResource;
+
+    public string resourceType {get; set;} // this is just used for the dialogue
     
     protected virtual void Start()
     {

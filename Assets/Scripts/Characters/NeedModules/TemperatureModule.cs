@@ -13,10 +13,12 @@ public class TemperatureModule : BasicNeedModule
     public bool isWarming;
     public bool isWearingAJacket;
     public float reportedTemperature;
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         currentTemperature = targetTemperature;
         isCommonNeed = false;
+        resourceType = "Temperature";
     }
 
    public bool AdjustTemperature(float value)

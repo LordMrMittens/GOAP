@@ -23,11 +23,13 @@ public class NeedsManager : MonoBehaviour
     {
         worldStatusManager = GameObject.FindObjectOfType<WorldStatusManager>();
         basicNeedModules = GetComponents<BasicNeedModule>();
+        
         jobModule = GetComponent<BaseJobModule>();
         nPCInventory = nPCController.nPCInventory;
     }
     void Update()
     {
+        
         tickTimer += Time.deltaTime;
         if (tickTimer > tickFrequency)
         {
@@ -78,7 +80,6 @@ public class NeedsManager : MonoBehaviour
             tickTimer = 0;
         }
     }
-
     private void ManageTemperature()
     {
         if (worldStatusManager != null)
@@ -131,16 +132,11 @@ public class NeedsManager : MonoBehaviour
         temperatureModule.isWearingAJacket = IsWearingJacket;
     }
     //create a public void where dialogue manager can get priorities and generate dialogue
-    public void GenerateComentary() //move this to a dialogue manager turn this into get priorities
-    {
-        string dialogue = "Testing dialogue";
-        StatusUI.statusUIInstance.UpdateDialogue(this.gameObject.name, dialogue);
 
-    }
     public void UpdateStatsSheet()
     {
         StatusUI.statusUIInstance.UpdateStatusWindow(basicNeedModules);
-        GenerateComentary(); //move this to a dialogue manager?
+         //move this to a dialogue manager?
     }
 
     public bool CheckForLight()
@@ -150,6 +146,31 @@ public class NeedsManager : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public BasicNeedModule ReturnLowestStat(){
+        BasicNeedModule lowestModule = null;
+        float lowestStat = Mathf.Infinity;
+        if (basicNeedModules.Length > 0)
+        {
+            foreach (BasicNeedModule module in basicNeedModules)
+            {
+                if (module.currentResource < lowestStat)
+                {
+                    if (module.resourceType != "Temperature")
+                    {
+                        lowestStat = module.currentResource;
+                        lowestModule = module;
+                    }
+                }
+            }
+        }
+        if (lowestModule != null)
+        {
+            Debug.Log(lowestModule.resourceType);
+            return lowestModule;
+        }
+        return null;
     }
 }
 
