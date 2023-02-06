@@ -55,7 +55,6 @@ public class JobModuleFarmer : BaseJobModule
                 }
                 else
                 {
-                    Debug.Log("Should not pickup product");
                     nPCController.beliefs.RemoveState($"ShouldPickProduct");
                     nPCController.beliefs.AddSingleState($"ShouldDepositProduct", 0);
                 }

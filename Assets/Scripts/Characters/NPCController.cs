@@ -71,7 +71,12 @@ public class NPCController : MonoBehaviour
     void CancelCurrentAction()
     {
         currentAction.RemoveOwnership(this);
-        allAvailableActions.Remove(currentAction);
+        foreach (Actions action in actionsInPlan)
+        {
+            action.RemoveOwnership(this);
+        }
+        allAvailableActions.Clear();
+        actionsInPlan.Clear();
         invoked = false;
     }
 
@@ -322,7 +327,7 @@ public class NPCController : MonoBehaviour
                 {
                     DeletePlanner();
                     CancelCurrentAction();
-                    //currentGoal=null;
+                    currentGoal=null;
                     goals.Clear();
                 }
             }
