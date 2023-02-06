@@ -167,7 +167,7 @@ public class NPCController : MonoBehaviour
 
     private void DeletePlanner()
     {
-        if (currentGoal.remove)
+        if (currentGoal !=null && currentGoal.remove)
         {
             goals.Remove(currentGoal);
         }
@@ -194,10 +194,12 @@ public class NPCController : MonoBehaviour
         foreach (KeyValuePair<SubGoal, int> subGoal in sortedGoals)
         {
             GetRelevantActions(relevantActions, AllActions, subGoal);
-            SetActionCosts(relevantActions);
+            SetActionCosts(relevantActions);   
+            currentGoal = subGoal.Key;       
             actionQueue = planner.Plan(relevantActions, subGoal.Key.subGoals, beliefs, this.transform, this);
             if (actionQueue != null)
             {
+                
                 actionsInPlan = actionQueue.ToList<Actions>();
                 foreach (Actions actionInPlan in actionsInPlan)
                 {
@@ -212,8 +214,6 @@ public class NPCController : MonoBehaviour
                     }
                 }
                 canPlan = false;
-                
-                currentGoal = subGoal.Key;
                 goals.Clear();
                 break;
             }
@@ -325,10 +325,10 @@ public class NPCController : MonoBehaviour
             {
                 if (cGoal.Value < value && !currentAction.activatingAction) //if the goals priority is higher than the previous goal priority then change goals
                 {
-                    DeletePlanner();
-                    CancelCurrentAction();
-                    currentGoal=null;
+                    currentGoal = null;
                     goals.Clear();
+                    CancelCurrentAction();
+                    DeletePlanner();
                 }
             }
         }

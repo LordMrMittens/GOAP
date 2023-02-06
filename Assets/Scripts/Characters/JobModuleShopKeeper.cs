@@ -24,5 +24,13 @@ public class JobModuleShopKeeper : BaseJobModule
             }
             stockCheckTimer += Time.deltaTime;
         }
+        else
+        {
+            foreach (string itemTocheckFor in stockItemsToCheck)
+            {
+                nPCController.beliefs.RemoveState($"ShouldCheck{itemTocheckFor}Stock");
+            }
+
+        }
     }
 }

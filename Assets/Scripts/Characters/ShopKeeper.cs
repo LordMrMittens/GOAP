@@ -17,8 +17,7 @@ public class ShopKeeper : BaseCharacter
             {
                 GetToWork();
                 hasGoal = true;
-            }
-            if (beliefs.GetAllStates().ContainsKey("ShouldCheckFoodStock"))
+                 if (beliefs.GetAllStates().ContainsKey("ShouldCheckFoodStock"))
             {
                 CheckFoodStocks();
                 hasGoal = true;
@@ -40,6 +39,7 @@ public class ShopKeeper : BaseCharacter
             }
             if (beliefs.GetAllStates().ContainsKey("ShopHasNoFoodStored"))
             {
+                Debug.Log("Triggering here");
                 RestockStoreFood();
                 hasGoal = true;
             }
@@ -48,6 +48,8 @@ public class ShopKeeper : BaseCharacter
                 RestockStoreDrink();
                 hasGoal = true;
             }
+            }
+           
             tickCounter = 0;
         }
     }

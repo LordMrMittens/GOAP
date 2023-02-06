@@ -39,7 +39,6 @@ public class JobModuleFarmer : BaseJobModule
             if (nPCInventory.itemsEquipped.Contains(itemBeingFarmed))
             {
                 List<string> itemsInInventory = new List<string>();
-                Debug.Log("Getting here");
                 foreach (string item in nPCInventory.itemsEquipped)
                 {
                     if (item == itemBeingFarmed)

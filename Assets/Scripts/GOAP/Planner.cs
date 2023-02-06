@@ -64,16 +64,19 @@ public class Planner
             }
         }
         List<Node> leaves = new List<Node>();
-        
-        Node start = new Node(null, 0, World.Instance.GetWorld().GetAllStates(),beliefStates.GetAllStates(),null);
+
+        Node start = new Node(null, 0, World.Instance.GetWorld().GetAllStates(), beliefStates.GetAllStates(), null);
 
         bool success = BuildGraph(start, leaves, doableActions, goal, _NPCTransform);
 
-        if(!success && _controller.currentGoal != null){
+        if (!success && _controller.currentGoal != null)
+        {
             foreach (KeyValuePair<string, int> failedGoal in goal)
             {
                 Debug.Log($" {_NPCTransform.gameObject.name} has No Plan for {failedGoal.Key} with the keyword {_controller.currentGoal.keyword}");
             }
+            _controller.currentGoal = null;
+            goal.Clear();
             return null;
         }
         Node cheapest = null;
