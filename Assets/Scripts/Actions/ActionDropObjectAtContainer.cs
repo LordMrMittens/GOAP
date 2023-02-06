@@ -34,6 +34,7 @@ public class ActionDropObjectAtContainer : Actions
                 }
                 _nPCController.beliefs.RemoveState($"HasNo{relatedItemIfAvailable}Stored");
                 _nPCController.beliefs.RemoveState($"ShopHasNo{relatedItemIfAvailable}Stored");
+                _nPCController.beliefs.RemoveState($"ShouldDepositProduct");
                 return true;
             }
         }
@@ -44,6 +45,7 @@ public class ActionDropObjectAtContainer : Actions
                 _nPCController.nPCInventory.RemoveObject(relatedItemIfAvailable);
                 _nPCController.beliefs.RemoveState($"HasNo{relatedItemIfAvailable}Stored");
                 _nPCController.beliefs.RemoveState($"ShopHasNo{relatedItemIfAvailable}Stored");
+                _nPCController.beliefs.RemoveState($"ShouldDepositProduct");
                 return true;
             }
         }
