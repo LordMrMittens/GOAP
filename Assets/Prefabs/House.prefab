@@ -22139,9 +22139,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2944324583867805589}
     m_Modifications:
+    - target: {fileID: 3242309377404883907, guid: c35c8ce775c3f054abc91cc1727f0272, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4913421296416443629, guid: c35c8ce775c3f054abc91cc1727f0272, type: 3}
       propertyPath: m_Name
       value: NPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 4913421296416443629, guid: c35c8ce775c3f054abc91cc1727f0272, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4913421296416443670, guid: c35c8ce775c3f054abc91cc1727f0272, type: 3}
       propertyPath: m_RootOrder
