@@ -16,11 +16,13 @@ public class Farmer : BaseCharacter
         {
             if (beliefs.GetAllStates().ContainsKey("ShouldPickProduct"))
             {
+                //Debug.Log("Should be mining at the moment");
                 PickProduct();
                 hasGoal = true;
             }
             if (beliefs.GetAllStates().ContainsKey("ShouldDepositProduct"))
             {
+                //Debug.Log("Should stop mining");
                 DepositProduct();
                 hasGoal = true;
             }

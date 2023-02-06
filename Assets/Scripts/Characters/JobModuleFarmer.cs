@@ -6,7 +6,6 @@ public class JobModuleFarmer : BaseJobModule
 {
  [SerializeField] int maxProductCarried;
  [SerializeField] string itemBeingFarmed;
- bool RecentlyWorked;
  NPCInventory nPCInventory;
 
 
@@ -37,11 +36,10 @@ public class JobModuleFarmer : BaseJobModule
         }
         if (isAtWork )
         {
-            RecentlyWorked = true;
             if (nPCInventory.itemsEquipped.Contains(itemBeingFarmed))
             {
                 List<string> itemsInInventory = new List<string>();
-
+                Debug.Log("Getting here");
                 foreach (string item in nPCInventory.itemsEquipped)
                 {
                     if (item == itemBeingFarmed)
@@ -64,14 +62,17 @@ public class JobModuleFarmer : BaseJobModule
                 nPCController.beliefs.AddSingleState($"ShouldPickProduct", 0);
             }
         }
-        else if (nPCInventory.itemsEquipped.Contains(itemBeingFarmed) && RecentlyWorked)
+        else
         {
-            Invoke("FinishWork", 3);
-            nPCController.beliefs.AddSingleState($"ShouldDepositProduct", 0);
-        }
-    }
+            if (nPCInventory.itemsEquipped.Contains(itemBeingFarmed))
+            {
+                nPCController.beliefs.RemoveState($"ShouldPickProduct");
+                nPCController.beliefs.AddSingleState($"ShouldDepositProduct", 0);
+            } else {
+                nPCController.beliefs.RemoveState($"ShouldDepositProduct");
+                nPCController.beliefs.RemoveState($"ShouldPickProduct");
+            }
 
-    void FinishWork(){
-        RecentlyWorked = false;
+        }
     }
 }
