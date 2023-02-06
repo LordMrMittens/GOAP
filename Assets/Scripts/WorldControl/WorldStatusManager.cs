@@ -17,6 +17,8 @@ public class WorldStatusManager : MonoBehaviour
     [SerializeField] float minTemperature;
     [SerializeField] float temperatureDeviation;
     public bool isDark;
+
+    public float timeSpeed=1;
     // Start is called before the first frame update
     private void Awake() {
         WSMInstance = this;
@@ -30,6 +32,7 @@ public class WorldStatusManager : MonoBehaviour
     void Update()
     {
         DayNightCycle();
+        Time.timeScale = timeSpeed;
     }
 
     private void UpdateDayNightCycle()

@@ -54,37 +54,37 @@ public class ShopKeeper : BaseCharacter
 
     public void GetToWork()
     {
-        AddSubGoal("IsWorking", 0, true, jobGoalRelatedTo);
+        AddSubGoal("IsWorking", 7, true, jobGoalRelatedTo);
     }
     public void CheckFoodStocks()
     {
-        AddSubGoal("CheckedFoodStock", 0, true, jobGoalRelatedTo);
+        AddSubGoal("CheckedFoodStock", 7, true, jobGoalRelatedTo);
     }
     public void CheckDrinkStocks()
     {
-        AddSubGoal("CheckedDrinkStock", 0, true, jobGoalRelatedTo);
+        AddSubGoal("CheckedDrinkStock", 7, true, jobGoalRelatedTo);
     }
     
     public void CheckCoalStocks()
     {
-        AddSubGoal("CheckedCoalStock", 0, true, jobGoalRelatedTo);
+        AddSubGoal("CheckedCoalStock", 7, true, jobGoalRelatedTo);
     }
     public void CheckMetalStocks()
     {
-        AddSubGoal("CheckedMetalStock", 0, true, jobGoalRelatedTo);
+        AddSubGoal("CheckedMetalStock", 7, true, jobGoalRelatedTo);
     }
     public void RestockStoreDrink()
     {
-        AddSubGoal("RestockedJobDrink", 0, true, jobGoalRelatedTo);
+        AddSubGoal("RestockedJobDrink", 11, true, jobGoalRelatedTo);
     }
     public void RestockStoreFood(){
-        AddSubGoal("RestockedJobFood", 0, true, jobGoalRelatedTo);
+        AddSubGoal("RestockedJobFood", 11, true, jobGoalRelatedTo);
     }
         public void RestockStoreCoal()
     {
-        AddSubGoal("RestockedJobCoal", 0, true, jobGoalRelatedTo);
+        AddSubGoal("RestockedJobCoal", 11, true, jobGoalRelatedTo);
     }
     public void RestockStoreMetal(){
-        AddSubGoal("RestockedJobMetal", 0, true, jobGoalRelatedTo);
+        AddSubGoal("RestockedJobMetal", 11, true, jobGoalRelatedTo);
     }
 }

@@ -33,6 +33,6 @@ public class Farmer : BaseCharacter
     }
     public void DepositProduct()
     {
-        AddSubGoal("DepositProduct", 0, true, jobGoalRelatedTo);
+        AddSubGoal("DepositProduct", 11, true, jobGoalRelatedTo);
     }
 }

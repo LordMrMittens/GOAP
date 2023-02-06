@@ -17,30 +17,30 @@ public class BaseCharacter : NPCController
     public void GetHungry()
     {
         beliefs.AddSingleState("IsHungry", 0);
-        AddSubGoal("HasEaten", 0, true, "Food");
+        AddSubGoal("HasEaten", 7, true, "Food");
     }
 
     void GetTired()
     {
         beliefs.AddSingleState("IsTired", 0);
-        AddSubGoal("IsRested", 0, true, "Rest");
+        AddSubGoal("IsRested", 6, true, "Rest");
     }
     void GetThirsty()
     {
         beliefs.AddSingleState("IsThirsty", 0);
-        AddSubGoal("QuenchThirst", 0, true, "Drink");
+        AddSubGoal("QuenchThirst", 7, true, "Drink");
     }
     void GetTooHot()
     {
         CheckForJacket();
         beliefs.AddSingleState("IsTooHot", 0);
-        AddSubGoal("GetCold", 7, true, "Temperature");
+        AddSubGoal("GetCold", 8, true, "Temperature");
     }
     void GetTooCold()
     {
         CheckForJacket();
         beliefs.AddSingleState("IsTooCold", 0);
-        AddSubGoal("GetWarm", 7, true, "Temperature");
+        AddSubGoal("GetWarm", 8, true, "Temperature");
     }
 
     void PrepForNightTime()

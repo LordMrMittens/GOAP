@@ -1249,7 +1249,7 @@ MonoBehaviour:
   - key: HasEaten
     value: 0
     carryOver: 1
-  canBeCancelled: 1
+  canBeCancelled: 0
 --- !u!114 &247091818369783937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1288,7 +1288,7 @@ MonoBehaviour:
   - key: QuenchThirst
     value: 0
     carryOver: 1
-  canBeCancelled: 1
+  canBeCancelled: 0
 --- !u!114 &1805352962889116187
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -322,6 +322,7 @@ public class NPCController : MonoBehaviour
                 {
                     DeletePlanner();
                     CancelCurrentAction();
+                    //currentGoal=null;
                     goals.Clear();
                 }
             }

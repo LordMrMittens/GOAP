@@ -7946,7 +7946,7 @@ MonoBehaviour:
   - key: HasFood
     value: 0
     carryOver: 1
-  canBeCancelled: 1
+  canBeCancelled: 0
 --- !u!114 &6079367874937909488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7979,7 +7979,7 @@ MonoBehaviour:
   - key: HasDrink
     value: 0
     carryOver: 1
-  canBeCancelled: 1
+  canBeCancelled: 0
 --- !u!114 &225854723380225407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8015,7 +8015,7 @@ MonoBehaviour:
   - key: StoredDrink
     value: 0
     carryOver: 0
-  canBeCancelled: 1
+  canBeCancelled: 0
 --- !u!114 &2299807012036473277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8051,7 +8051,7 @@ MonoBehaviour:
   - key: StoredFood
     value: 0
     carryOver: 0
-  canBeCancelled: 1
+  canBeCancelled: 0
 --- !u!1 &2703664691043879978
 GameObject:
   m_ObjectHideFlags: 0
@@ -21600,7 +21600,7 @@ MonoBehaviour:
   - key: SnuffLight
     value: 0
     carryOver: 1
-  canBeCancelled: 1
+  canBeCancelled: 0
 --- !u!114 &4463631769016829239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21633,7 +21633,7 @@ MonoBehaviour:
   - key: GetLight
     value: 0
     carryOver: 1
-  canBeCancelled: 1
+  canBeCancelled: 0
 --- !u!1 &7887579666846103021
 GameObject:
   m_ObjectHideFlags: 0
@@ -21757,7 +21757,7 @@ MonoBehaviour:
   - key: GetCold
     value: 0
     carryOver: 1
-  canBeCancelled: 1
+  canBeCancelled: 0
 --- !u!114 &8828360780090809153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21793,7 +21793,7 @@ MonoBehaviour:
   - key: GetWarm
     value: 0
     carryOver: 1
-  canBeCancelled: 1
+  canBeCancelled: 0
 --- !u!1 &8497414939084942894
 GameObject:
   m_ObjectHideFlags: 0
