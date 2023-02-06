@@ -34,34 +34,34 @@ public class BaseCharacter : NPCController
     {
         CheckForJacket();
         beliefs.AddSingleState("IsTooHot", 0);
-        AddSubGoal("GetCold", 0, true, "Temperature");
+        AddSubGoal("GetCold", 7, true, "Temperature");
     }
     void GetTooCold()
     {
         CheckForJacket();
         beliefs.AddSingleState("IsTooCold", 0);
-        AddSubGoal("GetWarm", 0, true, "Temperature");
+        AddSubGoal("GetWarm", 7, true, "Temperature");
     }
 
     void PrepForNightTime()
     {
             beliefs.AddSingleState("IsTooDark", 0);
-            AddSubGoal("GetLight", 0, true, "Light");
+            AddSubGoal("GetLight", 10, true, "Light");
     }
     void PrepForDayTime()
     {
             beliefs.AddSingleState("IsTooBright", 0);
-            AddSubGoal("SnuffLight", 0, true, "Light");
+            AddSubGoal("SnuffLight", 10, true, "Light");
     }
 
 
     void RestockFood()
     {
-        AddSubGoal("StoredFood", 0, true, "Groceries");
+        AddSubGoal("StoredFood", 4, true, "Groceries");
     }
         void RestockDrink()
     {
-        AddSubGoal("StoredDrink", 0, true, "Groceries");
+        AddSubGoal("StoredDrink", 4, true, "Groceries");
     }
     public void CheckForJacket()
     {

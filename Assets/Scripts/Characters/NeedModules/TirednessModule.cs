@@ -6,14 +6,25 @@ using UnityEngine.AI;
 public class TirednessModule : BasicNeedModule
 {
     NavMeshAgent agent;
+    bool nightOwl;
+    WorldStatusManager worldStatusManager;
     protected override void Start() {
         base.Start();
         agent = GetComponent<NavMeshAgent>();
         resourceType = "Tiredness";
+        worldStatusManager = WorldStatusManager.WSMInstance;
     }
     public override void ConsumeResource(float value)
     {
         if (agent.velocity != Vector3.zero)
+        {
+            value += value;
+        }
+        if (worldStatusManager.isDark && !nightOwl) //and not asleep!
+        {
+            value += value;
+        }
+        else if (!worldStatusManager.isDark && nightOwl)
         {
             value += value;
         }

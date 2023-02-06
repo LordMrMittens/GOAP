@@ -1023,10 +1023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375a4afb05a8cb14d82b4bd07df38bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SetGoal: 
-  worldSpeed: 1
   allAvailableActions: []
-  ActionHolder: {fileID: 6327330763404635773}
   target: {fileID: 0}
   currentAction: {fileID: 0}
   invoked: 0
@@ -1213,6 +1210,7 @@ MonoBehaviour:
   - key: IsRested
     value: 0
     carryOver: 1
+  canBeCancelled: 0
 --- !u!114 &5331453730778557672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1251,6 +1249,7 @@ MonoBehaviour:
   - key: HasEaten
     value: 0
     carryOver: 1
+  canBeCancelled: 1
 --- !u!114 &247091818369783937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1289,6 +1288,7 @@ MonoBehaviour:
   - key: QuenchThirst
     value: 0
     carryOver: 1
+  canBeCancelled: 1
 --- !u!114 &1805352962889116187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1318,6 +1318,7 @@ MonoBehaviour:
   - key: Wander
     value: 0
     carryOver: 0
+  canBeCancelled: 1
 --- !u!1001 &1989731529363538473
 PrefabInstance:
   m_ObjectHideFlags: 0

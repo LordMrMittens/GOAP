@@ -21,14 +21,10 @@ public class SubGoal
 public class NPCController : MonoBehaviour
 {
     ExcelImporter excelImporter;
-    public string SetGoal;
-    public float worldSpeed = 1;
     NavMeshAgent agent;
     public List<Actions> allAvailableActions = new List<Actions>();
     public Dictionary<SubGoal, int> goals = new Dictionary<SubGoal, int>();
-    public Inventory inventory = new Inventory();
     public WorldStates beliefs = new WorldStates();
-    [SerializeField] GameObject ActionHolder;
     public GameObject target;
     Planner planner;
     public Queue<Actions> actionQueue;
@@ -36,21 +32,16 @@ public class NPCController : MonoBehaviour
     public Actions currentAction;
     public SubGoal currentGoal;
     public bool invoked = false;
-
     [SerializeField] float DistanceFromTarget = 1.3f;
-
     public NeedsManager needsManager;
     public NPCInventory nPCInventory;
-
     public float tickFrequency = 1f;
-    public float tickCounter {get; set;}
-
-
+    public float tickCounter { get; set; }
     public bool hasGoal { get; set; }
     public bool canPlan = true;
     public List<SubGoal> failedGoalsList = new List<SubGoal>();
     float failedTaskListResetTimer = 0;
-    float failedTaskListResetFrequency = Mathf.Infinity;
+    float failedTaskListResetFrequency = 5;
     public string jobGoalRelatedTo; // eg MarketJob
 
     protected virtual void Start()
@@ -77,11 +68,16 @@ public class NPCController : MonoBehaviour
         currentAction.RemoveOwnership(this);
         invoked = false;
     }
+    void CancelCurrentAction()
+    {
+        allAvailableActions.Remove(currentAction);
+        currentAction.RemoveOwnership(this);
+        invoked = false;
+    }
 
     void LateUpdate()
     {
         failedTaskListResetTimer += Time.deltaTime;
-        Time.timeScale = worldSpeed;
         if (currentAction && currentAction.target != null)
         {
             target = currentAction.target;
@@ -99,8 +95,10 @@ public class NPCController : MonoBehaviour
         {
             ExecutePlan();
         }
-        if (failedTaskListResetTimer > failedTaskListResetFrequency){
+        if (failedTaskListResetTimer > failedTaskListResetFrequency)
+        {
             failedGoalsList.Clear();
+            failedTaskListResetTimer = 0;
         }
     }
 
@@ -236,7 +234,8 @@ public class NPCController : MonoBehaviour
             {
                 allAvailableActions.Add(action);
             }
-            if(action.defaultOwner ==this){
+            if (action.defaultOwner == this)
+            {
                 allAvailableActions.Add(action);
             }
         }
@@ -254,7 +253,8 @@ public class NPCController : MonoBehaviour
     {
         foreach (Actions action in relevantActions)
         {
-            if(action.activatingAction){
+            if (action.activatingAction)
+            {
                 continue;
             }
             else if (action.defaultTarget != null)
@@ -280,7 +280,6 @@ public class NPCController : MonoBehaviour
             }
         }
     }
-
     private void RemoveUnusedActions(int i)
     {
         allAvailableActions[i].RemoveOwnership(this);
@@ -298,26 +297,37 @@ public class NPCController : MonoBehaviour
                 {
                     return;
                 }
-
             }
         }
         if (goals.Count > 0)
         {
             foreach (KeyValuePair<SubGoal, int> Sgoal in goals)
             {
-                if (Sgoal.Key.keyword == keyword){
+                if (Sgoal.Key.keyword == keyword)
+                {
                     return;
                 }
             }
         }
-
-         
+        if (currentGoal != null && currentAction != null)
+        {
+            foreach (KeyValuePair<string, int> cGoal in currentGoal.subGoals)
+            {
+                if (cGoal.Value < value && !currentAction.activatingAction) //if the goals priority is higher than the previous goal priority then change goals
+                {
+                    DeletePlanner();
+                    CancelCurrentAction();
+                    goals.Clear();
+                }
+            }
+        }
         if (canPlan)
         {
-            goals.Add(subGoalToAdd, 5);//what is the number? to eliminate queue and potentially crashing put this inside the canplan check
+            //TODO Why does this Dictionary / Queue crash? 
+            //temp (permanent?) fix, put this inside the canplan check
+            goals.Add(subGoalToAdd, value);
             CreatePlan();
         }
-
     }
 
     public void GetPlanInformation()
@@ -330,7 +340,8 @@ public class NPCController : MonoBehaviour
                 planToDisplay += action.actionName + ".\n";
             }
         }
-        else {
+        else
+        {
             planToDisplay += "There is no plan";
         }
         StatusUI.statusUIInstance.UpdatePlanWindow(planToDisplay);

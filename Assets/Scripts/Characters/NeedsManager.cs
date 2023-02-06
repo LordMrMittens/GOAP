@@ -8,13 +8,13 @@ public class NeedsManager : MonoBehaviour
     [SerializeField] TemperatureModule temperatureModule;
     [SerializeField] HydrationModule hydrationModule;
     [SerializeField] TirednessModule tirednessModule;
-    WorldStatusManager worldStatusManager;
+    public WorldStatusManager worldStatusManager {get;set;}
     [SerializeField] NPCController nPCController;
     [SerializeField] float tickFrequency;
     public NPCInventory nPCInventory { get; private set; }
     public BasicNeedModule[] basicNeedModules {get; private set;}
     public BaseJobModule jobModule;
-
+    int workNeedToleranceOffset = 20;
     float tickTimer;
     bool canSee = true;
     //need reference to character controller,  can it be cast since they derive from a parent class?
@@ -48,18 +48,21 @@ public class NeedsManager : MonoBehaviour
                 }
             }
             //TODO add some sort of priority system
-            if (nutritionModule.currentResource < nutritionModule.minResource && jobModule && !jobModule.isAtWork)
+            if ((jobModule.isAtWork && nutritionModule.currentResource < nutritionModule.minResource - workNeedToleranceOffset) || 
+                (!jobModule.isAtWork && nutritionModule.currentResource < nutritionModule.minResource))
             {
                 nPCController.Invoke("GetHungry", 0);
                 nPCController.hasGoal=true;
                 //use  delegates instead??
             }
-            if (hydrationModule.currentResource < hydrationModule.minResource && jobModule && !jobModule.isAtWork) 
+            if ((jobModule.isAtWork && hydrationModule.currentResource < hydrationModule.minResource - workNeedToleranceOffset) || 
+                (!jobModule.isAtWork && hydrationModule.currentResource < hydrationModule.minResource))
             {
                 nPCController.Invoke("GetThirsty", 0);
                 nPCController.hasGoal=true;
             }
-            if (tirednessModule.currentResource < tirednessModule.minResource  && jobModule && !jobModule.isAtWork)
+            if ((jobModule.isAtWork && tirednessModule.currentResource < tirednessModule.minResource - workNeedToleranceOffset) || 
+                (!jobModule.isAtWork && tirednessModule.currentResource < tirednessModule.minResource))
             {
                 nPCController.Invoke("GetTired", 0);
                 nPCController.hasGoal=true;
@@ -72,7 +75,7 @@ public class NeedsManager : MonoBehaviour
                 nPCController.Invoke("RestockDrink", 0);
                 nPCController.hasGoal = true;
             }
-            if (nPCController.goals.Count <= 0 && jobModule && !jobModule.isAtWork) //&& not insocial hours can remove first check when everyone has a job module
+            if (!jobModule.isAtWork || !nPCController.hasGoal) //&& not social hours??
             {
                 nPCController.Invoke("BeIdle", 0);
                 nPCController.hasGoal = true;
@@ -158,7 +161,7 @@ public class NeedsManager : MonoBehaviour
         {
             foreach (BasicNeedModule module in basicNeedModules)
             {
-                if (module.currentResource < lowestStat)
+                if (module.currentResource < module.minResource &&  module.currentResource < lowestStat)
                 {
                     if (module != temperatureModule)
                     {

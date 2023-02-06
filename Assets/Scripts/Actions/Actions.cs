@@ -30,7 +30,7 @@ public abstract class Actions : MonoBehaviour
     public string relatedItemIfAvailable;
     public worldState[] preConditions;
     public worldState[] actionResults;
-   
+
     public Actions(){
         preconditions = new Dictionary<string, int>();
         actionresults = new Dictionary<string, int>();

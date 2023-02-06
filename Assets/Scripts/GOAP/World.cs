@@ -11,10 +11,6 @@ public class World
     static World()
     {
         world = new WorldStates();
-        Tourists = new Queue<GameObject>();
-        AvailableDeer = new Queue<GameObject>();
-       // World.Instance.FindAllDeer();
-
     }
     public WorldStates GetWorld()
     {
@@ -29,47 +25,6 @@ public class World
         get
         {
             return instance;
-        }
-    }
-    public void AddTourist(GameObject Tourist){
-        Tourists.Enqueue(Tourist);
-    }
-
-    public GameObject RemoveTourist(){
-        if (Tourists.Count == 0 ){
-            return null;
-        } else {
-            return Tourists.Dequeue();
-        }
-    }
-
-    public void AddDeer(GameObject Deer){
-        AvailableDeer.Enqueue(Deer);
-    }
-
-    public GameObject RemoveDeer()
-    {
-        if (AvailableDeer.Count == 0)
-        {
-            return null;
-        }
-        else
-        {
-            return AvailableDeer.Dequeue();
-        }
-    }
-
- 
-
-    void FindAllDeer()
-    {
-        GameObject[] allDeer =  GameObject.FindGameObjectsWithTag("Deer");
-        foreach (GameObject deer in allDeer)
-        {
-            AvailableDeer.Enqueue(deer);
-        }
-        if (allDeer.Length>0){
-            world.ChangeState("AvailableDeer", allDeer.Length);
         }
     }
 }
