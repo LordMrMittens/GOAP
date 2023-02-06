@@ -63,15 +63,15 @@ public class NPCController : MonoBehaviour
 
     void CompleteAction()
     {
+        currentAction.RemoveOwnership(this);
         currentAction.PostPerform(this);
         allAvailableActions.Remove(currentAction);
-        currentAction.RemoveOwnership(this);
         invoked = false;
     }
     void CancelCurrentAction()
     {
-        allAvailableActions.Remove(currentAction);
         currentAction.RemoveOwnership(this);
+        allAvailableActions.Remove(currentAction);
         invoked = false;
     }
 
@@ -194,6 +194,10 @@ public class NPCController : MonoBehaviour
             if (actionQueue != null)
             {
                 actionsInPlan = actionQueue.ToList<Actions>();
+                foreach (Actions actionInPlan in actionsInPlan)
+                {
+                    actionInPlan.SetupOwnership(this);
+                }
                 for (int i = 0; i < allAvailableActions.Count; i++)
                 {
                     allAvailableActions[i].ResetCost();
@@ -203,6 +207,7 @@ public class NPCController : MonoBehaviour
                     }
                 }
                 canPlan = false;
+                
                 currentGoal = subGoal.Key;
                 goals.Clear();
                 break;
@@ -244,7 +249,7 @@ public class NPCController : MonoBehaviour
             if (action.goalsRelatedTo.Contains(subGoal.Key.keyword))
             {
                 relevantActions.Add(action);
-                action.SetupOwnership(this);
+                //action.SetupOwnership(this); might be causing issues
             }
         }
     }
