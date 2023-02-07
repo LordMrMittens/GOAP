@@ -17,46 +17,48 @@ public class ShopKeeper : BaseCharacter
             {
                 GetToWork();
                 hasGoal = true;
-                 if (beliefs.GetAllStates().ContainsKey("ShouldCheckFoodStock"))
+            }
+            if (baseJobModule.isAtWork)
             {
-                CheckFoodStocks();
-                hasGoal = true;
+                if (beliefs.GetAllStates().ContainsKey("ShouldCheckFoodStock"))
+                {
+                    CheckFoodStocks();
+                    hasGoal = true;
+                }
+                if (beliefs.GetAllStates().ContainsKey("ShouldCheckDrinkStock"))
+                {
+                    CheckDrinkStocks();
+                    hasGoal = true;
+                }
+                if (beliefs.GetAllStates().ContainsKey("ShouldCheckCoalStock"))
+                {
+                    CheckCoalStocks();
+                    hasGoal = true;
+                }
+                if (beliefs.GetAllStates().ContainsKey("ShouldCheckMetalStock"))
+                {
+                    CheckMetalStocks();
+                    hasGoal = true;
+                }
+                if (beliefs.GetAllStates().ContainsKey("ShopHasNoFoodStored"))
+                {
+                    RestockStoreFood();
+                    hasGoal = true;
+                }
+                if (beliefs.GetAllStates().ContainsKey("ShopHasNoDrinkStored"))
+                {
+                    RestockStoreDrink();
+                    hasGoal = true;
+                }
             }
-            if (beliefs.GetAllStates().ContainsKey("ShouldCheckDrinkStock"))
-            {
-                CheckDrinkStocks();
-                hasGoal = true;
-            }
-            if (beliefs.GetAllStates().ContainsKey("ShouldCheckCoalStock"))
-            {
-                CheckCoalStocks();
-                hasGoal = true;
-            }
-            if (beliefs.GetAllStates().ContainsKey("ShouldCheckMetalStock"))
-            {
-                CheckMetalStocks();
-                hasGoal = true;
-            }
-            if (beliefs.GetAllStates().ContainsKey("ShopHasNoFoodStored"))
-            {
-                Debug.Log("Triggering here");
-                RestockStoreFood();
-                hasGoal = true;
-            }
-            if (beliefs.GetAllStates().ContainsKey("ShopHasNoDrinkStored"))
-            {
-                RestockStoreDrink();
-                hasGoal = true;
-            }
-            }
-           
+
             tickCounter = 0;
         }
     }
 
     public void GetToWork()
     {
-        AddSubGoal("IsWorking", 7, true, jobGoalRelatedTo);
+        AddSubGoal("IsWorking", 5, true, jobGoalRelatedTo);
     }
     public void CheckFoodStocks()
     {
@@ -66,7 +68,7 @@ public class ShopKeeper : BaseCharacter
     {
         AddSubGoal("CheckedDrinkStock", 7, true, jobGoalRelatedTo);
     }
-    
+
     public void CheckCoalStocks()
     {
         AddSubGoal("CheckedCoalStock", 7, true, jobGoalRelatedTo);
@@ -79,14 +81,16 @@ public class ShopKeeper : BaseCharacter
     {
         AddSubGoal("RestockedJobDrink", 11, true, jobGoalRelatedTo);
     }
-    public void RestockStoreFood(){
+    public void RestockStoreFood()
+    {
         AddSubGoal("RestockedJobFood", 11, true, jobGoalRelatedTo);
     }
-        public void RestockStoreCoal()
+    public void RestockStoreCoal()
     {
         AddSubGoal("RestockedJobCoal", 11, true, jobGoalRelatedTo);
     }
-    public void RestockStoreMetal(){
+    public void RestockStoreMetal()
+    {
         AddSubGoal("RestockedJobMetal", 11, true, jobGoalRelatedTo);
     }
 }

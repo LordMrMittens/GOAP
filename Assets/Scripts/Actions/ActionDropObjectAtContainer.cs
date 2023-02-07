@@ -37,6 +37,10 @@ public class ActionDropObjectAtContainer : Actions
                 _nPCController.beliefs.RemoveState($"ShouldDepositProduct");
                 return true;
             }
+            else
+            {
+                return false;
+            }
         }
         else
         {

@@ -43,11 +43,13 @@ public class NPCController : MonoBehaviour
     float failedTaskListResetTimer = 0;
     float failedTaskListResetFrequency = 5;
     public string jobGoalRelatedTo; // eg MarketJob
+    public BaseJobModule baseJobModule {get;set;}
 
     protected virtual void Start()
     {
         AssignName();
         agent = GetComponent<NavMeshAgent>();
+        baseJobModule = GetComponent<BaseJobModule>();
     }
 
     private void AssignName()

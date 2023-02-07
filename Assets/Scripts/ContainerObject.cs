@@ -5,7 +5,7 @@ using UnityEngine;
 public class ContainerObject : MonoBehaviour
 {
     public List<string> typeOfObjectsContained = new List<string>();
-    [SerializeField] int maxNumberOfItems = 5;
+    public int maxNumberOfItems = 5;
     [SerializeField] int numberOfObjectsToAdd = 1;
 
     public List<string> storedObjects = new List<string>();
