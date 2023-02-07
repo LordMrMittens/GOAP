@@ -69,6 +69,7 @@ public class NPCController : MonoBehaviour
         currentAction.PostPerform(this);
         allAvailableActions.Remove(currentAction);
         invoked = false;
+
     }
     void CancelCurrentAction()
     {
