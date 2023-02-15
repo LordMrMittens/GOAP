@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WorldStatusManager : MonoBehaviour
 {
@@ -15,8 +16,14 @@ public class WorldStatusManager : MonoBehaviour
     [ field : SerializeField] public float currentTemperature { get; private set; }
     [SerializeField] float maxTemperature;
     [SerializeField] float minTemperature;
+    
+    float nextDayTemp;
+    float lastDayTemp;
+    float nextNightTemp;
+    bool needtoChangeTheTemp = true;
     [SerializeField] float temperatureDeviation;
     public bool isDark;
+    [SerializeField] Text tempText;
 
     public float timeSpeed=1;
     // Start is called before the first frame update
@@ -26,6 +33,8 @@ public class WorldStatusManager : MonoBehaviour
     void Start()
     {
         UpdateDayNightCycle();
+        SetNextMinMaxTemperature();
+        currentTemperature = 0;
     }
 
     // Update is called once per frame
@@ -33,19 +42,26 @@ public class WorldStatusManager : MonoBehaviour
     {
         DayNightCycle();
         Time.timeScale = timeSpeed;
+        tempText.text = currentTemperature.ToString();
     }
 
     private void UpdateDayNightCycle()
     {
         if (timeOfDay < 6 || timeOfDay > 18)
         {
-            currentTemperature = Random.Range(minTemperature, minTemperature + temperatureDeviation);
             isDark = true;
         }
         else
         {
-            currentTemperature = Random.Range(maxTemperature - temperatureDeviation, maxTemperature);
             isDark = false;
+        }
+        if (timeOfDay > 0 && timeOfDay < 12)
+        {
+            currentTemperature = currentTemperature + (nextDayTemp / 12);
+        }
+        else
+        {
+            currentTemperature = currentTemperature - ((lastDayTemp - nextNightTemp) / 12);
         }
     }
 
@@ -62,11 +78,20 @@ public class WorldStatusManager : MonoBehaviour
         {
             hourTimer = 0;
             timeOfDay++;
+            if(timeOfDay == 0 || timeOfDay == 12){
+                SetNextMinMaxTemperature();
+                lastDayTemp = nextDayTemp;
+            }
             if (timeOfDay >= hoursPerDay)
             {
                 timeOfDay = 0;
             }
             UpdateDayNightCycle();
         }
+    }
+    void SetNextMinMaxTemperature()
+    {
+        nextDayTemp = Random.Range(maxTemperature - temperatureDeviation, maxTemperature);
+        nextNightTemp = Random.Range(minTemperature, minTemperature + temperatureDeviation);
     }
 }
