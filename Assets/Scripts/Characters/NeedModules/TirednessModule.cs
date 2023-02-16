@@ -20,7 +20,7 @@ public class TirednessModule : BasicNeedModule
         {
             value += value;
         }
-        if (worldStatusManager.isDark && !nightOwl) //and not asleep!
+        if (worldStatusManager.isDark && !nightOwl)
         {
             value += value;
         }
