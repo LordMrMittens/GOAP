@@ -13,6 +13,7 @@ TagManager:
   - PubBar
   - PubTable
   - IdlingLocation
+  - CloseupCameraPosition
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - HideFromCam
   - 
   - 
   - 

@@ -44,12 +44,16 @@ public class NPCController : MonoBehaviour
     float failedTaskListResetFrequency = 5;
     public string jobGoalRelatedTo; // eg MarketJob
     public BaseJobModule baseJobModule {get;set;}
+    public Transform closeupCamPos {get;set;}
+    public Transform lookAtOffset {get;set;}
 
     protected virtual void Start()
     {
         AssignName();
         agent = GetComponent<NavMeshAgent>();
         baseJobModule = GetComponent<BaseJobModule>();
+        closeupCamPos = transform.Find("CamPos");
+        lookAtOffset = transform.Find("LookAtOffset");
     }
 
     private void AssignName()

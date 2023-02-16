@@ -116,6 +116,68 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &3502614562161887802
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 35630639649149581}
+  m_Layer: 0
+  m_Name: LookAtOffset
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &35630639649149581
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3502614562161887802}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 1.311, y: 1.441, z: 0.134}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4913421296416443670}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4301984291430533103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5407386073509071616}
+  m_Layer: 0
+  m_Name: CamPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5407386073509071616
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4301984291430533103}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.475, y: 1.606, z: 2.447}
+  m_LocalScale: {x: 0.99999976, y: 1, z: 0.99999976}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4913421296416443670}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4913421294744068777
 GameObject:
   m_ObjectHideFlags: 0
@@ -944,6 +1006,8 @@ Transform:
   - {fileID: 4913421295865022154}
   - {fileID: 4956133478692502684}
   - {fileID: 3194726354405140485}
+  - {fileID: 5407386073509071616}
+  - {fileID: 35630639649149581}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
@@ -1072,6 +1136,7 @@ MonoBehaviour:
   isCommonNeed: 0
   randomnessOffset: 0
   hasResource: 0
+  nightOwl: 0
 --- !u!114 &6978994666869021405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1124,16 +1189,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82f2fdfac8f3b45408876ed5d3702648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <displayName>k__BackingField: Temperature
-  maxResource: 100
-  minResource: 0
-  <currentResource>k__BackingField: 0
-  backgroundDecayRate: 0.01
-  isCommonNeed: 0
-  randomnessOffset: 0
-  hasResource: 0
   targetTemperature: 20
-  toleranceOffset: 40
+  coldToleranceOffset: 0
+  heatToleranceOffset: 0
   currentTemperature: 0
   <energyConsumptionRate>k__BackingField: 0.5
   <waterConsumptionRate>k__BackingField: 0.5
@@ -1210,7 +1268,6 @@ MonoBehaviour:
   - key: IsRested
     value: 0
     carryOver: 1
-  canBeCancelled: 0
 --- !u!114 &5331453730778557672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1249,7 +1306,6 @@ MonoBehaviour:
   - key: HasEaten
     value: 0
     carryOver: 1
-  canBeCancelled: 0
 --- !u!114 &247091818369783937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1288,7 +1344,6 @@ MonoBehaviour:
   - key: QuenchThirst
     value: 0
     carryOver: 1
-  canBeCancelled: 0
 --- !u!114 &1805352962889116187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1318,7 +1373,6 @@ MonoBehaviour:
   - key: Wander
     value: 0
     carryOver: 0
-  canBeCancelled: 1
 --- !u!1001 &1989731529363538473
 PrefabInstance:
   m_ObjectHideFlags: 0

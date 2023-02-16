@@ -7,8 +7,10 @@ public class ClickManager : MonoBehaviour
     GameObject selectedNPC;
     ExcelImporter excelImporter;
     WorldStatusManager worldStatusManager;
+    CameraMovement cam;
     private void Start() {
         worldStatusManager = WorldStatusManager.WSMInstance;
+        cam= Camera.main.GetComponent<CameraMovement>();
     }
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Mouse0)){
@@ -26,6 +28,7 @@ public class ClickManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape)){
             StatusUI.statusUIInstance.ClearStats();
             StatusUI.statusUIInstance.statsDisplay.SetActive(false);
+            cam.ResetLastPositionAndRotation();
         }
     }
     private void OnNpcClicked(){
@@ -34,6 +37,7 @@ public class ClickManager : MonoBehaviour
         NeedsManager needsManager = selectedNPC.GetComponent<NeedsManager>();
         BasicNeedModule mostNeedyStat = needsManager.GetLowestStat();
         TemperatureModule temperatureModule = needsManager.GetTemperatureModule();
+        cam.SetCloseUpPosition(nPCController.closeupCamPos.position, nPCController.lookAtOffset);
         string commentary = "";
         if (mostNeedyStat != null)
         {

@@ -67,7 +67,6 @@ MonoBehaviour:
   - key: AtTable
     value: 0
     carryOver: 0
-  canBeCancelled: 1
 --- !u!1 &401763948923997951
 GameObject:
   m_ObjectHideFlags: 0
@@ -4504,7 +4503,6 @@ MonoBehaviour:
   - key: AtBed
     value: 0
     carryOver: 0
-  canBeCancelled: 1
 --- !u!114 &2975132905557108330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4540,7 +4538,6 @@ MonoBehaviour:
   - key: IsRested
     value: 0
     carryOver: 1
-  canBeCancelled: 0
 --- !u!1 &1717665995750453412
 GameObject:
   m_ObjectHideFlags: 0
@@ -7887,7 +7884,6 @@ MonoBehaviour:
   - key: AtKitchen
     value: 0
     carryOver: 0
-  canBeCancelled: 1
 --- !u!114 &1487396696835980915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7946,7 +7942,6 @@ MonoBehaviour:
   - key: HasFood
     value: 0
     carryOver: 1
-  canBeCancelled: 0
 --- !u!114 &6079367874937909488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7979,7 +7974,6 @@ MonoBehaviour:
   - key: HasDrink
     value: 0
     carryOver: 1
-  canBeCancelled: 0
 --- !u!114 &225854723380225407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8015,7 +8009,6 @@ MonoBehaviour:
   - key: StoredDrink
     value: 0
     carryOver: 0
-  canBeCancelled: 0
 --- !u!114 &2299807012036473277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8051,7 +8044,6 @@ MonoBehaviour:
   - key: StoredFood
     value: 0
     carryOver: 0
-  canBeCancelled: 0
 --- !u!1 &2703664691043879978
 GameObject:
   m_ObjectHideFlags: 0
@@ -12414,7 +12406,7 @@ GameObject:
   - component: {fileID: 2944324583867805584}
   - component: {fileID: 2944324583867805587}
   - component: {fileID: 2944324583867805586}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: House
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20313,7 +20305,6 @@ MonoBehaviour:
   - key: AtHome
     value: 0
     carryOver: 1
-  canBeCancelled: 1
 --- !u!1 &7175100126831643892
 GameObject:
   m_ObjectHideFlags: 0
@@ -21567,7 +21558,6 @@ MonoBehaviour:
   - key: AtToolshed
     value: 0
     carryOver: 0
-  canBeCancelled: 1
 --- !u!114 &2990453456917463792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21600,7 +21590,6 @@ MonoBehaviour:
   - key: SnuffLight
     value: 0
     carryOver: 1
-  canBeCancelled: 0
 --- !u!114 &4463631769016829239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21633,7 +21622,6 @@ MonoBehaviour:
   - key: GetLight
     value: 0
     carryOver: 1
-  canBeCancelled: 0
 --- !u!1 &7887579666846103021
 GameObject:
   m_ObjectHideFlags: 0
@@ -21721,7 +21709,6 @@ MonoBehaviour:
   - key: AtWardrobe
     value: 0
     carryOver: 1
-  canBeCancelled: 1
 --- !u!114 &6624088380790573572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21757,7 +21744,6 @@ MonoBehaviour:
   - key: GetCold
     value: 0
     carryOver: 1
-  canBeCancelled: 0
 --- !u!114 &8828360780090809153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21793,7 +21779,6 @@ MonoBehaviour:
   - key: GetWarm
     value: 0
     carryOver: 1
-  canBeCancelled: 0
 --- !u!1 &8497414939084942894
 GameObject:
   m_ObjectHideFlags: 0

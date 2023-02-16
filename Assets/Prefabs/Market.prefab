@@ -16895,7 +16895,7 @@ GameObject:
   - component: {fileID: 2944324583867805584}
   - component: {fileID: 2944324583867805587}
   - component: {fileID: 2944324583867805586}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Market
   m_TagString: Untagged
   m_Icon: {fileID: 0}
