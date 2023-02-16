@@ -32,17 +32,33 @@ public class ActionCheckForStock : Actions
     }
     public override bool PostPerform(NPCController _nPCController)
     {
+        ContainerObject container = target.GetComponent<ContainerObject>();
         foreach (string relatedItem in relatedItemsIfAvailable)
         {
-            if (!target.GetComponent<ContainerObject>().storedObjects.Contains(relatedItem) || target.GetComponent<ContainerObject>().storedObjects.Count < 20)
+            if (container.storedObjects.Contains(relatedItem))
+            {
+                int itemCounter = 0;
+                foreach (string item in container.storedObjects)
+                {
+                    if (item == relatedItem)
+                    {
+                        itemCounter++;
+                    }
+                }
+                if (itemCounter < 20)
+                {
+                    _nPCController.beliefs.AddSingleState($"ShopHasNo{relatedItem}Stored", 0);
+                }
+            }
+            else
             {
                 foreach (NPCController NPC in allNPCsWithThisAction)
                 {
                     _nPCController.beliefs.AddSingleState($"ShopHasNo{relatedItem}Stored", 0);
                 }
             }
-            _nPCController.beliefs.RemoveState($"ShouldCheck{relatedItem}Stock");
         }
+        _nPCController.beliefs.RemoveState($"ShouldCheckStock");
         return true;
     }
 }
