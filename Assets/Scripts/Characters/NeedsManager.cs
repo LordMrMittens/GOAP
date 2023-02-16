@@ -89,22 +89,37 @@ public class NeedsManager : MonoBehaviour
         {
             if (temperatureModule.AdjustTemperature(worldStatusManager.currentTemperature))
             {
+
                 if (temperatureModule.isWarming)
                 {
-                    nutritionModule.ConsumeResource(temperatureModule.energyConsumptionRate);
+                    if (temperatureModule.isWearingAJacket)
+                    {
+                        nutritionModule.ConsumeResource(temperatureModule.energyConsumptionRate);
+                    }
+                    else
+                    {
+                        nutritionModule.ConsumeResource(temperatureModule.energyConsumptionRate + .5f);
+                    }
                 }
                 else
                 {
-                    hydrationModule.ConsumeResource(temperatureModule.waterConsumptionRate);
+                    if (temperatureModule.isWearingAJacket)
+                    {
+                        hydrationModule.ConsumeResource(temperatureModule.waterConsumptionRate + .5f);
+                    }
+                    else
+                    {
+                        hydrationModule.ConsumeResource(temperatureModule.waterConsumptionRate);
+                    }
                 }
             }
             // TODO calling functions may need to be moved to priority system
-            if (worldStatusManager.currentTemperature < temperatureModule.GetCurrentTemperature() - temperatureModule.toleranceOffset)
+            if (worldStatusManager.currentTemperature < temperatureModule.GetCurrentTemperature() - temperatureModule.coldToleranceOffset)
             {
                 nPCController.Invoke("GetTooCold", 0); //npc is too cold 
                 nPCController.hasGoal=true;
             }
-            else if (worldStatusManager.currentTemperature > temperatureModule.GetCurrentTemperature() + temperatureModule.toleranceOffset)
+            else if (worldStatusManager.currentTemperature > temperatureModule.GetCurrentTemperature() + temperatureModule.heatToleranceOffset)
             {
                 nPCController.Invoke("GetTooHot", 0); //npc is too hot
                 nPCController.hasGoal=true;

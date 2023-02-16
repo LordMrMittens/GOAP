@@ -6,6 +6,10 @@ public class ClickManager : MonoBehaviour
 {
     GameObject selectedNPC;
     ExcelImporter excelImporter;
+    WorldStatusManager worldStatusManager;
+    private void Start() {
+        worldStatusManager = WorldStatusManager.WSMInstance;
+    }
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Mouse0)){
 
@@ -35,6 +39,7 @@ public class ClickManager : MonoBehaviour
         {
            commentary = GenerateComentaryOnNeeds(mostNeedyStat.resourceType);
         }
+        GenerateComentaryOnTemperature(temperatureModule);
         needsManager.UpdateStatsSheet();
         nPCController.GetPlanInformation();
         StatusUI.statusUIInstance.UpdateDialogue(nPCController.gameObject.name, commentary);
@@ -58,25 +63,56 @@ public class ClickManager : MonoBehaviour
             case "Tiredness":
                 dialogue = GetDialogue(dialogue, "TiredDialogue");
                 break;
-            case "Temperature":
-            //temperature works differently
-                dialogue = GetDialogue(dialogue, "TemperatureDialogue");
-                break;
-                default:
+            default:
                 dialogue = "Nothing to report";
                 break;
         }
         return dialogue;
     }
-        void GenerateTemperatureCommentary(TemperatureModule _temperatureModule){
-
-        if(_temperatureModule.isWarming){
-            //its cold
-        } else{
-            //its hot
+    public string GenerateComentaryOnTemperature(TemperatureModule temperatureModule)
+    {
+        string dialogue = "Weather is pleasant";
+        Debug.Log($"current temp {worldStatusManager.currentTemperature}, heattolerance {temperatureModule.heatToleranceOffset}, cold tolernce {temperatureModule.coldToleranceOffset} target temp{temperatureModule.targetTemperature} world temp {worldStatusManager.currentTemperature}");
+        if (temperatureModule.currentTemperature < temperatureModule.targetTemperature - 3 || temperatureModule.currentTemperature > temperatureModule.targetTemperature + 3)
+        {
+            //means it cant adjust temperature properly anymore
+            if (worldStatusManager.currentTemperature < temperatureModule.targetTemperature)
+            {
+                dialogue = GetDialogue(dialogue, "HypothermiaDialogue"); // need to make these add to eachother
+                dialogue = GetDialogue(dialogue, "HungryDialogue");
+            }
+            else
+            {
+                dialogue = GetDialogue(dialogue, "HeatstrokeDialogue");
+                dialogue = GetDialogue(dialogue, "ThirstyDialogue");
+            }
         }
-
-        //check for jacket in inventory
+        else
+        {
+            if (worldStatusManager.currentTemperature < temperatureModule.targetTemperature)
+            {
+                if (worldStatusManager.currentTemperature < temperatureModule.targetTemperature - temperatureModule.coldToleranceOffset)
+                {
+                    dialogue = GetDialogue(dialogue, "ColdDialogue");
+                }
+                else
+                {
+                    dialogue = GetDialogue(dialogue, "CoolBreezeDialogue");
+                }
+            }
+            else
+            {
+                if (worldStatusManager.currentTemperature > temperatureModule.targetTemperature + temperatureModule.heatToleranceOffset)
+                {
+                    dialogue = GetDialogue(dialogue, "HotDialogue");
+                }
+                else
+                {
+                    dialogue = GetDialogue(dialogue, "WarmBreezeDialogue");
+                }
+            }
+        }
+        return dialogue;
     }
 
     void GenerateComentaryOnPlans()

@@ -2,29 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TemperatureModule : BasicNeedModule
+public class TemperatureModule : MonoBehaviour
 {
 
     [field : SerializeField] public float targetTemperature;
-    [field : SerializeField] public float toleranceOffset;
+    [field : SerializeField] public float coldToleranceOffset;
+    float defaultColdTolerance;
+    [field : SerializeField] public float heatToleranceOffset;
+    float defaultHeatTolerance;
+
     public float currentTemperature;
     [field : SerializeField] public float energyConsumptionRate {get; private set;} = .5f;
     [field : SerializeField] public float waterConsumptionRate {get; private set;} = .1f;
     public bool isWarming;
     public bool isWearingAJacket;
     public float reportedTemperature;
-    protected override void Start()
+    void Start()
     {
-        base.Start();
         currentTemperature = targetTemperature;
-        isCommonNeed = false;
-        resourceType = "Temperature";
+        defaultColdTolerance = coldToleranceOffset;
+        defaultHeatTolerance = heatToleranceOffset;
     }
 
-   public bool AdjustTemperature(float value)
+    public bool AdjustTemperature(float value)
     {
         if (isWearingAJacket){
-            currentTemperature += 20;
+            coldToleranceOffset = 20;
+            heatToleranceOffset = -10;
+        } else {
+            coldToleranceOffset = defaultColdTolerance;
+            heatToleranceOffset = defaultHeatTolerance;
         }
         AffectTemperature(value);
         isWarming = false;
@@ -68,7 +75,6 @@ public class TemperatureModule : BasicNeedModule
         isWarming = false;
     }
     public float GetCurrentTemperature(){
-        currentResource = reportedTemperature;
         return reportedTemperature;
     }
 }
