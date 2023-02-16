@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class TirednessModule : BasicNeedModule
 {
     NavMeshAgent agent;
-    bool nightOwl;
+    public bool nightOwl;
     WorldStatusManager worldStatusManager;
     protected override void Start() {
         base.Start();

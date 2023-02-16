@@ -13,6 +13,6 @@ public class NeedUI : MonoBehaviour
     {
         needName.text = _name;
         needPoints.text = _priority.ToString("F2");
-        priority.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _priority*2.7f);
+        priority.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _priority*2.4f);
     }
 }

@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class StatusUI : MonoBehaviour
 {
     public static StatusUI statusUIInstance;
     public GameObject statsDisplay;
     [SerializeField] GameObject needPrefab;
+    [SerializeField] TextMeshProUGUI temperatureText;
     [SerializeField] RectTransform rootPanel;
     [SerializeField] PlanUI planUI;
     [SerializeField] ComentaryDialogueUI dialogueUI;
@@ -61,5 +63,9 @@ public class StatusUI : MonoBehaviour
         displayedStats.Clear();
         UpdateDialogue("", "");
         UpdatePlanWindow("");
+    }
+    public void SetTemperature(float temp){
+
+        temperatureText.text = $"Body Temp: {temp.ToString("F1")}°C";
     }
 }

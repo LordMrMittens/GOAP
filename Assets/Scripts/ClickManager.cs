@@ -43,6 +43,7 @@ public class ClickManager : MonoBehaviour
         needsManager.UpdateStatsSheet();
         nPCController.GetPlanInformation();
         StatusUI.statusUIInstance.UpdateDialogue(nPCController.gameObject.name, commentary);
+        StatusUI.statusUIInstance.SetTemperature(temperatureModule.GetCurrentTemperature());
         StatusUI.statusUIInstance.statsDisplay.SetActive(true);
     }
 
