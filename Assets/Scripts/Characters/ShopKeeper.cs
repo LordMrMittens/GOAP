@@ -20,24 +20,9 @@ public class ShopKeeper : BaseCharacter
             }
             if (baseJobModule.isAtWork)
             {
-                if (beliefs.GetAllStates().ContainsKey("ShouldCheckFoodStock"))
+                if (beliefs.GetAllStates().ContainsKey("ShouldCheckStock"))
                 {
                     CheckFoodStocks();
-                    hasGoal = true;
-                }
-                if (beliefs.GetAllStates().ContainsKey("ShouldCheckDrinkStock"))
-                {
-                    CheckDrinkStocks();
-                    hasGoal = true;
-                }
-                if (beliefs.GetAllStates().ContainsKey("ShouldCheckCoalStock"))
-                {
-                    CheckCoalStocks();
-                    hasGoal = true;
-                }
-                if (beliefs.GetAllStates().ContainsKey("ShouldCheckMetalStock"))
-                {
-                    CheckMetalStocks();
                     hasGoal = true;
                 }
                 if (beliefs.GetAllStates().ContainsKey("ShopHasNoFoodStored"))
@@ -50,8 +35,27 @@ public class ShopKeeper : BaseCharacter
                     RestockStoreDrink();
                     hasGoal = true;
                 }
+                if (beliefs.GetAllStates().ContainsKey("ShopHasNoWoodStored"))
+                {
+                    RestockStoreWood();
+                    hasGoal = true;
+                }
+                if (beliefs.GetAllStates().ContainsKey("ShopHasNoToolStored"))
+                {
+                    RestockStoreTool();
+                    hasGoal = true;
+                }
+                if (beliefs.GetAllStates().ContainsKey("ShopHasNoMetalStored"))
+                {
+                    RestockStoreMetal();
+                    hasGoal = true;
+                }
+                if (beliefs.GetAllStates().ContainsKey("ShopHasNoCoalStored"))
+                {
+                    RestockStoreCoal();
+                    hasGoal = true;
+                }
             }
-
             tickCounter = 0;
         }
     }
@@ -62,20 +66,7 @@ public class ShopKeeper : BaseCharacter
     }
     public void CheckFoodStocks()
     {
-        AddSubGoal("CheckedFoodStock", 7, true, jobGoalRelatedTo);
-    }
-    public void CheckDrinkStocks()
-    {
-        AddSubGoal("CheckedDrinkStock", 7, true, jobGoalRelatedTo);
-    }
-
-    public void CheckCoalStocks()
-    {
-        AddSubGoal("CheckedCoalStock", 7, true, jobGoalRelatedTo);
-    }
-    public void CheckMetalStocks()
-    {
-        AddSubGoal("CheckedMetalStock", 7, true, jobGoalRelatedTo);
+        AddSubGoal("CheckedStock", 7, true, jobGoalRelatedTo);
     }
     public void RestockStoreDrink()
     {
@@ -92,5 +83,13 @@ public class ShopKeeper : BaseCharacter
     public void RestockStoreMetal()
     {
         AddSubGoal("RestockedJobMetal", 11, true, jobGoalRelatedTo);
+    }
+        public void RestockStoreWood()
+    {
+        AddSubGoal("RestockedJobWood", 11, true, jobGoalRelatedTo);
+    }
+        public void RestockStoreTool()
+    {
+        AddSubGoal("RestockedJobTool", 15, true, jobGoalRelatedTo);
     }
 }

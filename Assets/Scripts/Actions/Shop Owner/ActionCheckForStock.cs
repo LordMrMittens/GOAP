@@ -6,6 +6,8 @@ public class ActionCheckForStock : Actions
 {
     List< NPCController> allNPCsWithThisAction = new List<NPCController>();
 
+    public string[] relatedItemsIfAvailable;
+
     void Start()
     {
         NPCController[] allNPCs = FindObjectsOfType<NPCController>();
@@ -24,16 +26,23 @@ public class ActionCheckForStock : Actions
     {
         return true;
     }
+    protected override bool CheckIfItemsAvailable(NPCController _nPCController)
+    {
+        return true;
+    }
     public override bool PostPerform(NPCController _nPCController)
     {
-        if (!target.GetComponent<ContainerObject>().storedObjects.Contains(relatedItemIfAvailable) || target.GetComponent<ContainerObject>().storedObjects.Count < 20)
+        foreach (string relatedItem in relatedItemsIfAvailable)
         {
-            foreach (NPCController NPC in allNPCsWithThisAction)
+            if (!target.GetComponent<ContainerObject>().storedObjects.Contains(relatedItem) || target.GetComponent<ContainerObject>().storedObjects.Count < 20)
             {
-                _nPCController.beliefs.AddSingleState($"ShopHasNo{relatedItemIfAvailable}Stored", 0);
+                foreach (NPCController NPC in allNPCsWithThisAction)
+                {
+                    _nPCController.beliefs.AddSingleState($"ShopHasNo{relatedItem}Stored", 0);
+                }
             }
+            _nPCController.beliefs.RemoveState($"ShouldCheck{relatedItem}Stock");
         }
-        _nPCController.beliefs.RemoveState($"ShouldCheck{relatedItemIfAvailable}Stock");
         return true;
     }
 }

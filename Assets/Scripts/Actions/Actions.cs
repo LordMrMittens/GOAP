@@ -25,7 +25,7 @@ public abstract class Actions : MonoBehaviour
     public WorldStates belief;
     public NeedsManager needsManager {get; set;}
     //public bool running {get; set;} = false;
-     [SerializeField] ContainerObject containerUsed; //if depositing item container used should be blank
+    public ContainerObject containerUsed; //if depositing item container used should be blank
     public bool activatingAction = false;
     public string relatedItemIfAvailable;
     public worldState[] preConditions;
@@ -103,13 +103,13 @@ public abstract class Actions : MonoBehaviour
     public abstract bool PrePerform();
     public abstract bool PostPerform(NPCController _nPCController);
 
-    bool CheckIfItemsAvailable(NPCController _nPCController)
+    protected virtual bool CheckIfItemsAvailable(NPCController _nPCController)
     {
         if (containerUsed.storedObjects.Contains(relatedItemIfAvailable)) //if depositing item container used should be blank
         {
             return true;
         }
-        else if (defaultOwner == _nPCController)
+        else if(defaultOwner == _nPCController)
         {
             _nPCController.beliefs.AddSingleState($"HasNo{relatedItemIfAvailable}Stored", 0);
         }

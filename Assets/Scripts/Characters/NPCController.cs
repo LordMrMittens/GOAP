@@ -201,12 +201,12 @@ public class NPCController : MonoBehaviour
         foreach (KeyValuePair<SubGoal, int> subGoal in sortedGoals)
         {
             GetRelevantActions(relevantActions, AllActions, subGoal);
-            SetActionCosts(relevantActions);   
-            currentGoal = subGoal.Key;       
+            SetActionCosts(relevantActions);
+            currentGoal = subGoal.Key;
             actionQueue = planner.Plan(relevantActions, subGoal.Key.subGoals, beliefs, this.transform, this);
             if (actionQueue != null)
             {
-                
+
                 actionsInPlan = actionQueue.ToList<Actions>();
                 foreach (Actions actionInPlan in actionsInPlan)
                 {
