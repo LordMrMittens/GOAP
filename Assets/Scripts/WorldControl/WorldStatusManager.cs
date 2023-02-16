@@ -24,6 +24,7 @@ public class WorldStatusManager : MonoBehaviour
     [SerializeField] float temperatureDeviation;
     public bool isDark;
     [SerializeField] Text tempText;
+    [SerializeField] Text timeText;
 
     public float timeSpeed=1;
     // Start is called before the first frame update
@@ -42,7 +43,14 @@ public class WorldStatusManager : MonoBehaviour
     {
         DayNightCycle();
         Time.timeScale = timeSpeed;
-        tempText.text = currentTemperature.ToString();
+        string time= timeOfDay.ToString();
+        if (hourTimer<9){
+            time += $":0{hourTimer.ToString("F0")}";
+        } else{
+            time += $":0{9}";
+        }
+        timeText.text = $"Time: {time}";
+        tempText.text = $"Temp:{currentTemperature.ToString("F1")}°C";
     }
 
     private void UpdateDayNightCycle()
@@ -55,13 +63,19 @@ public class WorldStatusManager : MonoBehaviour
         {
             isDark = false;
         }
-        if (timeOfDay > 0 && timeOfDay < 12)
+        if (timeOfDay > 3 && timeOfDay < 15)
         {
             currentTemperature = currentTemperature + (nextDayTemp / 12);
+            if(currentTemperature > maxTemperature){
+                currentTemperature = maxTemperature;
+            }
         }
         else
         {
             currentTemperature = currentTemperature - ((lastDayTemp - nextNightTemp) / 12);
+            if (currentTemperature < minTemperature){
+                currentTemperature = minTemperature;
+            }
         }
     }
 
