@@ -6,6 +6,15 @@ public class NPCInventory : MonoBehaviour
 {
     public List<string> itemsEquipped = new List<string>();
     ItemDisplayManager itemDisplayManager;
+    NPCController nPCController;
+    float maxToolDurability = 100;
+    float minToolDurability = 0;
+    float currentToolDurability;
+
+    private void Start() {
+        currentToolDurability = 100;
+        nPCController = GetComponent<NPCController>();
+    }
     private void Update() {
         if (itemDisplayManager ==null){
         itemDisplayManager = GetComponent<ItemDisplayManager>();
@@ -23,6 +32,42 @@ public class NPCInventory : MonoBehaviour
             itemsEquipped.Remove(objectToRemove);
             itemDisplayManager.HideObject(objectToRemove);
         }
-        
+
+    }
+    public void ConsumeToolDurability(float durabilityConsumed)
+    {
+        if (itemsEquipped.Contains("Tool"))
+        {
+            currentToolDurability -= durabilityConsumed;
+            if (currentToolDurability < minToolDurability)
+            {
+                BreakTool();
+            }
+        }
+    }
+
+    void BreakTool()
+    {
+        if (itemsEquipped.Contains("Tool"))
+        { 
+            RemoveObject("Tool");
+        }
+        nPCController.beliefs.AddSingleState("NeedTool", 5);
+    }
+    public void RestoreTool(){
+        currentToolDurability = maxToolDurability;
+    }
+
+    public bool CheckForTool()
+    {
+        if (!itemsEquipped.Contains("Tool"))
+        {
+            if (currentToolDurability < minToolDurability)
+            {
+                BreakTool();
+            }
+            return false;
+        }
+        return true;
     }
 }

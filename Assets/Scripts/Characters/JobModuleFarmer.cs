@@ -36,38 +36,52 @@ public class JobModuleFarmer : BaseJobModule
         }
         if (isAtWork )
         {
-            if (nPCInventory.itemsEquipped.Contains(itemBeingFarmed))
+            if (nPCInventory.CheckForTool())
             {
-                List<string> itemsInInventory = new List<string>();
-                foreach (string item in nPCInventory.itemsEquipped)
+                if (nPCInventory.itemsEquipped.Contains(itemBeingFarmed))
                 {
-                    if (item == itemBeingFarmed)
+                    List<string> itemsInInventory = new List<string>();
+                    foreach (string item in nPCInventory.itemsEquipped)
                     {
-                        itemsInInventory.Add(item);
+                        if (item == itemBeingFarmed)
+                        {
+                            itemsInInventory.Add(item);
+                        }
                     }
-                }
-                if (itemsInInventory.Count < maxProductCarried)
-                {
-                    nPCController.beliefs.AddSingleState($"ShouldPickProduct", 0);
+                    if (itemsInInventory.Count < maxProductCarried)
+                    {
+                        nPCController.beliefs.AddSingleState($"ShouldPickProduct", 0);
+                    }
+                    else
+                    {
+                        nPCController.beliefs.RemoveState($"ShouldPickProduct");
+                        nPCController.beliefs.AddSingleState($"ShouldDepositProduct", 0);
+                    }
                 }
                 else
                 {
-                    nPCController.beliefs.RemoveState($"ShouldPickProduct");
-                    nPCController.beliefs.AddSingleState($"ShouldDepositProduct", 0);
+                    nPCController.beliefs.AddSingleState($"ShouldPickProduct", 0);
                 }
             }
             else
             {
-                nPCController.beliefs.AddSingleState($"ShouldPickProduct", 0);
+                nPCController.beliefs.RemoveState($"ShouldPickProduct");
+                nPCController.beliefs.AddSingleState($"NeedTool", 0);
             }
         }
         else
         {
+            if (nPCInventory.CheckForTool())
+            {
+                nPCController.beliefs.AddSingleState($"ShouldStoreTool", 0);
+            }
             if (nPCInventory.itemsEquipped.Contains(itemBeingFarmed))
             {
                 nPCController.beliefs.RemoveState($"ShouldPickProduct");
                 nPCController.beliefs.AddSingleState($"ShouldDepositProduct", 0);
-            } else {
+            }
+            else
+            {
                 nPCController.beliefs.RemoveState($"ShouldDepositProduct");
                 nPCController.beliefs.RemoveState($"ShouldPickProduct");
             }

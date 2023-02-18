@@ -14,18 +14,23 @@ public class Farmer : BaseCharacter
         tickCounter += Time.deltaTime;
         if (tickCounter > tickFrequency)
         {
+            if (beliefs.GetAllStates().ContainsKey("NeedTool"))
+            {
+                beliefs.RemoveState("ShouldPickProduct");
+                GetTool();
+                hasGoal = true;
+            }
             if (beliefs.GetAllStates().ContainsKey("ShouldPickProduct"))
             {
-                //Debug.Log("Should be mining at the moment");
                 PickProduct();
                 hasGoal = true;
             }
             if (beliefs.GetAllStates().ContainsKey("ShouldDepositProduct"))
             {
-                //Debug.Log("Should stop mining");
                 DepositProduct();
                 hasGoal = true;
             }
+
             tickCounter = 0;
         }
     }
@@ -36,5 +41,10 @@ public class Farmer : BaseCharacter
     public void DepositProduct()
     {
         AddSubGoal("DepositProduct", 11, true, jobGoalRelatedTo);
+    }
+    public void GetTool()
+    {
+        Debug.Log("Adding subgoal");
+        AddSubGoal("HasTool", 11, true, jobGoalRelatedTo);
     }
 }

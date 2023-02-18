@@ -21487,6 +21487,8 @@ GameObject:
   - component: {fileID: 4630597609325131367}
   - component: {fileID: 2990453456917463792}
   - component: {fileID: 4463631769016829239}
+  - component: {fileID: 8621887810515281912}
+  - component: {fileID: 5722668591437494926}
   m_Layer: 0
   m_Name: ToolShed
   m_TagString: Untagged
@@ -21526,6 +21528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeOfObjectsContained:
   - Light
+  - Tool
   maxNumberOfItems: 5
   numberOfObjectsToAdd: 1
   storedObjects: []
@@ -21620,6 +21623,68 @@ MonoBehaviour:
     carryOver: 1
   actionResults:
   - key: GetLight
+    value: 0
+    carryOver: 1
+--- !u!114 &8621887810515281912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7734759574920570394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4ef17ad6e848be4eb95bfcc235a47f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Pick Tool
+  goalsRelatedTo: []
+  defaultCost: 1
+  defaultTarget: {fileID: 7734759574920570394}
+  targetTag: 
+  duration: 0
+  maxOwners: 1
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 5233869548145432261}
+  activatingAction: 1
+  relatedItemIfAvailable: Tool
+  preConditions:
+  - key: AtToolshed
+    value: 0
+    carryOver: 0
+  actionResults:
+  - key: HasTool
+    value: 0
+    carryOver: 1
+--- !u!114 &5722668591437494926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7734759574920570394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abbf8ec0bdadd004fab05c05fbca42ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Drop Tool
+  goalsRelatedTo: []
+  defaultCost: 1
+  defaultTarget: {fileID: 7734759574920570394}
+  targetTag: 
+  duration: 0
+  maxOwners: 1
+  defaultOwner: {fileID: 0}
+  containerUsed: {fileID: 0}
+  activatingAction: 1
+  relatedItemIfAvailable: Tool
+  preConditions:
+  - key: AtToolshed
+    value: 0
+    carryOver: 0
+  actionResults:
+  - key: StoredTool
     value: 0
     carryOver: 1
 --- !u!1 &7887579666846103021
