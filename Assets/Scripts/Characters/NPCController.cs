@@ -147,7 +147,7 @@ public class NPCController : MonoBehaviour
                 {
                     target = currentAction.target;
                 }
-                if (currentAction.freeTargets.Count > 0)
+                if (currentAction.freeTargets.Count > 0 && currentAction.multipleTargetsAreContainers == false)
                 {
                     float bestDistance = Mathf.Infinity;
                     int bestTarget = 0;
@@ -162,6 +162,9 @@ public class NPCController : MonoBehaviour
                     }
                     target = currentAction.freeTargets[bestTarget];
                     currentAction.RemoveAvailableTarget(currentAction.freeTargets[bestTarget]);
+                }
+                if (currentAction.freeTargets.Count > 0 && currentAction.multipleTargetsAreContainers){
+                    target = currentAction.SetTarget(this);
                 }
             }
             agent.SetDestination(target.transform.position);

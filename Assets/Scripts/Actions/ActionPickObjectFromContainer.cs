@@ -10,6 +10,26 @@ public class ActionPickObjectFromContainer : Actions
     {
         return true;
     }
+
+    protected override bool CheckIfItemsAvailable(NPCController _nPCController)
+    {
+        if (targetTag == "")
+        {
+            return base.CheckIfItemsAvailable(_nPCController);
+        }
+        else
+        {
+            CheckTargetAvailability();
+            foreach (GameObject target in freeTargets)
+            {
+                if (target.GetComponent<ContainerObject>().storedObjects.Contains(relatedItemIfAvailable))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
     public override bool PostPerform(NPCController _nPCController)
     {
         if (pickAllObjectsPossible)
@@ -33,6 +53,20 @@ public class ActionPickObjectFromContainer : Actions
                 return true;
             }
         }
+        if (multipleTargetsAreContainers){
+            ResetTarget();
+        }
         return false;
+    }
+
+    void CheckTargetAvailability(){
+        foreach (GameObject target in targetsInUse)
+        {
+            if(target.GetComponent<ContainerObject>().storedObjects.Count >0){
+                freeTargets.Add(target);
+                targetsInUse.Remove(target);
+                break;
+            }
+        }
     }
 }

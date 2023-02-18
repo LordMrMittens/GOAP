@@ -14,6 +14,12 @@ TagManager:
   - PubTable
   - IdlingLocation
   - CloseupCameraPosition
+  - FruitBush
+  - GrapeBush
+  - VeggieBush
+  - Cow
+  - Tree
+  - Fish
   layers:
   - Default
   - TransparentFX

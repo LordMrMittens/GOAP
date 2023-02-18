@@ -44,7 +44,6 @@ public class Farmer : BaseCharacter
     }
     public void GetTool()
     {
-        Debug.Log("Adding subgoal");
         AddSubGoal("HasTool", 11, true, jobGoalRelatedTo);
     }
 }

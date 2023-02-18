@@ -27,9 +27,11 @@ public abstract class Actions : MonoBehaviour
     //public bool running {get; set;} = false;
     public ContainerObject containerUsed; //if depositing item container used should be blank
     public bool activatingAction = false;
+    public bool multipleTargetsAreContainers;
     public string relatedItemIfAvailable;
     public worldState[] preConditions;
     public worldState[] actionResults;
+    
 
     public Actions(){
         preconditions = new Dictionary<string, int>();
@@ -83,8 +85,9 @@ public abstract class Actions : MonoBehaviour
 
     public bool IsAchievable(NPCController _nPCController)
     {
-        if(containerUsed){
-        return CheckIfItemsAvailable(_nPCController);
+        if (containerUsed)
+        {
+            return CheckIfItemsAvailable(_nPCController);
         }
         return true;
     }
@@ -135,5 +138,33 @@ public abstract class Actions : MonoBehaviour
     IEnumerator WaitForActionToComplete(GameObject _target){
         yield return new WaitForSeconds(duration);
         AddAvailableTarget(_target);
+    }
+
+    public GameObject SetTarget(NPCController user)
+    {
+
+        float bestDistance = Mathf.Infinity;
+        int bestTarget = 0;
+        for (int i = 0; i < freeTargets.Count; i++)
+        {
+            if (freeTargets[i].GetComponent<ContainerObject>().storedObjects.Count > 0)
+            {
+                float distance = Vector3.Distance(user.transform.position, freeTargets[i].transform.position);
+                if (distance < bestDistance)
+                {
+
+                    bestDistance = distance;
+                    bestTarget = i;
+                }
+            } else {
+                RemoveAvailableTarget(freeTargets[i]);
+            }
+        }
+        target = freeTargets[bestTarget];
+        RemoveAvailableTarget(freeTargets[bestTarget]);
+        return target;
+    }
+    public void ResetTarget(){
+        target = null;
     }
 }
