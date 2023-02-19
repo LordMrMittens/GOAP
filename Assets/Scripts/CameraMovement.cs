@@ -41,7 +41,6 @@ public class CameraMovement : MonoBehaviour
         transform.position = pos.transform.position;
         transform.parent = pos;
         Camera.main.transform.LookAt(lookAt);
-        worldStatusManager.timeSpeed = 0;
     }
 
     void SetLastPositionAndRotation()
@@ -51,10 +50,9 @@ public class CameraMovement : MonoBehaviour
     }
     public void ResetLastPositionAndRotation()
     {
-         Camera.main.cullingMask = defaultLayersToShow;
-         camLight.SetActive(false);
-         transform.parent = null;
-        worldStatusManager.timeSpeed = 1;
+        Camera.main.cullingMask = defaultLayersToShow;
+        camLight.SetActive(false);
+        transform.parent = null;
         transform.position = lastPos;
         transform.rotation = lastRotation;
         isCloseUp = false;

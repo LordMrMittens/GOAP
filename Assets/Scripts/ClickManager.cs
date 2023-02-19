@@ -9,9 +9,14 @@ public class ClickManager : MonoBehaviour
     WorldStatusManager worldStatusManager;
     CameraMovement cam;
     bool NPCDetailView = false;
+    NPCController nPCController;
+    NeedsManager needsManager; 
+    BasicNeedModule mostNeedyStat;
+    TemperatureModule temperatureModule; 
     private void Start() {
         worldStatusManager = WorldStatusManager.WSMInstance;
         cam= Camera.main.GetComponent<CameraMovement>();
+        
     }
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Mouse0)){
@@ -31,9 +36,16 @@ public class ClickManager : MonoBehaviour
             StatusUI.statusUIInstance.statsDisplay.SetActive(false);
             cam.ResetLastPositionAndRotation();
             NPCDetailView = false;
+            nPCController = null;
+            needsManager = null;
+            mostNeedyStat = null;
+            temperatureModule = null;
+            worldStatusManager.timeSpeed = 1;
         }
-        if (NPCDetailView){
-
+        if (NPCDetailView && nPCController && needsManager && temperatureModule){
+            needsManager.UpdateStatsSheet();
+            nPCController.GetPlanInformation();
+            StatusUI.statusUIInstance.SetTemperature(temperatureModule.GetCurrentTemperature());
         }
 
     }
@@ -42,10 +54,10 @@ public class ClickManager : MonoBehaviour
         if (cam.isCloseUp == false)
         {
             excelImporter = FindObjectOfType<ExcelImporter>();
-            NPCController nPCController = selectedNPC.GetComponent<NPCController>();
-            NeedsManager needsManager = selectedNPC.GetComponent<NeedsManager>();
-            BasicNeedModule mostNeedyStat = needsManager.GetLowestStat();
-            TemperatureModule temperatureModule = needsManager.GetTemperatureModule();
+            nPCController = selectedNPC.GetComponent<NPCController>();
+            needsManager = selectedNPC.GetComponent<NeedsManager>();
+            mostNeedyStat = needsManager.GetLowestStat();
+            temperatureModule = needsManager.GetTemperatureModule();
             cam.SetCloseUpPosition(nPCController.closeupCamPos, nPCController.lookAtOffset);
             string commentary = "";
             if (mostNeedyStat != null)
@@ -54,11 +66,9 @@ public class ClickManager : MonoBehaviour
             }
             GenerateComentaryOnTemperature(temperatureModule);
             NPCDetailView =true;
-            needsManager.UpdateStatsSheet();
-            nPCController.GetPlanInformation();
             StatusUI.statusUIInstance.UpdateDialogue(nPCController.gameObject.name, commentary);
-            StatusUI.statusUIInstance.SetTemperature(temperatureModule.GetCurrentTemperature());
             StatusUI.statusUIInstance.statsDisplay.SetActive(true);
+            worldStatusManager.timeSpeed = 0;
         }
     }
 
