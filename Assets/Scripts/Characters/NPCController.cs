@@ -28,7 +28,7 @@ public class NPCController : MonoBehaviour
     public GameObject target;
     Planner planner;
     public Queue<Actions> actionQueue;
-    List<Actions> actionsInPlan = new List<Actions>();
+    public List<Actions> actionsInPlan {get;set;} = new List<Actions>();
     public Actions currentAction;
     public SubGoal currentGoal;
     public bool invoked = false;
@@ -351,20 +351,5 @@ public class NPCController : MonoBehaviour
         }
     }
 
-    public void GetPlanInformation()
-    {
-        string planToDisplay = "My plan is: \n";
-        if (actionsInPlan.Count > 0)
-        {
-            foreach (Actions action in actionsInPlan)
-            {
-                planToDisplay += action.actionName + ".\n";
-            }
-        }
-        else
-        {
-            planToDisplay += "There is no plan";
-        }
-        StatusUI.statusUIInstance.UpdatePlanWindow(planToDisplay);
-    }
+
 }
