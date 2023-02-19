@@ -8,6 +8,7 @@ public class ClickManager : MonoBehaviour
     ExcelImporter excelImporter;
     WorldStatusManager worldStatusManager;
     CameraMovement cam;
+    bool NPCDetailView = false;
     private void Start() {
         worldStatusManager = WorldStatusManager.WSMInstance;
         cam= Camera.main.GetComponent<CameraMovement>();
@@ -29,30 +30,40 @@ public class ClickManager : MonoBehaviour
             StatusUI.statusUIInstance.ClearStats();
             StatusUI.statusUIInstance.statsDisplay.SetActive(false);
             cam.ResetLastPositionAndRotation();
+            NPCDetailView = false;
         }
+        if (NPCDetailView){
+
+        }
+
     }
-    private void OnNpcClicked(){
-        excelImporter = FindObjectOfType<ExcelImporter>();
-        NPCController nPCController = selectedNPC.GetComponent<NPCController>();
-        NeedsManager needsManager = selectedNPC.GetComponent<NeedsManager>();
-        BasicNeedModule mostNeedyStat = needsManager.GetLowestStat();
-        TemperatureModule temperatureModule = needsManager.GetTemperatureModule();
-        cam.SetCloseUpPosition(nPCController.closeupCamPos.position, nPCController.lookAtOffset);
-        string commentary = "";
-        if (mostNeedyStat != null)
+    private void OnNpcClicked()
+    {
+        if (cam.isCloseUp == false)
         {
-           commentary = GenerateComentaryOnNeeds(mostNeedyStat.resourceType);
+            excelImporter = FindObjectOfType<ExcelImporter>();
+            NPCController nPCController = selectedNPC.GetComponent<NPCController>();
+            NeedsManager needsManager = selectedNPC.GetComponent<NeedsManager>();
+            BasicNeedModule mostNeedyStat = needsManager.GetLowestStat();
+            TemperatureModule temperatureModule = needsManager.GetTemperatureModule();
+            cam.SetCloseUpPosition(nPCController.closeupCamPos, nPCController.lookAtOffset);
+            string commentary = "";
+            if (mostNeedyStat != null)
+            {
+                commentary = GenerateComentaryOnNeeds(mostNeedyStat.resourceType);
+            }
+            GenerateComentaryOnTemperature(temperatureModule);
+            NPCDetailView =true;
+            needsManager.UpdateStatsSheet();
+            nPCController.GetPlanInformation();
+            StatusUI.statusUIInstance.UpdateDialogue(nPCController.gameObject.name, commentary);
+            StatusUI.statusUIInstance.SetTemperature(temperatureModule.GetCurrentTemperature());
+            StatusUI.statusUIInstance.statsDisplay.SetActive(true);
         }
-        GenerateComentaryOnTemperature(temperatureModule);
-        needsManager.UpdateStatsSheet();
-        nPCController.GetPlanInformation();
-        StatusUI.statusUIInstance.UpdateDialogue(nPCController.gameObject.name, commentary);
-        StatusUI.statusUIInstance.SetTemperature(temperatureModule.GetCurrentTemperature());
-        StatusUI.statusUIInstance.statsDisplay.SetActive(true);
     }
 
     // TODO MOVE ALL BELOW TO THEIR OWN CLASS
-        public string GenerateComentaryOnNeeds(string keyword) 
+    public string GenerateComentaryOnNeeds(string keyword) 
     {
         string dialogue = "Nothing to report";
         switch (keyword)

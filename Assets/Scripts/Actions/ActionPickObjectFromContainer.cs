@@ -40,6 +40,11 @@ public class ActionPickObjectFromContainer : Actions
                 if (targetContainer.RemoveObject(relatedItemIfAvailable))
                 {
                     _nPCController.nPCInventory.DepositObject(relatedItemIfAvailable);
+                    if (multipleTargetsAreContainers)
+                    {
+                        _nPCController.nPCInventory.ConsumeToolDurability(10);
+                        //ResetTarget(); reseting target may not be needed
+                    }
                 }
             }
             return true;
@@ -50,12 +55,16 @@ public class ActionPickObjectFromContainer : Actions
             if (target.GetComponent<ContainerObject>().RemoveObject(relatedItemIfAvailable))
             {
                 _nPCController.nPCInventory.DepositObject(relatedItemIfAvailable);
+                if (multipleTargetsAreContainers)
+                {
+                    _nPCController.nPCInventory.ConsumeToolDurability(10);
+                    //ResetTarget();reseting target may not be needed
+                }
                 return true;
             }
         }
-        if (multipleTargetsAreContainers){
-            ResetTarget();
-        }
+
+
         return false;
     }
 

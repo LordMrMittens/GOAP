@@ -20,7 +20,6 @@ public class WorldStatusManager : MonoBehaviour
     float nextDayTemp;
     float lastDayTemp;
     float nextNightTemp;
-    bool needtoChangeTheTemp = true;
     [SerializeField] float temperatureDeviation;
     public bool isDark;
     [SerializeField] Text tempText;

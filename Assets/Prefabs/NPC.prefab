@@ -1256,6 +1256,7 @@ MonoBehaviour:
   defaultOwner: {fileID: -4578944316393918606}
   containerUsed: {fileID: 0}
   activatingAction: 1
+  multipleTargetsAreContainers: 0
   relatedItemIfAvailable: 
   preConditions:
   - key: IsTired
@@ -1291,6 +1292,7 @@ MonoBehaviour:
   defaultOwner: {fileID: -4578944316393918606}
   containerUsed: {fileID: 0}
   activatingAction: 1
+  multipleTargetsAreContainers: 0
   relatedItemIfAvailable: Food
   preConditions:
   - key: IsHungry
@@ -1329,6 +1331,7 @@ MonoBehaviour:
   defaultOwner: {fileID: -4578944316393918606}
   containerUsed: {fileID: 0}
   activatingAction: 1
+  multipleTargetsAreContainers: 0
   relatedItemIfAvailable: Drink
   preConditions:
   - key: IsThirsty
@@ -1367,6 +1370,7 @@ MonoBehaviour:
   defaultOwner: {fileID: 0}
   containerUsed: {fileID: 0}
   activatingAction: 0
+  multipleTargetsAreContainers: 0
   relatedItemIfAvailable: 
   preConditions: []
   actionResults:

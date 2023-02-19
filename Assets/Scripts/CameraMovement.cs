@@ -10,14 +10,16 @@ public class CameraMovement : MonoBehaviour
     float zoomAmount;
     public Vector3 lastPos {get;set;}
     public Quaternion lastRotation {get;set;}
-    bool isCloseUp;
+    public bool isCloseUp {get; set;}
     [SerializeField] LayerMask layersToHide;
+    [SerializeField] GameObject camLight;
     LayerMask defaultLayersToShow;
     void Start()
     {
         worldStatusManager = WorldStatusManager.WSMInstance;
         zoomAmount = transform.position.y;
         defaultLayersToShow = Camera.main.cullingMask;
+        camLight.SetActive(false);
     }
     void Update()
     {
@@ -31,11 +33,13 @@ public class CameraMovement : MonoBehaviour
         }
     }
 
-    public void SetCloseUpPosition( Vector3 pos, Transform lookAt){
+    public void SetCloseUpPosition( Transform pos, Transform lookAt){
         isCloseUp = true;
+        camLight.SetActive(true);
         Camera.main.cullingMask = layersToHide;
         SetLastPositionAndRotation();
-        transform.position = pos;
+        transform.position = pos.transform.position;
+        transform.parent = pos;
         Camera.main.transform.LookAt(lookAt);
         worldStatusManager.timeSpeed = 0;
     }
@@ -48,6 +52,8 @@ public class CameraMovement : MonoBehaviour
     public void ResetLastPositionAndRotation()
     {
          Camera.main.cullingMask = defaultLayersToShow;
+         camLight.SetActive(false);
+         transform.parent = null;
         worldStatusManager.timeSpeed = 1;
         transform.position = lastPos;
         transform.rotation = lastRotation;
