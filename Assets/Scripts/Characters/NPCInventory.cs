@@ -70,4 +70,20 @@ public class NPCInventory : MonoBehaviour
         }
         return true;
     }
+        public bool CheckForLight()
+    {
+        if (itemsEquipped.Contains("Light"))
+        {
+            return true;
+        }
+        return false;
+    }
+    public bool CheckForJacket()
+    {
+        if (itemsEquipped.Contains("Jacket"))
+        {
+            return true;
+        }
+        return false;
+    }
 }
