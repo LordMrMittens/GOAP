@@ -50,8 +50,12 @@ public class StatusUI : MonoBehaviour
         planUI.UpdatePlanText(_plan);
     }
 
-    public void UpdateDialogue(string _nPCName, string _dialogue){
-        dialogueUI.UpdateNameText(_nPCName);
+    public void UpdateDialogue(string _nPCName, string job , string _dialogue, bool _nightOwl = false){
+        string nightOwl = "";
+        if(_nightOwl){
+            nightOwl = "(Nightshift)";
+        }
+        dialogueUI.UpdateNameText(_nPCName, job ,nightOwl);
         dialogueUI.UpdateDialogueText(_dialogue);
     }
     public void ClearStats()
@@ -61,11 +65,14 @@ public class StatusUI : MonoBehaviour
             Destroy(stat.Value.gameObject);
         }
         displayedStats.Clear();
-        UpdateDialogue("", "");
+        UpdateDialogue("", "", "");
         UpdatePlanWindow("");
     }
     public void SetTemperature(float temp){
 
         temperatureText.text = $"Body Temp: {temp.ToString("F1")}°C";
+    }
+    public void UpdateInventory(){
+
     }
 }

@@ -4,43 +4,76 @@ using UnityEngine;
 
 public class DialogueManager
 {
-public string GenerateComentaryOnNeeds(string keyword) 
+
+    public void GenerateDialogue(NPCController nPCController, NeedsManager needsManager, BasicNeedModule mostNeedyStat, TemperatureModule temperatureModule)
     {
-        string dialogue = "Nothing to report";
+        string commentaryToDisplay;
+        string needsCommentary = "";
+        string junction = "";
+        mostNeedyStat = needsManager.GetLowestStat();
+        if (mostNeedyStat != null)
+        {
+            needsCommentary = GenerateComentaryOnNeeds(mostNeedyStat.resourceType);
+        }
+        bool negativeMood = false;
+        if(negativeMood){
+            junction = "and \n";
+        } else {
+            junction = "but \n";
+        }
+
+        string temperatureCommentary = GenerateComentaryOnTemperature(temperatureModule, negativeMood);
+        if (needsCommentary != "")
+        {
+            commentaryToDisplay = temperatureCommentary + "\n" + junction + needsCommentary;
+        }
+        else
+        {
+            commentaryToDisplay = temperatureCommentary;
+        }
+        string job = nPCController.jobGoalRelatedTo;
+        job = job.Remove(job.Length - 3, 3);
+        StatusUI.statusUIInstance.UpdateDialogue(nPCController.gameObject.name, job , commentaryToDisplay, needsManager.tirednessModule.nightOwl);
+    }
+    public string GenerateComentaryOnNeeds(string keyword) 
+    {
+        string needsDialogue = "Nothing to report";
         switch (keyword)
         {
             case "Hydration":
-                dialogue = GetDialogue(dialogue, "ThirstyDialogue");
+                needsDialogue = GetDialogue(needsDialogue, "ThirstyDialogue");
                 break;
 
             case "Nutrition":
-                dialogue = GetDialogue(dialogue, "HungryDialogue");
+                needsDialogue = GetDialogue(needsDialogue, "HungryDialogue");
                 break;
 
             case "Tiredness":
-                dialogue = GetDialogue(dialogue, "TiredDialogue");
+                needsDialogue = GetDialogue(needsDialogue, "TiredDialogue");
                 break;
             default:
-                dialogue = "Nothing to report";
+                needsDialogue = "Nothing to report";
                 break;
         }
-        return dialogue;
+        return needsDialogue;
     }
-    public string GenerateComentaryOnTemperature(TemperatureModule temperatureModule)
+    public string GenerateComentaryOnTemperature(TemperatureModule temperatureModule, bool negativeMood)
     {
-        string dialogue = "Weather is pleasant";
+        string temperatureDialogue = "Weather is pleasant";
         if (temperatureModule.currentTemperature < temperatureModule.targetTemperature - 3 || temperatureModule.currentTemperature > temperatureModule.targetTemperature + 3)
         {
             //means it cant adjust temperature properly anymore
             if (WorldStatusManager.WSMInstance.currentTemperature < temperatureModule.targetTemperature)
             {
-                dialogue = GetDialogue(dialogue, "HypothermiaDialogue"); // need to make these add to eachother
-                dialogue = GetDialogue(dialogue, "HungryDialogue");
+                temperatureDialogue = GetDialogue(temperatureDialogue, "HypothermiaDialogue"); // need to make these add to eachother
+                temperatureDialogue = GetDialogue(temperatureDialogue, "HungryDialogue");
+                negativeMood = true;
             }
             else
             {
-                dialogue = GetDialogue(dialogue, "HeatstrokeDialogue");
-                dialogue = GetDialogue(dialogue, "ThirstyDialogue");
+                temperatureDialogue = GetDialogue(temperatureDialogue, "HeatstrokeDialogue");
+                temperatureDialogue = GetDialogue(temperatureDialogue, "ThirstyDialogue");
+                negativeMood = true;
             }
         }
         else
@@ -49,26 +82,30 @@ public string GenerateComentaryOnNeeds(string keyword)
             {
                 if (WorldStatusManager.WSMInstance.currentTemperature < temperatureModule.targetTemperature - temperatureModule.coldToleranceOffset)
                 {
-                    dialogue = GetDialogue(dialogue, "ColdDialogue");
+                    temperatureDialogue = GetDialogue(temperatureDialogue, "ColdDialogue");
+                    negativeMood = true;
                 }
                 else
                 {
-                    dialogue = GetDialogue(dialogue, "CoolBreezeDialogue");
+                    temperatureDialogue = GetDialogue(temperatureDialogue, "CoolBreezeDialogue");
+                    negativeMood = false;
                 }
             }
             else
             {
                 if (WorldStatusManager.WSMInstance.currentTemperature > temperatureModule.targetTemperature + temperatureModule.heatToleranceOffset)
                 {
-                    dialogue = GetDialogue(dialogue, "HotDialogue");
+                    temperatureDialogue = GetDialogue(temperatureDialogue, "HotDialogue");
+                    negativeMood = true;
                 }
                 else
                 {
-                    dialogue = GetDialogue(dialogue, "WarmBreezeDialogue");
+                    temperatureDialogue = GetDialogue(temperatureDialogue, "WarmBreezeDialogue");
+                    negativeMood = false;
                 }
             }
         }
-        return dialogue;
+        return temperatureDialogue;
     }
 
     void GenerateComentaryOnPlans()

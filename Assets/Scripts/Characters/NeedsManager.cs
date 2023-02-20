@@ -7,7 +7,7 @@ public class NeedsManager : MonoBehaviour
     [SerializeField] NutritionModule nutritionModule;
     [SerializeField] TemperatureModule temperatureModule;
     [SerializeField] HydrationModule hydrationModule;
-    [SerializeField] TirednessModule tirednessModule;
+    [field: SerializeField] public TirednessModule tirednessModule;
     public WorldStatusManager worldStatusManager {get;set;}
     [SerializeField] NPCController nPCController;
     [SerializeField] float tickFrequency;

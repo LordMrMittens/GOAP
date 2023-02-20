@@ -6,10 +6,9 @@ using System.Collections.Generic;
 public class ExcelImporter : MonoBehaviour
 {
     public TextAsset[] csvFile;
-    public string jsonFileName = "csvData.json";
     public Dictionary<string, List<string>> text = new Dictionary<string, List<string>>();
     public static ExcelImporter textImporterInstance;
-    //public List<string> names = new List<string>();
+
     private void Awake()
     {
         textImporterInstance = this;
@@ -19,12 +18,6 @@ public class ExcelImporter : MonoBehaviour
             {
                 List<string> names = ReadCsv(csvFile[i].text);
                 text.Add(csvFile[i].name, names);
-            }
-        }
-        if (text.ContainsKey("Names")){
-            foreach (string item in text["Names"])
-            {
-                //Debug.Log(item);
             }
         }
     }

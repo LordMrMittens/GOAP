@@ -19,7 +19,6 @@ public class ClickManager : MonoBehaviour
     private void Start() {
         worldStatusManager = WorldStatusManager.WSMInstance;
         cam= Camera.main.GetComponent<CameraMovement>();
-        
     }
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Mouse0)){
@@ -30,34 +29,48 @@ public class ClickManager : MonoBehaviour
             {
                 if(hit.transform.gameObject.tag == "NPC"){
                     selectedNPC = hit.transform.gameObject;
-                    OnNpcClicked();
+                    EnterFocusMode();
                 }
             }
         }
-        if(Input.GetKeyDown(KeyCode.Escape)){
-            StatusUI.statusUIInstance.ClearStats();
-            StatusUI.statusUIInstance.statsDisplay.SetActive(false);
-            cam.ResetLastPositionAndRotation();
-            NPCDetailView = false;
-            nPCController = null;
-            needsManager = null;
-            mostNeedyStat = null;
-            temperatureModule = null;
-            worldStatusManager.timeSpeed = 1;
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            ExitFocusMode();
         }
-        if (NPCDetailView && nPCController && needsManager && temperatureModule){
-            needsManager.UpdateStatsSheet();
-            string newPlan = dialogueManager.GetPlanInformation(nPCController);
-            StatusUI.statusUIInstance.UpdatePlanWindow(newPlan);
-            if(currentPlan != newPlan){
-                currentPlan = newPlan;
-                GenerateDialogue();
-            }
-            StatusUI.statusUIInstance.SetTemperature(temperatureModule.GetCurrentTemperature());
+        if (NPCDetailView && nPCController && needsManager && temperatureModule)
+        {
+            UpdateFocusMode();
         }
 
     }
-    private void OnNpcClicked()
+
+    private void UpdateFocusMode()
+    {
+        needsManager.UpdateStatsSheet();
+        string newPlan = dialogueManager.GetPlanInformation(nPCController);
+        StatusUI.statusUIInstance.UpdatePlanWindow(newPlan);
+        if (currentPlan != newPlan)
+        {
+            currentPlan = newPlan;
+            dialogueManager.GenerateDialogue(nPCController, needsManager, mostNeedyStat, temperatureModule);
+        }
+        StatusUI.statusUIInstance.SetTemperature(temperatureModule.GetCurrentTemperature());
+    }
+
+    private void ExitFocusMode()
+    {
+        StatusUI.statusUIInstance.ClearStats();
+        StatusUI.statusUIInstance.statsDisplay.SetActive(false);
+        cam.ResetLastPositionAndRotation();
+        NPCDetailView = false;
+        nPCController = null;
+        needsManager = null;
+        mostNeedyStat = null;
+        temperatureModule = null;
+        worldStatusManager.timeSpeed = 1;
+    }
+
+    private void EnterFocusMode()
     {
         if (cam.isCloseUp == false)
         {
@@ -68,25 +81,11 @@ public class ClickManager : MonoBehaviour
             mostNeedyStat = needsManager.GetLowestStat();
             temperatureModule = needsManager.GetTemperatureModule();
             cam.SetCloseUpPosition(nPCController.closeupCamPos, nPCController.lookAtOffset);
-            GenerateDialogue();
+            dialogueManager.GenerateDialogue(nPCController,needsManager,mostNeedyStat,temperatureModule);
             NPCDetailView = true;
             StatusUI.statusUIInstance.statsDisplay.SetActive(true);
             worldStatusManager.timeSpeed = 0;
         }
     }
-
-    private void GenerateDialogue()
-    {
-        string commentary = "";
-        mostNeedyStat = needsManager.GetLowestStat();
-        if (mostNeedyStat != null)
-        {
-            commentary = dialogueManager.GenerateComentaryOnNeeds(mostNeedyStat.resourceType);
-        }
-        dialogueManager.GenerateComentaryOnTemperature(temperatureModule);
-        StatusUI.statusUIInstance.UpdateDialogue(nPCController.gameObject.name, commentary);
-    }
-
-    // TODO MOVE ALL BELOW TO THEIR OWN CLASS
     
 }
