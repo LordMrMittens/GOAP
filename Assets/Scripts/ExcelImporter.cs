@@ -8,9 +8,11 @@ public class ExcelImporter : MonoBehaviour
     public TextAsset[] csvFile;
     public string jsonFileName = "csvData.json";
     public Dictionary<string, List<string>> text = new Dictionary<string, List<string>>();
+    public static ExcelImporter textImporterInstance;
     //public List<string> names = new List<string>();
     private void Awake()
     {
+        textImporterInstance = this;
         for (int i = 0; i < csvFile.Length; i++)
         {
             if (csvFile[i] != null)
