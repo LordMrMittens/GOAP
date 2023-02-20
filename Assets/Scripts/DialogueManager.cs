@@ -57,14 +57,16 @@ public class DialogueManager
             //means it cant adjust temperature properly anymore
             if (WorldStatusManager.WSMInstance.currentTemperature < temperatureModule.targetTemperature)
             {
-                temperatureDialogue = GetDialogue("HypothermiaDialogue"); // need to make these add to eachother
-                temperatureDialogue = GetDialogue("HungryDialogue");
+                temperatureDialogue = GetDialogue("HypothermiaDialogue");
+                temperatureDialogue += "and \n"; // need to make these add to eachother
+                temperatureDialogue += GetDialogue("HungryDialogue");
                 negativeMood = true;
             }
             else
             {
                 temperatureDialogue = GetDialogue("HeatstrokeDialogue");
-                temperatureDialogue = GetDialogue("ThirstyDialogue");
+                 temperatureDialogue += "and \n";
+                temperatureDialogue += GetDialogue("ThirstyDialogue");
                 negativeMood = true;
             }
         }
@@ -109,7 +111,6 @@ public class DialogueManager
         string planDialogue = "";
         if (nPCController.currentGoal != null)
         {
-            Debug.Log(nPCController.currentGoal.keyword);
              planDialogue = "I am doing work stuff because ";
             if (nPCController.currentGoal.keyword == "Idle")
             {
@@ -180,7 +181,6 @@ public class DialogueManager
            jobDialogue = GetDialogue("JobDialogue");
         }
         if( jobDialogue != ""){
-            Debug.Log("JobCommentary returning a line break");
             return jobDialogue + " \n";
         }
         return jobDialogue;
@@ -197,10 +197,6 @@ public class DialogueManager
         else
         {
             Debug.LogWarning($"No keyword {keywordDialogue} matches text file name");
-        }
-        if (_dialogue != "")
-        {
-            return _dialogue + " \n";
         }
         return _dialogue;
     }
