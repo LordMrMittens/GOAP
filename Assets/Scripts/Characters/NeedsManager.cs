@@ -188,7 +188,6 @@ public class NeedsManager : MonoBehaviour
         }
         if (lowestModule != null)
         {
-            Debug.Log(lowestModule.resourceType);
             return lowestModule;
         }
         return null;

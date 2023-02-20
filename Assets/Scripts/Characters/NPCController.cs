@@ -29,6 +29,7 @@ public class NPCController : MonoBehaviour
     Planner planner;
     public Queue<Actions> actionQueue;
     public List<Actions> actionsInPlan {get;set;} = new List<Actions>();
+    public List<Actions> actionsCompleted {get;set;} = new List<Actions>();
     public Actions currentAction;
     public SubGoal currentGoal;
     public bool invoked = false;
@@ -69,6 +70,7 @@ public class NPCController : MonoBehaviour
 
     void CompleteAction()
     {
+        actionsCompleted.Add(currentAction);
         currentAction.RemoveOwnership(this);
         currentAction.PostPerform(this);
         allAvailableActions.Remove(currentAction);
@@ -188,6 +190,7 @@ public class NPCController : MonoBehaviour
 
         }
         actionsInPlan.Clear();
+        actionsCompleted.Clear();
         planner = null;
         hasGoal = false;
         canPlan = true;

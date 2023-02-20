@@ -110,7 +110,6 @@ public class ClickManager : MonoBehaviour
     public string GenerateComentaryOnTemperature(TemperatureModule temperatureModule)
     {
         string dialogue = "Weather is pleasant";
-        Debug.Log($"current temp {worldStatusManager.currentTemperature}, heattolerance {temperatureModule.heatToleranceOffset}, cold tolernce {temperatureModule.coldToleranceOffset} target temp{temperatureModule.targetTemperature} world temp {worldStatusManager.currentTemperature}");
         if (temperatureModule.currentTemperature < temperatureModule.targetTemperature - 3 || temperatureModule.currentTemperature > temperatureModule.targetTemperature + 3)
         {
             //means it cant adjust temperature properly anymore
@@ -186,7 +185,11 @@ public class ClickManager : MonoBehaviour
         {
             foreach (Actions action in nPCController.actionsInPlan)
             {
+                if(nPCController.actionsCompleted.Contains(action)){
+                    planToDisplay += $"<s>{action.actionName}</s>.\n";
+                } else {
                 planToDisplay += action.actionName + ".\n";
+                }
             }
         }
         else
