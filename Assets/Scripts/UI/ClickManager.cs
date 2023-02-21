@@ -69,7 +69,7 @@ public class ClickManager : MonoBehaviour
         needsManager = null;
         mostNeedyStat = null;
         temperatureModule = null;
-        worldStatusManager.timeSpeed = 1;
+        worldStatusManager.ChangeWorldSpeed(1);
     }
 
     private void EnterFocusMode()
@@ -86,7 +86,7 @@ public class ClickManager : MonoBehaviour
             dialogueManager.GenerateDialogue(nPCController,needsManager,mostNeedyStat,temperatureModule);
             NPCDetailView = true;
             StatusUI.statusUIInstance.statsDisplay.SetActive(true);
-            worldStatusManager.timeSpeed = 0;
+           worldStatusManager.ChangeWorldSpeed(0);
         }
     }
     

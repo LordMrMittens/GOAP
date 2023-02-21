@@ -9,19 +9,19 @@ public class StatusUI : MonoBehaviour
     public GameObject statsDisplay;
     [SerializeField] GameObject needPrefab;
     [SerializeField] TextMeshProUGUI temperatureText;
-    [SerializeField] RectTransform rootPanel;
+    [SerializeField] RectTransform[] originPositions;
     [SerializeField] PlanUI planUI;
     [SerializeField] InventoryUI inventoryUI;
     [SerializeField] ComentaryDialogueUI dialogueUI;
     Dictionary<BasicNeedModule, NeedUI> displayedStats = new Dictionary<BasicNeedModule, NeedUI>();
     Vector3 spawnPoint;
-    float verticalPanelOffset = 50;
+    float verticalPanelOffset = 0;
     float horizontalPanelOffset= 320;
     void Awake()
     {
         statsDisplay.SetActive(true);
         statusUIInstance = this;
-        spawnPoint = rootPanel.transform.position;
+
         statsDisplay.SetActive(false);
     }
     public void UpdateStatusWindow(BasicNeedModule[] needs)
@@ -37,8 +37,8 @@ public class StatusUI : MonoBehaviour
             }
             if (!displayedStats.ContainsKey(needs[i]))
             {
-                spawnPoint = new Vector3(rootPanel.transform.position.x + (xCounter * horizontalPanelOffset), rootPanel.transform.position.y - (yCounter * verticalPanelOffset), rootPanel.transform.position.z);
-                displayedStats[needs[i]] = Instantiate(needPrefab, spawnPoint, Quaternion.identity, rootPanel).GetComponent<NeedUI>();
+                spawnPoint = new Vector3(originPositions[i].transform.position.x + (xCounter * horizontalPanelOffset), originPositions[i].transform.position.y - (yCounter * verticalPanelOffset), originPositions[i].transform.position.z);
+                displayedStats[needs[i]] = Instantiate(needPrefab, spawnPoint, Quaternion.identity, originPositions[i]).GetComponent<NeedUI>();
             }
             yCounter++;
             displayedStats[needs[i]].UpdateGoalInfo(needs[i].displayName, needs[i].currentResource);

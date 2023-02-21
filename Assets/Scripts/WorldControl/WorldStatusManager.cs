@@ -16,6 +16,7 @@ public class WorldStatusManager : MonoBehaviour
     [ field : SerializeField] public float currentTemperature { get; private set; }
     [SerializeField] float maxTemperature;
     [SerializeField] float minTemperature;
+    [SerializeField] Slider worldSpeedSlider;
     
     float nextDayTemp;
     float lastDayTemp;
@@ -24,6 +25,7 @@ public class WorldStatusManager : MonoBehaviour
     public bool isDark;
     [SerializeField] Text tempText;
     [SerializeField] Text timeText;
+    [SerializeField] Text worldSpeedText;
 
     public float timeSpeed=1;
     // Start is called before the first frame update
@@ -41,7 +43,9 @@ public class WorldStatusManager : MonoBehaviour
     void Update()
     {
         DayNightCycle();
+        timeSpeed = worldSpeedSlider.value;
         Time.timeScale = timeSpeed;
+        worldSpeedText.text = $"Time speed x {timeSpeed}";  
         string time= timeOfDay.ToString();
         if (hourTimer<9){
             time += $":0{hourTimer.ToString("F0")}";
@@ -106,5 +110,10 @@ public class WorldStatusManager : MonoBehaviour
     {
         nextDayTemp = Random.Range(maxTemperature - temperatureDeviation, maxTemperature);
         nextNightTemp = Random.Range(minTemperature, minTemperature + temperatureDeviation);
+    }
+    public void ChangeWorldSpeed(int speed){
+        worldSpeedSlider.value=speed;
+        timeSpeed = speed;
+
     }
 }
