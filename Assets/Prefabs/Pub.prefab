@@ -13625,7 +13625,7 @@ MonoBehaviour:
     value: 0
     carryOver: 1
   actionResults:
-  - key: HasFood
+  - key: HasEatingFood
     value: 0
     carryOver: 1
 --- !u!114 &5182823575659468986

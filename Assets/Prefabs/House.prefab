@@ -8020,7 +8020,7 @@ MonoBehaviour:
     value: 0
     carryOver: 1
   actionResults:
-  - key: HasFood
+  - key: HasEatingFood
     value: 0
     carryOver: 1
 --- !u!114 &6079367874937909488

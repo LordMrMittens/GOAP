@@ -54,8 +54,11 @@ public class JobModuleFarmer : BaseJobModule
                     }
                     else
                     {
-                        nPCController.beliefs.RemoveState($"ShouldPickProduct");
-                        nPCController.beliefs.AddSingleState($"ShouldDepositProduct", 0);
+                        if (nPCController.currentGoal.keyword != "Food" && nPCController.currentGoal.keyword != "Drink")
+                        {
+                            nPCController.beliefs.RemoveState($"ShouldPickProduct");
+                            nPCController.beliefs.AddSingleState($"ShouldDepositProduct", 0);
+                        }
                     }
                 }
                 else
@@ -77,8 +80,11 @@ public class JobModuleFarmer : BaseJobModule
             }
             if (nPCInventory.itemsEquipped.Contains(itemBeingFarmed))
             {
-                nPCController.beliefs.RemoveState($"ShouldPickProduct");
-                nPCController.beliefs.AddSingleState($"ShouldDepositProduct", 0);
+                if (nPCController.currentGoal.keyword != "Food" && nPCController.currentGoal.keyword != "Drink")
+                {
+                    nPCController.beliefs.RemoveState($"ShouldPickProduct");
+                    nPCController.beliefs.AddSingleState($"ShouldDepositProduct", 0);
+                }
             }
             else
             {
