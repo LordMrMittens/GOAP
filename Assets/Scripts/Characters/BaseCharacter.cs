@@ -11,7 +11,7 @@ public class BaseCharacter : NPCController
 
     public void BeIdle()
     {
-        AddSubGoal("Wander", 0, true, "Idle");
+        AddSubGoal("Wander", 1, true, "Idle");
     }
 
     public void GetHungry()

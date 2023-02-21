@@ -17,6 +17,7 @@ public class NeedsManager : MonoBehaviour
     int workNeedToleranceOffset = 20;
     float tickTimer;
     bool canSee = true;
+    int idletimer =0;
     //need reference to character controller,  can it be cast since they derive from a parent class?
 
     private void Awake()
@@ -77,8 +78,18 @@ public class NeedsManager : MonoBehaviour
             }
             if (!jobModule.isAtWork || !nPCController.hasGoal) //&& not social hours??
             {
-                nPCController.Invoke("BeIdle", 0);
-                nPCController.hasGoal = true;
+                idletimer++;
+                if (idletimer > 1)
+                {
+                    nPCController.Invoke("BeIdle", 0);
+                    nPCController.hasGoal = true;
+                    idletimer = 0;
+                }
+
+            }
+            else
+            {
+                idletimer = 0;
             }
             tickTimer = 0;
         }
