@@ -34,7 +34,7 @@ public class JobModuleFarmer : BaseJobModule
         {
             isAtWork = false;
         }
-        if (isAtWork )
+        if (isAtWork && nPCController.currentGoal != null )
         {
             if (nPCInventory.CheckForTool())
             {

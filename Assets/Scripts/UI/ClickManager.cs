@@ -89,5 +89,37 @@ public class ClickManager : MonoBehaviour
            worldStatusManager.ChangeWorldSpeed(0);
         }
     }
-    
+    public void GrantRequest()
+    {
+        if (needsManager.GetLowestStat())
+        {
+            string keyword = needsManager.GetLowestStat().resourceType;
+            switch (keyword)
+            {
+                case "Hydration":
+                    needsManager.QuenchThirst();
+                    break;
+
+                case "Nutrition":
+                    needsManager.SatiateHunger();
+                    break;
+
+                case "Tiredness":
+                    needsManager.RestoreEnergy();
+                    break;
+                case "Tools": // tools stuff
+
+                    break;
+                default:
+
+                    break;
+            }
+            nPCController.ResetGoals();
+            //update all dialogue and plans
+            mostNeedyStat = needsManager.GetLowestStat();
+        } else {
+            mostNeedyStat =null;
+        }
+        dialogueManager.GenerateDialogue(nPCController, needsManager, mostNeedyStat, temperatureModule);
+    }
 }

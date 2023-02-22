@@ -51,7 +51,7 @@ public class DialogueManager
         }
         return needsDialogue;
     }
-        public string GenerateRequest(string keyword) 
+    public string GenerateRequest(string keyword)
     {
         string requestDialogue = "";
         switch (keyword)

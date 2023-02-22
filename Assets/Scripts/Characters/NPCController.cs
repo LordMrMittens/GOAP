@@ -353,6 +353,12 @@ public class NPCController : MonoBehaviour
             CreatePlan();
         }
     }
-
+    public void ResetGoals()
+    {
+        currentGoal = null;
+        goals.Clear();
+        CancelCurrentAction();
+        DeletePlanner();
+    }
 
 }
