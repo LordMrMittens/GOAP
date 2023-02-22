@@ -16,6 +16,7 @@ public class ClickManager : MonoBehaviour
     TemperatureModule temperatureModule; 
     DialogueManager dialogueManager;
     string currentPlan;
+    bool grantedRequest;
     private void Start() {
         worldStatusManager = WorldStatusManager.WSMInstance;
         cam= Camera.main.GetComponent<CameraMovement>();
@@ -54,7 +55,8 @@ public class ClickManager : MonoBehaviour
         if (currentPlan != newPlan)
         {
             currentPlan = newPlan;
-            dialogueManager.GenerateDialogue(nPCController, needsManager, mostNeedyStat, temperatureModule);
+            dialogueManager.GenerateDialogue(nPCController, needsManager, mostNeedyStat, temperatureModule, grantedRequest);
+            grantedRequest=false;
         }
         StatusUI.statusUIInstance.SetTemperature(temperatureModule.GetCurrentTemperature());
     }
@@ -70,6 +72,7 @@ public class ClickManager : MonoBehaviour
         mostNeedyStat = null;
         temperatureModule = null;
         worldStatusManager.ChangeWorldSpeed(1);
+        grantedRequest=false;
     }
 
     private void EnterFocusMode()
@@ -83,10 +86,11 @@ public class ClickManager : MonoBehaviour
             mostNeedyStat = needsManager.GetLowestStat();
             temperatureModule = needsManager.GetTemperatureModule();
             cam.SetCloseUpPosition(nPCController.closeupCamPos, nPCController.lookAtOffset);
-            dialogueManager.GenerateDialogue(nPCController,needsManager,mostNeedyStat,temperatureModule);
+            dialogueManager.GenerateDialogue(nPCController,needsManager,mostNeedyStat,temperatureModule, grantedRequest);
             NPCDetailView = true;
             StatusUI.statusUIInstance.statsDisplay.SetActive(true);
            worldStatusManager.ChangeWorldSpeed(0);
+           grantedRequest=false;
         }
     }
     public void GrantRequest()
@@ -120,6 +124,7 @@ public class ClickManager : MonoBehaviour
         } else {
             mostNeedyStat =null;
         }
-        dialogueManager.GenerateDialogue(nPCController, needsManager, mostNeedyStat, temperatureModule);
+        grantedRequest = true;
+        dialogueManager.GenerateDialogue(nPCController, needsManager, mostNeedyStat, temperatureModule, grantedRequest);
     }
 }

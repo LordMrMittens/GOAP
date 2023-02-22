@@ -5,7 +5,7 @@ using UnityEngine;
 public class DialogueManager
 {
 
-    public void GenerateDialogue(NPCController nPCController, NeedsManager needsManager, BasicNeedModule mostNeedyStat, TemperatureModule temperatureModule)
+    public void GenerateDialogue(NPCController nPCController, NeedsManager needsManager, BasicNeedModule mostNeedyStat, TemperatureModule temperatureModule, bool requestGranted = false)
     {
         string commentaryToDisplay ="";
         string needsCommentary = "";
@@ -20,7 +20,12 @@ public class DialogueManager
         string planCommentary = GenerateComentaryOnPlans(nPCController);
         string jobCommetary = GenerateComentaryOnJob(nPCController);
         string temperatureCommentary = GenerateComentaryOnTemperature(temperatureModule, negativeTemperatureState);
-        commentaryToDisplay = planCommentary + jobCommetary + temperatureCommentary + needsCommentary;
+        if (requestGranted)
+        {
+            commentaryToDisplay += "Thank you very much for the help \n";
+        }
+        commentaryToDisplay += planCommentary + jobCommetary + temperatureCommentary + needsCommentary;
+    
         string job = nPCController.jobGoalRelatedTo;
         job = job.Remove(job.Length - 3, 3);
         StatusUI.statusUIInstance.UpdateDialogue(nPCController.gameObject.name, job , commentaryToDisplay,requestCommentary ,needsManager.tirednessModule.nightOwl);

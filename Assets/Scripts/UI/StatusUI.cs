@@ -60,10 +60,13 @@ public class StatusUI : MonoBehaviour
             nightOwl = "(Nightshift)";
         }
         dialogueUI.UpdateNameText(_nPCName, job, nightOwl);
+
         dialogueUI.UpdateDialogueText(_dialogue);
         if (_request != "")
         {
             dialogueUI.ActivateRequestPanel(_request);
+        }else {
+            dialogueUI.DeactivateRequestPanel();
         }
     }
     public void ClearStats()
