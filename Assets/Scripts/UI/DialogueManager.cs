@@ -9,19 +9,21 @@ public class DialogueManager
     {
         string commentaryToDisplay ="";
         string needsCommentary = "";
+        string requestCommentary = "";
         mostNeedyStat = needsManager.GetLowestStat();
         if (mostNeedyStat != null)
         {
             needsCommentary = GenerateComentaryOnNeeds(mostNeedyStat.resourceType);
+            requestCommentary = GenerateRequest(mostNeedyStat.resourceType);
         }
         bool negativeTemperatureState = false;
         string planCommentary = GenerateComentaryOnPlans(nPCController);
         string jobCommetary = GenerateComentaryOnJob(nPCController);
         string temperatureCommentary = GenerateComentaryOnTemperature(temperatureModule, negativeTemperatureState);
-         commentaryToDisplay = planCommentary + jobCommetary + temperatureCommentary + needsCommentary;
+        commentaryToDisplay = planCommentary + jobCommetary + temperatureCommentary + needsCommentary;
         string job = nPCController.jobGoalRelatedTo;
         job = job.Remove(job.Length - 3, 3);
-        StatusUI.statusUIInstance.UpdateDialogue(nPCController.gameObject.name, job , commentaryToDisplay, needsManager.tirednessModule.nightOwl);
+        StatusUI.statusUIInstance.UpdateDialogue(nPCController.gameObject.name, job , commentaryToDisplay,requestCommentary ,needsManager.tirednessModule.nightOwl);
     }
     public string GenerateComentaryOnNeeds(string keyword) 
     {
@@ -48,6 +50,31 @@ public class DialogueManager
             return needsDialogue + " \n";
         }
         return needsDialogue;
+    }
+        public string GenerateRequest(string keyword) 
+    {
+        string requestDialogue = "";
+        switch (keyword)
+        {
+            case "Hydration":
+                requestDialogue = GetDialogue("ThirstyRequestDialogue");
+                break;
+
+            case "Nutrition":
+                requestDialogue = GetDialogue("HungryRequestDialogue");
+                break;
+
+            case "Tiredness":
+                requestDialogue = GetDialogue("TiredRequestDialogue");
+                break;
+            case "Tools": // tools dialogue
+                requestDialogue = GetDialogue("ToolRequestDialogue");
+                break;
+            default:
+                requestDialogue = "";
+                break;
+        }
+        return requestDialogue;
     }
     public string GenerateComentaryOnTemperature(TemperatureModule temperatureModule, bool negativeMood)
     {

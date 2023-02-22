@@ -9,6 +9,9 @@ public class ComentaryDialogueUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI jobText;
     [SerializeField] TextMeshProUGUI nightOwlText;
     [SerializeField] TextMeshProUGUI dialogueText;
+     
+    [SerializeField] GameObject requestPanel;
+    [SerializeField] TextMeshProUGUI requestDialogueText;
     
     public void UpdateNameText(string _nPCName, string _nPCJob, string nightOwl = "")
     {
@@ -19,5 +22,16 @@ public class ComentaryDialogueUI : MonoBehaviour
         public void UpdateDialogueText(string _dialogue)
     {
         dialogueText.text = _dialogue;
+    }
+
+    public void ActivateRequestPanel(string _dialogue)
+    {
+        requestPanel.SetActive(true);
+        requestDialogueText.text = _dialogue;
+    }
+    public void DeactivateRequestPanel()
+    {
+        requestPanel.SetActive(false);
+        requestDialogueText.text = "";
     }
 }

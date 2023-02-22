@@ -54,13 +54,17 @@ public class StatusUI : MonoBehaviour
         inventoryUI.UpdateInventoryText(_inventory);
     }
 
-    public void UpdateDialogue(string _nPCName, string job , string _dialogue, bool _nightOwl = false){
+    public void UpdateDialogue(string _nPCName, string job , string _dialogue,string _request, bool _nightOwl = false){
         string nightOwl = "";
         if(_nightOwl){
             nightOwl = "(Nightshift)";
         }
-        dialogueUI.UpdateNameText(_nPCName, job ,nightOwl);
+        dialogueUI.UpdateNameText(_nPCName, job, nightOwl);
         dialogueUI.UpdateDialogueText(_dialogue);
+        if (_request != "")
+        {
+            dialogueUI.ActivateRequestPanel(_request);
+        }
     }
     public void ClearStats()
     {
@@ -69,9 +73,10 @@ public class StatusUI : MonoBehaviour
             Destroy(stat.Value.gameObject);
         }
         displayedStats.Clear();
-        UpdateDialogue("", "", "");
+        UpdateDialogue("", "", "", "");
         UpdatePlanWindow("");
         UpdateInventoryWindow("");
+        dialogueUI.DeactivateRequestPanel();
     }
     public void SetTemperature(float temp){
 
