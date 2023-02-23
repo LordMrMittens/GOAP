@@ -5,7 +5,8 @@ using UnityEngine;
 public class DialogueManager
 {
 
-    public void GenerateDialogue(NPCController nPCController, NeedsManager needsManager, BasicNeedModule mostNeedyStat, TemperatureModule temperatureModule, bool requestGranted = false)
+    public void GenerateDialogue(NPCController nPCController, NeedsManager needsManager, BasicNeedModule mostNeedyStat, TemperatureModule temperatureModule, 
+                                bool requestGranted = false, bool requestDenied= false)
     {
         string commentaryToDisplay ="";
         string needsCommentary = "";
@@ -23,6 +24,8 @@ public class DialogueManager
         if (requestGranted)
         {
             commentaryToDisplay += "Thank you very much for the help \n";
+        } else if (requestDenied){
+            commentaryToDisplay += "Please! I need help! \n";
         }
         commentaryToDisplay += planCommentary + jobCommetary + temperatureCommentary + needsCommentary;
     
