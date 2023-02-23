@@ -13,11 +13,15 @@ public class NeedsManager : MonoBehaviour
     [SerializeField] float tickFrequency;
     public NPCInventory nPCInventory { get; private set; }
     public BasicNeedModule[] basicNeedModules {get; private set;}
-    public BaseJobModule jobModule;
+    public BaseJobModule jobModule {get;set;}
     int workNeedToleranceOffset = 20;
     float tickTimer;
     bool canSee = true;
     int idletimer =0;
+    [SerializeField] CapsuleCollider spriteCollider;
+    [SerializeField] GameObject exclamation;
+    [SerializeField] GameObject yellowExclamation;
+    [SerializeField] GameObject redExclamation;
     //need reference to character controller,  can it be cast since they derive from a parent class?
 
     private void Awake()
@@ -27,6 +31,7 @@ public class NeedsManager : MonoBehaviour
         
         jobModule = GetComponent<BaseJobModule>();
         nPCInventory = nPCController.nPCInventory;
+        spriteCollider.enabled = false;
     }
     void Update()
     {
@@ -91,6 +96,7 @@ public class NeedsManager : MonoBehaviour
             {
                 idletimer = 0;
             }
+            NeedSignalLogic();
             tickTimer = 0;
         }
     }
@@ -202,6 +208,39 @@ public class NeedsManager : MonoBehaviour
             return lowestModule;
         }
         return null;
+    }
+    void NeedSignalLogic()
+    {
+        BasicNeedModule needyModule = GetLowestStat();
+        if (needyModule != null)
+        {
+            if(needyModule.currentResource <= needyModule.minResource/5){
+                ActivateNeedSignal(redExclamation);
+            } else if (needyModule.currentResource <= needyModule.minResource/2){
+                ActivateNeedSignal(yellowExclamation);
+            } else if(needyModule.currentResource <= needyModule.minResource){
+                ActivateNeedSignal(exclamation);
+            } else {
+                DeactivateNeedSignal();
+            }
+        } else{
+            DeactivateNeedSignal();
+        }
+    }
+    void ActivateNeedSignal(GameObject _signal){
+        spriteCollider.enabled = true;
+        exclamation.SetActive(false);
+        yellowExclamation.SetActive(false);
+        redExclamation.SetActive(false);
+        _signal.SetActive(true);
+
+    }
+    void DeactivateNeedSignal()
+    {
+        spriteCollider.enabled = false;
+        exclamation.SetActive(false);
+        yellowExclamation.SetActive(false);
+        redExclamation.SetActive(false);
     }
 }
 
