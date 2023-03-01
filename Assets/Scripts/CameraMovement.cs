@@ -13,6 +13,12 @@ public class CameraMovement : MonoBehaviour
     public bool isCloseUp {get; set;}
     [SerializeField] LayerMask layersToHide;
     [SerializeField] GameObject camLight;
+    [SerializeField] float minX;
+    [SerializeField] float maxX;
+    [SerializeField] float minZ;
+    [SerializeField] float maxZ;
+    [SerializeField] float minY;
+    [SerializeField] float maxY;
     LayerMask defaultLayersToShow;
     void Start()
     {
@@ -28,8 +34,11 @@ public class CameraMovement : MonoBehaviour
             float xAxis = Input.GetAxis("Vertical");
             float zAxis = Input.GetAxis("Horizontal");
             zoomAmount += (Input.GetAxis("Mouse ScrollWheel") * zoomSpeed);
-            //to clamp
-            transform.position = new Vector3(transform.position.x + (xAxis * speed), zoomAmount, transform.position.z + (-zAxis * speed));
+            zoomAmount = Mathf.Clamp(zoomAmount, minY, maxY);
+            Vector3 camPos = new Vector3(transform.position.x + (xAxis * speed), zoomAmount, transform.position.z + (-zAxis * speed));
+            camPos.x = Mathf.Clamp(camPos.x, minX, maxX);
+            camPos.z = Mathf.Clamp(camPos.z, minZ, maxZ);
+            transform.position = camPos;
         }
     }
 
