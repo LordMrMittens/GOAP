@@ -80,7 +80,7 @@ public class JobModuleFarmer : BaseJobModule
             }
             if (nPCInventory.itemsEquipped.Contains(itemBeingFarmed))
             {
-                if (nPCController.currentGoal.keyword != "Food" && nPCController.currentGoal.keyword != "Drink")
+                if (nPCController.currentGoal !=null && nPCController.currentGoal.keyword != "Food" && nPCController.currentGoal.keyword != "Drink")
                 {
                     nPCController.beliefs.RemoveState($"ShouldPickProduct");
                     nPCController.beliefs.AddSingleState($"ShouldDepositProduct", 0);
