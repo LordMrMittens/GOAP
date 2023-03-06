@@ -158,8 +158,6 @@ public class ClickManager : MonoBehaviour
 
                     break;
             }
-            nPCController.ResetGoals();
-            //update all dialogue and plans
             mostNeedyStat = needsManager.GetLowestStat();
         } else {
             mostNeedyStat =null;
