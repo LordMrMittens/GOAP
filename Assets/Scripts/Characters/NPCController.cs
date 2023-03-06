@@ -47,6 +47,8 @@ public class NPCController : MonoBehaviour
     public BaseJobModule baseJobModule {get;set;}
     public Transform closeupCamPos {get;set;}
     public Transform lookAtOffset {get;set;}
+    public bool canMove{get;set;} = true;
+    float speed;
 
     protected virtual void Start()
     {
@@ -55,6 +57,7 @@ public class NPCController : MonoBehaviour
         baseJobModule = GetComponent<BaseJobModule>();
         closeupCamPos = transform.Find("CamPos");
         lookAtOffset = transform.Find("LookAtOffset");
+        speed = agent.speed;
     }
 
     private void AssignName()
@@ -113,6 +116,11 @@ public class NPCController : MonoBehaviour
         {
             failedGoalsList.Clear();
             failedTaskListResetTimer = 0;
+        }
+        if (!canMove){
+            agent.speed = 0;
+        } else {
+            agent.speed = speed;
         }
     }
 

@@ -7,7 +7,7 @@ public class HydrationModule : BasicNeedModule
     protected override void Start()
     {
         base.Start();
-        resourceType = "Hydration";
+        resourceType = "Drink";
     }
 
 }

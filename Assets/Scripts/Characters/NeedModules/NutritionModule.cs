@@ -7,6 +7,6 @@ public class NutritionModule : BasicNeedModule
     protected override void Start()
     {
         base.Start();
-        resourceType = "Nutrition";
+        resourceType = "Food";
     }
 }

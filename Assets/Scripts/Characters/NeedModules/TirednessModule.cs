@@ -11,7 +11,7 @@ public class TirednessModule : BasicNeedModule
     protected override void Start() {
         base.Start();
         agent = GetComponent<NavMeshAgent>();
-        resourceType = "Tiredness";
+        resourceType = "Rest";
         worldStatusManager = WorldStatusManager.WSMInstance;
     }
     public override void ConsumeResource(float value)

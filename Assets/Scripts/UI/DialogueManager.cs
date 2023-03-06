@@ -38,15 +38,15 @@ public class DialogueManager
         string needsDialogue = "";
         switch (keyword)
         {
-            case "Hydration":
+            case "Drink":
                 needsDialogue = GetDialogue("ThirstyDialogue");
                 break;
 
-            case "Nutrition":
+            case "Food":
                 needsDialogue = GetDialogue("HungryDialogue");
                 break;
 
-            case "Tiredness":
+            case "Rest":
                 needsDialogue = GetDialogue("TiredDialogue");
                 break;
             default:
@@ -64,15 +64,15 @@ public class DialogueManager
         string requestDialogue = "";
         switch (keyword)
         {
-            case "Hydration":
+            case "Drink":
                 requestDialogue = GetDialogue("ThirstyRequestDialogue");
                 break;
 
-            case "Nutrition":
+            case "Food":
                 requestDialogue = GetDialogue("HungryRequestDialogue");
                 break;
 
-            case "Tiredness":
+            case "Rest":
                 requestDialogue = GetDialogue("TiredRequestDialogue");
                 break;
             case "Tools": // tools dialogue

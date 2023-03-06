@@ -35,7 +35,18 @@ public class NeedsManager : MonoBehaviour
     }
     void Update()
     {
-        
+        foreach (BasicNeedModule module in basicNeedModules)
+        {
+            bool hasAllResources = true;
+            if (module.hasResource == false)
+            {
+                if (nPCController.currentGoal != null && nPCController.currentGoal.keyword != module.resourceType)
+                {
+                    hasAllResources = false;
+                }
+            }
+            nPCController.canMove = hasAllResources;
+        }
         tickTimer += Time.deltaTime;
         if (tickTimer > tickFrequency)
         {

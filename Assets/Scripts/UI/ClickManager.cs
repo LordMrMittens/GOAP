@@ -104,15 +104,15 @@ public class ClickManager : MonoBehaviour
             string keyword = needsManager.GetLowestStat().resourceType;
             switch (keyword)
             {
-                case "Hydration":
+                case "Drink":
                     needsManager.QuenchThirst();
                     break;
 
-                case "Nutrition":
+                case "Food":
                     needsManager.SatiateHunger();
                     break;
 
-                case "Tiredness":
+                case "Rest":
                     needsManager.RestoreEnergy();
                     break;
                 case "Tools": // tools stuff
@@ -140,15 +140,15 @@ public class ClickManager : MonoBehaviour
             string keyword = needsManager.GetLowestStat().resourceType;
             switch (keyword)
             {
-                case "Hydration":
+                case "Drink":
                     
                     break;
 
-                case "Nutrition":
+                case "Food":
                     
                     break;
 
-                case "Tiredness":
+                case "Rest":
                     
                     break;
                 case "Tools": // tools stuff
