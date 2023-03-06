@@ -14,6 +14,8 @@ public class TemperatureModule : MonoBehaviour
     public float currentTemperature;
     [field : SerializeField] public float energyConsumptionRate {get; private set;} = .5f;
     [field : SerializeField] public float waterConsumptionRate {get; private set;} = .1f;
+    [SerializeField] NutritionModule nutritionModule;
+    [SerializeField] HydrationModule hydrationModule;
     public bool isWarming;
     public bool isWearingAJacket;
     public float reportedTemperature;
@@ -66,12 +68,20 @@ public class TemperatureModule : MonoBehaviour
         reportedTemperature = currentTemperature;
     }
 
-    void WarmUp(){
-        currentTemperature = targetTemperature;
-        isWarming=true;
+    void WarmUp()
+    {
+        if (nutritionModule.hasResource)
+        {
+            currentTemperature = targetTemperature;
+        }
+        isWarming = true;
     }
-    void CoolDown(){
-        currentTemperature = targetTemperature;
+    void CoolDown()
+    {
+        if (hydrationModule.hasResource)
+        {
+            currentTemperature = targetTemperature;
+        }
         isWarming = false;
     }
     public float GetCurrentTemperature(){

@@ -11819,7 +11819,6 @@ MonoBehaviour:
   tirednessModule: {fileID: 4359241635176777236}
   nPCController: {fileID: -4578944316393918606}
   tickFrequency: 1
-  jobModule: {fileID: 0}
   spriteCollider: {fileID: 8945738373114679915}
   exclamation: {fileID: 8369007545509930839}
   yellowExclamation: {fileID: 6398525403775840426}
@@ -11903,6 +11902,8 @@ MonoBehaviour:
   currentTemperature: 0
   <energyConsumptionRate>k__BackingField: 0.5
   <waterConsumptionRate>k__BackingField: 0.5
+  nutritionModule: {fileID: 9209703962267718606}
+  hydrationModule: {fileID: 6978994666869021405}
   isWarming: 0
   isWearingAJacket: 0
   reportedTemperature: 0
