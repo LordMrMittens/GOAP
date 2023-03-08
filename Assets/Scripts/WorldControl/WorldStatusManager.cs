@@ -28,6 +28,7 @@ public class WorldStatusManager : MonoBehaviour
     [SerializeField] Text worldSpeedText;
 
     public float timeSpeed=1;
+    public bool isTutorial=false;
     // Start is called before the first frame update
     private void Awake() {
         WSMInstance = this;
@@ -43,10 +44,13 @@ public class WorldStatusManager : MonoBehaviour
     void Update()
     {
         DayNightCycle();
-        timeSpeed = worldSpeedSlider.value;
+        if (!isTutorial)
+        {
+            timeSpeed = worldSpeedSlider.value;
+        }
         Time.timeScale = timeSpeed;
-        worldSpeedText.text = $"Time speed x {timeSpeed}";  
-        string time= timeOfDay.ToString();
+        worldSpeedText.text = $"Time speed x {timeSpeed}";
+        string time = timeOfDay.ToString();
         if (hourTimer<9){
             time += $":0{hourTimer.ToString("F0")}";
         } else{

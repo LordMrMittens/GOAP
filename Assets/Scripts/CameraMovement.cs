@@ -20,16 +20,21 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] float minY;
     [SerializeField] float maxY;
     LayerMask defaultLayersToShow;
+    [SerializeField] bool tutorialCamera= false;
+    Transform parentTransform;
     void Start()
     {
         worldStatusManager = WorldStatusManager.WSMInstance;
         zoomAmount = transform.position.y;
         defaultLayersToShow = Camera.main.cullingMask;
         camLight.SetActive(false);
+        if(tutorialCamera){
+            parentTransform = transform.parent.transform;
+        }
     }
     void Update()
     {
-        if (!isCloseUp)
+        if (!isCloseUp && !tutorialCamera)
         {
             float xAxis = Input.GetAxis("Vertical");
             float zAxis = Input.GetAxis("Horizontal");
@@ -39,6 +44,9 @@ public class CameraMovement : MonoBehaviour
             camPos.x = Mathf.Clamp(camPos.x, minX, maxX);
             camPos.z = Mathf.Clamp(camPos.z, minZ, maxZ);
             transform.position = camPos;
+        }
+        if (tutorialCamera && transform.parent == null){
+            transform.parent = parentTransform;
         }
     }
 

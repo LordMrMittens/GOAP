@@ -18,8 +18,11 @@ public class ClickManager : MonoBehaviour
     string currentPlan;
     bool grantedRequest;
     bool deniedRequest;
+    bool isTutorial = false;
+    bool focusMode=false;
     private void Start() {
         worldStatusManager = WorldStatusManager.WSMInstance;
+        isTutorial = worldStatusManager.isTutorial;
         cam= Camera.main.GetComponent<CameraMovement>();
     }
     private void Update() {
@@ -35,7 +38,7 @@ public class ClickManager : MonoBehaviour
                 }
             }
         }
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape)&&cam.isCloseUp)
         {
             ExitFocusMode();
         }
@@ -73,8 +76,11 @@ public class ClickManager : MonoBehaviour
         needsManager = null;
         mostNeedyStat = null;
         temperatureModule = null;
-        worldStatusManager.ChangeWorldSpeed(1);
-        grantedRequest=false;
+        if (!isTutorial)
+        {
+            worldStatusManager.ChangeWorldSpeed(1);
+        }
+        grantedRequest = false;
         deniedRequest = false;
     }
 
