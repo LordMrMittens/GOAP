@@ -19,7 +19,6 @@ public class ClickManager : MonoBehaviour
     bool grantedRequest;
     bool deniedRequest;
     bool isTutorial = false;
-    bool focusMode=false;
     private void Start() {
         worldStatusManager = WorldStatusManager.WSMInstance;
         isTutorial = worldStatusManager.isTutorial;
@@ -35,6 +34,9 @@ public class ClickManager : MonoBehaviour
                 if(hit.transform.gameObject.tag == "NPC"){
                     selectedNPC = hit.transform.gameObject;
                     EnterFocusMode();
+                    if (isTutorial){
+                        TutorialController.instance.ShowStatsPanelGuide();
+                    }
                 }
             }
         }
