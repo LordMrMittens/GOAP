@@ -1750,20 +1750,20 @@ MonoBehaviour:
   m_text: "Goal-Oriented Action Planning (GOAP), is a decision-making technique for
     AI.\n\nUnlike finite state machines or behaviour trees, the connections between
     actions available to AI agents are not hard-coded to trigger once certain criteria
-    has been met.\n\nIn GOAP all actions are made available simultaneously, each
+    have been met.\n\nIn GOAP all actions are made available simultaneously and each
     action has preconditions that need to be met for that action to be carried out.
     For example, to eat food you need to have food.\n\nEach action also carries consequences,
-    which in turn may or may not fulfil preconditions to be able to carry out new
+    which, in turn, may or may not fulfil preconditions to be able to carry out new
     actions. For instance, buying food means you now have food which makes it possible
     for you to eat.\n\nBy joining the preconditions and consequences of each action
-    it is possible to reach a desired goal.\n\nIn this simulation NPC's were programed
-    using this system, their goals being triggered by need modules that detect the
-    NPC's status, tracking information such as hunger, thirst, temperature and others.
-    Using these modules the NPCs can generate goals for themselves.\n\nOnce an NPC
-    has a goal it should formulate a plan in order to meet that goal or even ask
-    players for help. \n\nThe point of this study is to evaluate the behaviour of
-    the NPC's in this simulation and how this technique can be used to generate content
-    in commercially released games.\n"
+    it is possible to reach a desired goal.\n\nIn this simulation NPCs are programed
+    using this system and their goals are triggered by need modules that detect each
+    NPC's status, tracking information such as hunger, thirst or temperature. Using
+    these modules  NPCs can generate goals for themselves.\n\nOnce an NPC has a goal
+    it should formulate a plan in order to meet that goal or even ask a player for
+    help. \n\nThe point of this study is to evaluate the behaviour of the NPCs in
+    this simulation and how this technique can be used to generate content in commercially-released
+    games.\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
