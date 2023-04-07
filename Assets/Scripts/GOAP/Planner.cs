@@ -88,7 +88,6 @@ public class Planner
                 cheapest = leaf;
             }
         }
-        //Debug.Log($"cheapest Leaf cost {cheapest.cost}");
         List<Actions> result = new List<Actions>();
         Node n = cheapest;
         while(n != null){
@@ -103,12 +102,6 @@ public class Planner
         {
             queue.Enqueue(action);
         }
-        /*
-        Debug.Log("The plan is: ");
-      foreach (Actions action in queue)
-       {
-           Debug.Log($"Q: {action.actionName}");
-       }*/
         return queue;
     }
 
