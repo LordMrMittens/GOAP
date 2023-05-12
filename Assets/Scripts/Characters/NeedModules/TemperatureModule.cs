@@ -12,8 +12,8 @@ public class TemperatureModule : MonoBehaviour
     float defaultHeatTolerance;
 
     public float currentTemperature;
-    [field : SerializeField] public float energyConsumptionRate {get; private set;} = .5f;
-    [field : SerializeField] public float waterConsumptionRate {get; private set;} = .1f;
+    [field : SerializeField] public float energyConsumptionRate {get; private set;} = .08f;
+    [field : SerializeField] public float waterConsumptionRate {get; private set;} = .08f;
     [SerializeField] NutritionModule nutritionModule;
     [SerializeField] HydrationModule hydrationModule;
     public bool isWarming;
