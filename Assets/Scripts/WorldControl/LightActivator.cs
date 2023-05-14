@@ -5,29 +5,27 @@ using UnityEngine;
 public class LightActivator : MonoBehaviour
 {
     [SerializeField] GameObject lights;
+    [SerializeField] GameObject roof;
     int peopleInBuilding;
     private void Start() {
         lights.gameObject.SetActive(false);
     }
-    private void Update() {
-        if(peopleInBuilding > 0 && lights.gameObject.activeSelf == false){
-            lights.gameObject.SetActive(true);
-        } else if (peopleInBuilding <= 0 && lights.gameObject.activeSelf == true){
-            lights.gameObject.SetActive(false);
-        }
-
-    }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.tag == "NPC"){
-            peopleInBuilding++;
+
+        if (other.gameObject.tag == "NPC")
+        {
+            lights.gameObject.SetActive(true);
+            roof.gameObject.SetActive(false);
         }
     }
     private void OnTriggerExit(Collider other)
     {
+
         if (other.gameObject.tag == "NPC")
         {
-            peopleInBuilding--;
+            lights.gameObject.SetActive(false);
+            roof.gameObject.SetActive(true);
         }
     }
 

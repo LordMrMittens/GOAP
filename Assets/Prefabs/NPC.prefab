@@ -11837,7 +11837,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <displayName>k__BackingField: Energy
   maxResource: 100
-  minResource: 20
+  minResource: 40
   <currentResource>k__BackingField: 0
   backgroundDecayRate: 0.02
   isCommonNeed: 0
@@ -11860,7 +11860,7 @@ MonoBehaviour:
   maxResource: 100
   minResource: 40
   <currentResource>k__BackingField: 0
-  backgroundDecayRate: 0.05
+  backgroundDecayRate: 0.03
   isCommonNeed: 0
   randomnessOffset: 0
   hasResource: 0
@@ -11880,7 +11880,7 @@ MonoBehaviour:
   maxResource: 100
   minResource: 40
   <currentResource>k__BackingField: 0
-  backgroundDecayRate: 0.05
+  backgroundDecayRate: 0.03
   isCommonNeed: 0
   randomnessOffset: 0
   hasResource: 0
@@ -11900,8 +11900,8 @@ MonoBehaviour:
   coldToleranceOffset: 0
   heatToleranceOffset: 0
   currentTemperature: 0
-  <energyConsumptionRate>k__BackingField: 0.5
-  <waterConsumptionRate>k__BackingField: 0.5
+  <energyConsumptionRate>k__BackingField: 0.2
+  <waterConsumptionRate>k__BackingField: 0.2
   nutritionModule: {fileID: 9209703962267718606}
   hydrationModule: {fileID: 6978994666869021405}
   isWarming: 0

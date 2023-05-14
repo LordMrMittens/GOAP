@@ -26,12 +26,14 @@ public class WorldStatusManager : MonoBehaviour
     [SerializeField] Text tempText;
     [SerializeField] Text timeText;
     [SerializeField] Text worldSpeedText;
+    GameObject[] lights;
 
     public float timeSpeed=1;
     public bool isTutorial=false;
     // Start is called before the first frame update
     private void Awake() {
         WSMInstance = this;
+        lights = GameObject.FindGameObjectsWithTag("TimeLight");
     }
     void Start()
     {
@@ -80,8 +82,23 @@ public class WorldStatusManager : MonoBehaviour
         else
         {
             currentTemperature = currentTemperature - ((lastDayTemp - nextNightTemp) / 12);
-            if (currentTemperature < minTemperature){
+            if (currentTemperature < minTemperature)
+            {
                 currentTemperature = minTemperature;
+            }
+        }
+        if (timeOfDay < 7 || timeOfDay > 17)
+        {
+            foreach (GameObject light in lights)
+            {
+                light.SetActive(true);
+            }
+        }
+        else
+        {
+            foreach (GameObject light in lights)
+            {
+                light.SetActive(false);
             }
         }
     }

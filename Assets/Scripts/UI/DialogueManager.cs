@@ -152,7 +152,7 @@ public class DialogueManager
                 planDialogue = GetDialogue("IdleDialogue");
                 if (nPCController.needsManager.jobModule.isAtWork)
                 {
-                    planDialogue += " but ";
+                    planDialogue += " but \n";
                 }
             }
             if (nPCController.currentGoal.keyword == "Food")
@@ -160,7 +160,7 @@ public class DialogueManager
                 planDialogue = GetDialogue("FoodPlanDialogue");
                 if (nPCController.needsManager.jobModule.isAtWork)
                 {
-                    planDialogue += " but ";
+                    planDialogue += " but \n";
                 }
             }
             if (nPCController.currentGoal.keyword == "Drink")
@@ -168,7 +168,7 @@ public class DialogueManager
                 planDialogue = GetDialogue("DrinkPlanDialogue");
                 if (nPCController.needsManager.jobModule.isAtWork)
                 {
-                    planDialogue += " but ";
+                    planDialogue += " but \n";
                 }
             }
             if (nPCController.currentGoal.keyword == "Temperature")
@@ -197,7 +197,7 @@ public class DialogueManager
         }
         else
         {
-            planDialogue = "I have no plans ";
+            planDialogue = "I have no plans \n";
         }
         if (planDialogue != "")
         {
@@ -252,7 +252,7 @@ public class DialogueManager
         }
         else
         {
-            planToDisplay += "There is no plan";
+            planToDisplay += "There is no plan ";
         }
         return (planToDisplay);
     }

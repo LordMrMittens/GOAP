@@ -20,6 +20,7 @@ TagManager:
   - Cow
   - Tree
   - Fish
+  - TimeLight
   layers:
   - Default
   - TransparentFX

@@ -126,14 +126,14 @@ public class NeedsManager : MonoBehaviour
                     }
                     else
                     {
-                        nutritionModule.ConsumeResource(temperatureModule.energyConsumptionRate + .5f);
+                        nutritionModule.ConsumeResource(temperatureModule.energyConsumptionRate + .2f);
                     }
                 }
                 else
                 {
                     if (temperatureModule.isWearingAJacket)
                     {
-                        hydrationModule.ConsumeResource(temperatureModule.waterConsumptionRate + .5f);
+                        hydrationModule.ConsumeResource(temperatureModule.waterConsumptionRate + .2f);
                     }
                     else
                     {
