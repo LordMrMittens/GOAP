@@ -49,6 +49,7 @@ public class NPCController : MonoBehaviour
     public Transform lookAtOffset {get;set;}
     public bool canMove{get;set;} = true;
     float speed;
+    public bool isMale {get ; set;}
 
     protected virtual void Start()
     {
@@ -62,11 +63,32 @@ public class NPCController : MonoBehaviour
 
     private void AssignName()
     {
+        
         excelImporter = FindObjectOfType<ExcelImporter>();
         if (excelImporter.text.ContainsKey("Names"))
         {
             int randomName = Random.Range(0, excelImporter.text["Names"].Count);
             this.gameObject.name = excelImporter.text["Names"][randomName];
+            if (excelImporter.genderData.ContainsKey(this.gameObject.name))
+            {
+                int gender = excelImporter.genderData[this.gameObject.name];
+                if (gender == 0)
+                {
+                    isMale = true;
+                }
+                else if (gender == 1)
+                {
+                    isMale = false;
+                }            else
+            {
+                Debug.LogWarning($"No Valid Gender{gender}.");
+            }
+
+            }
+            else
+            {
+                Debug.LogWarning($"No Gender Found for {this.gameObject.name} ");
+            }
             excelImporter.text["Names"].RemoveAt(randomName);
         }
     }

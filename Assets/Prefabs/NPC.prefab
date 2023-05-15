@@ -11774,7 +11774,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemsEquipped: []
-  NPCModels:
+  maleNPCModels:
   - {fileID: 3634313458430227184}
   - {fileID: 4246934419105013077}
   - {fileID: 3738810044343769037}
@@ -11782,6 +11782,7 @@ MonoBehaviour:
   - {fileID: 4478712314463994196}
   - {fileID: 3731036395522083548}
   - {fileID: 1903906031675321462}
+  femaleNPCModels:
   - {fileID: 3017235281227224241}
   - {fileID: 18744201284605150}
   - {fileID: 5701135283664450663}

@@ -10,16 +10,28 @@ public class NPCInventory : MonoBehaviour
     float maxToolDurability = 100;
     float minToolDurability = 0;
     float currentToolDurability;
-    [SerializeField] GameObject[] NPCModels;
-    private void Start() {
+    [SerializeField] GameObject[] maleNPCModels;
+    [SerializeField] GameObject[] femaleNPCModels;
+    private void Start()
+    {
         currentToolDurability = 100;
         nPCController = GetComponent<NPCController>();
-                int modelNumber = Random.Range(0,NPCModels.Length);
-        NPCModels[modelNumber].SetActive(true);
+        if (nPCController.isMale)
+        {
+            int modelNumber = Random.Range(0, maleNPCModels.Length);
+            maleNPCModels[modelNumber].SetActive(true);
+        }
+        else
+        {
+            int modelNumber = Random.Range(0, femaleNPCModels.Length);
+            femaleNPCModels[modelNumber].SetActive(true);
+        }
     }
-    private void Update() {
-        if (itemDisplayManager ==null){
-        itemDisplayManager = GetComponent<ItemDisplayManager>();
+    private void Update()
+    {
+        if (itemDisplayManager == null)
+        {
+            itemDisplayManager = GetComponent<ItemDisplayManager>();
         }
     }
     public void DepositObject(string objectToAdd)
@@ -51,12 +63,13 @@ public class NPCInventory : MonoBehaviour
     void BreakTool()
     {
         if (itemsEquipped.Contains("Tool"))
-        { 
+        {
             RemoveObject("Tool");
         }
         nPCController.beliefs.AddSingleState("NeedTool", 5);
     }
-    public void RestoreTool(){
+    public void RestoreTool()
+    {
         currentToolDurability = maxToolDurability;
     }
 
@@ -72,7 +85,7 @@ public class NPCInventory : MonoBehaviour
         }
         return true;
     }
-        public bool CheckForLight()
+    public bool CheckForLight()
     {
         if (itemsEquipped.Contains("Light"))
         {
