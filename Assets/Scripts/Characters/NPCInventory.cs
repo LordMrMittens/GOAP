@@ -10,10 +10,12 @@ public class NPCInventory : MonoBehaviour
     float maxToolDurability = 100;
     float minToolDurability = 0;
     float currentToolDurability;
-
+    [SerializeField] GameObject[] NPCModels;
     private void Start() {
         currentToolDurability = 100;
         nPCController = GetComponent<NPCController>();
+                int modelNumber = Random.Range(0,NPCModels.Length);
+        NPCModels[modelNumber].SetActive(true);
     }
     private void Update() {
         if (itemDisplayManager ==null){
