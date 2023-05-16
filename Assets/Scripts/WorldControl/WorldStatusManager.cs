@@ -8,6 +8,7 @@ public class WorldStatusManager : MonoBehaviour
     public static WorldStatusManager WSMInstance;
     [SerializeField] GameObject sun;
     [SerializeField] GameObject moon;
+    [SerializeField] float rotationSpeed= 1.5f;
     public float timeOfDay;
     float hourTimer;
     float secondTimer;
@@ -23,6 +24,7 @@ public class WorldStatusManager : MonoBehaviour
     float nextNightTemp;
     [SerializeField] float temperatureDeviation;
     public bool isDark;
+    
     [SerializeField] Text tempText;
     [SerializeField] Text timeText;
     [SerializeField] Text worldSpeedText;
@@ -60,6 +62,9 @@ public class WorldStatusManager : MonoBehaviour
         }
         timeText.text = $"Time: {time}";
         tempText.text = $"Temp:{currentTemperature.ToString("F1")}°C";
+
+        sun.transform.Rotate(rotationSpeed * Time.deltaTime,0,0);
+        moon.transform.Rotate(rotationSpeed * Time.deltaTime,0,0);
     }
 
     private void UpdateDayNightCycle()
@@ -105,12 +110,13 @@ public class WorldStatusManager : MonoBehaviour
 
     private void DayNightCycle()
     {
+        
         hourTimer += Time.deltaTime;
         secondTimer += Time.deltaTime;
         if (secondTimer >= 1){
-            sun.transform.Rotate(1.5f, 0, 0);
-            moon.transform.Rotate(1.5f,0,0);
-            secondTimer=0;
+            //sun.transform.Rotate(1.5f, 0, 0);
+           // moon.transform.Rotate(1.5f,0,0);
+           // secondTimer=0;
         }
         if (hourTimer >= secondsPerHour)
         {

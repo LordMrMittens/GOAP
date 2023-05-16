@@ -38,7 +38,7 @@ public class CameraMovement : MonoBehaviour
         {
             float xAxis = Input.GetAxis("Vertical");
             float zAxis = Input.GetAxis("Horizontal");
-            zoomAmount += (Input.GetAxis("Mouse ScrollWheel") * zoomSpeed);
+            zoomAmount -= (Input.GetAxis("Mouse ScrollWheel") * zoomSpeed);
             zoomAmount = Mathf.Clamp(zoomAmount, minY, maxY);
             Vector3 camPos = new Vector3(transform.position.x + (xAxis * speed), zoomAmount, transform.position.z + (-zAxis * speed));
             camPos.x = Mathf.Clamp(camPos.x, minX, maxX);
