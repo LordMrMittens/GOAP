@@ -150,10 +150,28 @@ public class NPCController : MonoBehaviour
             failedGoalsList.Clear();
             failedTaskListResetTimer = 0;
         }
-        if (!canMove){
+        if (!canMove)
+        {
             agent.speed = 0;
-        } else {
-            agent.speed = speed;
+        }
+        else
+        {
+            if (currentAction && currentAction.target != null && target != null)
+            {
+                float distanceToTarget = Vector3.Distance(transform.position, target.gameObject.transform.position);
+                if (distanceToTarget > 15)
+                {
+                    agent.speed = speed * 2;
+                }
+                else
+                {
+                    agent.speed = speed;
+                }
+            }
+            else
+            {
+                agent.speed = speed;
+            }
         }
     }
 
