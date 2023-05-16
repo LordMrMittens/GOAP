@@ -197,7 +197,7 @@ public class DialogueManager
         }
         else
         {
-            planDialogue = "I have no plans \n";
+            planDialogue = "I have no plans";
         }
         if (planDialogue != "")
         {

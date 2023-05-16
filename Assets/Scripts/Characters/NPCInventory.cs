@@ -10,22 +10,11 @@ public class NPCInventory : MonoBehaviour
     float maxToolDurability = 100;
     float minToolDurability = 0;
     float currentToolDurability;
-    [SerializeField] GameObject[] maleNPCModels;
-    [SerializeField] GameObject[] femaleNPCModels;
+    public GameObject[] maleNPCModels;
+    public GameObject[] femaleNPCModels;
     private void Start()
     {
         currentToolDurability = 100;
-        nPCController = GetComponent<NPCController>();
-        if (nPCController.isMale)
-        {
-            int modelNumber = Random.Range(0, maleNPCModels.Length);
-            maleNPCModels[modelNumber].SetActive(true);
-        }
-        else
-        {
-            int modelNumber = Random.Range(0, femaleNPCModels.Length);
-            femaleNPCModels[modelNumber].SetActive(true);
-        }
     }
     private void Update()
     {

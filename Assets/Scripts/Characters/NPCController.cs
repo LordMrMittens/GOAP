@@ -79,10 +79,11 @@ public class NPCController : MonoBehaviour
                 else if (gender == 1)
                 {
                     isMale = false;
-                }            else
-            {
-                Debug.LogWarning($"No Valid Gender{gender}.");
-            }
+                }
+                else
+                {
+                    Debug.LogWarning($"No Valid Gender{gender}.");
+                }
 
             }
             else
@@ -90,6 +91,16 @@ public class NPCController : MonoBehaviour
                 Debug.LogWarning($"No Gender Found for {this.gameObject.name} ");
             }
             excelImporter.text["Names"].RemoveAt(randomName);
+        }
+                if (isMale)
+        {
+            int modelNumber = Random.Range(0, nPCInventory.maleNPCModels.Length);
+            nPCInventory.maleNPCModels[modelNumber].SetActive(true);
+        }
+        else
+        {
+            int modelNumber = Random.Range(0, nPCInventory.femaleNPCModels.Length);
+            nPCInventory.femaleNPCModels[modelNumber].SetActive(true);
         }
     }
 
