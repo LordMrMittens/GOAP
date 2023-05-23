@@ -15,9 +15,14 @@ public class NPCInventory : MonoBehaviour
     private void Start()
     {
         currentToolDurability = 100;
+        
     }
     private void Update()
     {
+        if (nPCController == null){
+        nPCController = GetComponent<NPCController>();
+        }
+       
         if (itemDisplayManager == null)
         {
             itemDisplayManager = GetComponent<ItemDisplayManager>();
@@ -55,6 +60,7 @@ public class NPCInventory : MonoBehaviour
         {
             RemoveObject("Tool");
         }
+        
         nPCController.beliefs.AddSingleState("NeedTool", 5);
     }
     public void RestoreTool()

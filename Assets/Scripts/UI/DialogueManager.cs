@@ -57,6 +57,7 @@ public class DialogueManager
         {
             return needsDialogue + " \n";
         }
+        Debug.Log("Returning without space");
         return needsDialogue;
     }
     public string GenerateRequest(string keyword)
@@ -152,7 +153,7 @@ public class DialogueManager
                 planDialogue = GetDialogue("IdleDialogue");
                 if (nPCController.needsManager.jobModule.isAtWork)
                 {
-                    planDialogue += " but \n";
+                    planDialogue += " ";
                 }
             }
             if (nPCController.currentGoal.keyword == "Food")
@@ -160,7 +161,7 @@ public class DialogueManager
                 planDialogue = GetDialogue("FoodPlanDialogue");
                 if (nPCController.needsManager.jobModule.isAtWork)
                 {
-                    planDialogue += " but \n";
+                    planDialogue += " ";
                 }
             }
             if (nPCController.currentGoal.keyword == "Drink")
@@ -168,7 +169,7 @@ public class DialogueManager
                 planDialogue = GetDialogue("DrinkPlanDialogue");
                 if (nPCController.needsManager.jobModule.isAtWork)
                 {
-                    planDialogue += " but \n";
+                    planDialogue += " ";
                 }
             }
             if (nPCController.currentGoal.keyword == "Temperature")

@@ -29,6 +29,7 @@ public class WorldStatusManager : MonoBehaviour
     [SerializeField] Text timeText;
     [SerializeField] Text worldSpeedText;
     GameObject[] lights;
+    public bool isTitle = false;
 
     public float timeSpeed=1;
     public bool isTutorial=false;
@@ -48,23 +49,29 @@ public class WorldStatusManager : MonoBehaviour
     void Update()
     {
         DayNightCycle();
-        if (!isTutorial)
+        if (!isTitle)
         {
-            timeSpeed = worldSpeedSlider.value;
+            if (!isTutorial)
+            {
+                timeSpeed = worldSpeedSlider.value;
+            }
+            Time.timeScale = timeSpeed;
+            worldSpeedText.text = $"Time speed x {timeSpeed}";
+            string time = timeOfDay.ToString();
+            if (hourTimer < 9)
+            {
+                time += $":0{hourTimer.ToString("F0")}";
+            }
+            else
+            {
+                time += $":0{9}";
+            }
+            timeText.text = $"Time: {time}";
+            tempText.text = $"Temp:{currentTemperature.ToString("F1")}°C";
         }
-        Time.timeScale = timeSpeed;
-        worldSpeedText.text = $"Time speed x {timeSpeed}";
-        string time = timeOfDay.ToString();
-        if (hourTimer<9){
-            time += $":0{hourTimer.ToString("F0")}";
-        } else{
-            time += $":0{9}";
-        }
-        timeText.text = $"Time: {time}";
-        tempText.text = $"Temp:{currentTemperature.ToString("F1")}°C";
 
-        sun.transform.Rotate(rotationSpeed * Time.deltaTime,0,0);
-        moon.transform.Rotate(rotationSpeed * Time.deltaTime,0,0);
+        sun.transform.Rotate(rotationSpeed * Time.deltaTime, 0, 0);
+        moon.transform.Rotate(rotationSpeed * Time.deltaTime, 0, 0);
     }
 
     private void UpdateDayNightCycle()
